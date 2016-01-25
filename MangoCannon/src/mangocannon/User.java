@@ -12,7 +12,12 @@ package mangocannon;
 public class User {
     private String fieldName;
     private String secondName;
+    //I added this password variable as their wasn't one...
+    private String password;
     private long uniqueId;
     private int AccessLevel;
     
+    String getPassword() {
+        return password;
+    }
 }
