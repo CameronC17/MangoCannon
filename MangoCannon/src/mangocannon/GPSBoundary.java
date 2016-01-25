@@ -10,5 +10,14 @@ package mangocannon;
  * @author jacobburns
  */
 public class GPSBoundary {
+    //Private variable initialiers
+    private float pointList[];
     
+    float[] getBoundary() {
+        return pointList;
+    }
+    
+    void setBoundary(theBoundaries) {
+        this.pointList = boundaries;
+    }
 }
