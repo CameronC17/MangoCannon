@@ -9,6 +9,6 @@ package mangocannon;
  *
  * @author jacobburns
  */
-public class DataRecording {
+public class DataReading {
     
 }
