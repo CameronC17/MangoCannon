@@ -10,5 +10,12 @@ package mangocannon;
  * @author jacobburns
  */
 public class GPS {
+    //Private variable initialisers
+    //I have added this gpsCoordinates class to hold the locational data of the FieldStation
+    private float gpsCoordinates[2];
     
+    float[] getGlobalPosition() {
+        return gpsCoordinates;
+    }
+
 }
