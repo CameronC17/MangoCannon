@@ -12,6 +12,6 @@ package mangocannon;
 public class MainGUI {
     private Settings settings;
     private User currentUser;
-    private fieldList[] Field;
+    //private fieldList[] Field;
     
 }

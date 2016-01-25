@@ -11,8 +11,8 @@ package mangocannon;
  */
 public class FieldStationGUI {
     //Private variable initialisers
-    private GUISettings guiSettings;
-    
+    //private GUISettings guiSettings;
+    //Need to declare a class of GUISettings?
     public void connectToNetwork(){
         //Connect to what network?! lolz
     }

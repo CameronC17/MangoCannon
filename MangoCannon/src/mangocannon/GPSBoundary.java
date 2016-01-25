@@ -17,7 +17,7 @@ public class GPSBoundary {
         return pointList;
     }
     
-    void setBoundary(theBoundaries) {
-        this.pointList = boundaries;
+    void setBoundary(float[] theBoundaries) {
+        this.pointList = theBoundaries;
     }
 }

@@ -12,7 +12,7 @@ package mangocannon;
 public class Field {
     private String fieldName;
     private long uniqueId;
-    private GPSBoudary gpsBoundary;
+    //private GPSBoudary gpsBoundary;
     private FieldStation fieldStation;
     private Crop crop;
 }
