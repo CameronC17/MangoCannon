@@ -16,12 +16,16 @@ public class FieldStation {
     private boolean fixed;
     private GPS gps;
     
-    Sensor getSensor(){
-        return sensorList[];
+    Sensor[] getSensor(){
+        return sensorList;
     }
     
-    void setSensor(Sensor theSensorList[]){
-        this.sensorList = this.sensorList + theSensorList;
+    void setSensor(Sensor[] theSensorList){
+        /*for (int i = 0; i < theSensorList.length; i++){
+            this.sensorList.add(theSensorList[i]);
+        }*/
+
+        this.sensorList = theSensorList;
     }
     
     String getName(){
