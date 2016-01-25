@@ -13,6 +13,7 @@ public class Field {
     private String fieldName;
     private long uniqueId;
     //private GPSBoudary gpsBoundary;
+    private GPSBoundary gpsBoundary;
     private FieldStation fieldStation;
     private Crop crop;
 }
