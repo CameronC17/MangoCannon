@@ -10,20 +10,20 @@ package mangocannon;
  * @author jacobburns
  */
 public class SensorSettings {
-    private TimeInterval interval;
+    //private TimeInterval interval;
     private float valDelta;
-    private Unit units;
+    //private Unit units;
     private boolean enabled;
     private boolean deltaBased;
     private String typeName;
     
-    public TimeInterval getInterval(){
+    /*public TimeInterval getInterval(){
         return interval;
     }
     
     public void setInterval(TimeInterval theInterval){
         this.interval = theInterval;
-    }
+    }*/
     
     public float getValDelta(){
         return valDelta;
@@ -33,13 +33,13 @@ public class SensorSettings {
         this.valDelta = theValDelta;
     }
     
-    public Unit getUnits(){
+    /*public Unit getUnits(){
         return this.units;
     }
     
     public void setUnits(Unit theUnits){
         this.units = theUnits;
-    }
+    }*/
     
     public boolean getEnabled(){
         return this.enabled;
