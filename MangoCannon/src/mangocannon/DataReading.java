@@ -1,14 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mangocannon;
+
+import java.sql.Time;
+
 
 /**
  *
- * @author jacobburns
+ * @author tomhanson
  */
 public class DataReading {
     
+    private Time time;
+    private float[] readings;
+    private String readingType;
+    private long createdBy;
+    
+    public DataReading (Time theTime, float[] theReadings, String theReadingType, long theCreatedBy){
+        time = theTime;
+        readings = theReadings;
+        readingType = theReadingType;
+        createdBy = theCreatedBy;
+    }
+    
+    Time getTime(){
+        return time;
+    }
+    
+    float[] getReadingValues(){
+        return readings;
+    }
+    
+    String getReadingType(){
+        return readingType;
+    }
+    
+    long getCreatorId(){
+        return createdBy;
+    }
 }
