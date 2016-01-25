@@ -53,8 +53,9 @@ public class Sensor {
     DataReading[] getLatestReading(){
         return dataReadings;
     }
+    
     String getSensorType(){
-        //return sensorSettings.getTypeName();
+        return sensorSettings.getTypeName();
     }
     
     void startPolling(){
