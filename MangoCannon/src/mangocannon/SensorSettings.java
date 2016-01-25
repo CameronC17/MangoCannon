@@ -10,5 +10,60 @@ package mangocannon;
  * @author jacobburns
  */
 public class SensorSettings {
+    private TimeInterval interval;
+    private float valDelta;
+    private Unit units;
+    private boolean enabled;
+    private boolean deltaBased;
+    private String typeName;
+    
+    public TimeInterval getInterval(){
+        return interval;
+    }
+    
+    public void setInterval(TimeInterval theInterval){
+        this.interval = theInterval;
+    }
+    
+    public float getValDelta(){
+        return valDelta;
+    }
+    
+    public void setValDelta(float theValDelta){
+        this.valDelta = theValDelta;
+    }
+    
+    public Unit getUnits(){
+        return this.units;
+    }
+    
+    public void setUnits(Unit theUnits){
+        this.units = theUnits;
+    }
+    
+    public boolean getEnabled(){
+        return this.enabled;
+    }
+    
+    public void setEnabled(boolean theEnabled){
+        this.enabled = theEnabled;
+    }
+    
+    public boolean getDeltaBased(){
+        return this.deltaBased;
+    }
+    
+    public void setDeltaBased(boolean theDeltaBased){
+        this.deltaBased = theDeltaBased;
+    }
+    
+    public String getTypeName(){
+        return this.typeName;
+    }
+    
+    public void setTypeName(String theTypeName){
+        this.typeName = theTypeName;
+    }
+    
     
 }
