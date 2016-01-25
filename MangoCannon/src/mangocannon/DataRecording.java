@@ -9,6 +9,6 @@ package mangocannon;
  *
  * @author jacobburns
  */
-public class Test {
+public class DataRecording {
     
 }
