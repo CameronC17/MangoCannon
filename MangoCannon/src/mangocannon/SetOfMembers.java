@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package library;
+package mangocannon;
 
 import java.util.Vector;
 

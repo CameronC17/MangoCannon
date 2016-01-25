@@ -1,5 +1,5 @@
 
-package library;
+package mangocannon;
 
 public class Book implements java.io.Serializable {
 
