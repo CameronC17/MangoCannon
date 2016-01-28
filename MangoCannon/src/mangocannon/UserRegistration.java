@@ -15,9 +15,9 @@ public class UserRegistration {
     User login(String username, String password){
         for (int i = 0; i < users.length; i++)
         {
-            if (users[i].getUsername == username)
+            if (users[i].getUsername() == username)
             {
-                if (users[i].getPassword == password)
+                if (users[i].getPassword() == password)
                 {
                     return users[i];
                 }
@@ -25,6 +25,7 @@ public class UserRegistration {
         }
         //Sudo code for saying user hasnt been found...
         //return no user found!!
+        return null;
     }
     
 }

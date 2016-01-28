@@ -16,8 +16,13 @@ public class User {
     private String password;
     private long uniqueId;
     private int AccessLevel;
+    private String username;
     
     String getPassword() {
         return password;
+    }
+    
+    String getUsername() {
+        return username;
     }
 }
