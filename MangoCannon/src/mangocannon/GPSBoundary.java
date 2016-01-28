@@ -11,13 +11,13 @@ package mangocannon;
  */
 public class GPSBoundary {
     //Private variable initialiers
-    private float pointList[];
+    private GPS pointList[];
     
-    float[] getBoundary() {
+    GPS[] getBoundary() {
         return pointList;
     }
     
-    void setBoundary(float[] theBoundaries) {
+    void setBoundary(GPS[] theBoundaries) {
         this.pointList = theBoundaries;
     }
 }
