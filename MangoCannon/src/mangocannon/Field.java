@@ -16,4 +16,12 @@ public class Field {
     private GPSBoundary gpsBoundary;
     private FieldStation fieldStation;
     private Crop crop;
+    
+    Field(){
+        this.fieldName = "Field 1";
+    }
+    
+    public String getFieldName(){
+        return this.fieldName;
+    }
 }
