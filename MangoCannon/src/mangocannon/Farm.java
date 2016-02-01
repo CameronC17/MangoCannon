@@ -1,20 +1,19 @@
 package mangocannon;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Vector;
 
-public class Farm {
+public class Farm extends Vector<Field>{
     //private Field fields[];
-    List<Field> fieldList = new ArrayList<Field>();
     
-    Farm(){
-        Field field1 = new Field();
-        fieldList.add(field1);
+    void addField(Field theField){
+        super.add(theField);
     }
     
-    List<Field> getFieldList(){
-        return fieldList;
+    void removeField(Field theField){
+        super.remove(theField);
     }
-    
+       
     
 }
 

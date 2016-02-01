@@ -17,11 +17,17 @@ public class Field {
     private FieldStation fieldStation;
     private Crop crop;
     
-    Field(){
-        this.fieldName = "Field 1";
+    Field(String fieldName){
+        this.fieldName = fieldName;
+        
     }
     
     public String getFieldName(){
         return this.fieldName;
+    }
+    
+    @Override
+    public String toString(){
+        return (fieldName);
     }
 }
