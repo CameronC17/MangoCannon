@@ -14,7 +14,6 @@ import java.util.Date;
 public class MainGUI extends javax.swing.JFrame {
 
     public Farm farm1 = new Farm();
-//    private SetOfFields theFields = new SetOfFields(); 
 
     /**
      * Creates new form MainGUI
@@ -55,14 +54,13 @@ public class MainGUI extends javax.swing.JFrame {
             expectedDates.addElement(farm1.get(i).getCrop().getExpectedHarvest());
         }
         
-        //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUIs
+        //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUI
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
         model.addColumn("Fields", fieldNames);
         model.addColumn("Crop Type", cropTypes);
         model.addColumn("Date Planted", datesPlanted);
         model.addColumn("Expected ", expectedDates);
-               
-
+        
     }
 
     /**

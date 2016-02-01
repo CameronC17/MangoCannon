@@ -1,6 +1,5 @@
 package mangocannon;
-import java.util.List;
-import java.util.ArrayList;
+
 import java.util.Vector;
 
 public class Farm extends Vector<Field>{

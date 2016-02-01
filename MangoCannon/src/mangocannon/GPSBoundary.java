@@ -1,23 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mangocannon;
 
-/**
- *
- * @author jacobburns
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class GPSBoundary {
     //Private variable initialiers
-    private GPS pointList[];
+    //private GPS pointList[];
+    List<GPS> pointList = new ArrayList<GPS>(); 
     
-    GPS[] getBoundary() {
+    List<GPS> getBoundary() {
         return pointList;
     }
     
-    void setBoundary(GPS[] theBoundaries) {
+    void addBoundary(GPS theGPS) {
+        pointList.add(theGPS);
+    }
+    
+    void setBoundary(List<GPS> theBoundaries) {
         this.pointList = theBoundaries;
     }
 }
