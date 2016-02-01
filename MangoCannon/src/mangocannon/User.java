@@ -14,7 +14,7 @@ public class User {
     private String secondName;
     private String password;
     private long uniqueId;
-    private int accessLevel;
+    private int AccessLevel;
     private String username;
     
     
@@ -63,7 +63,7 @@ public class User {
     }
     
     void setAccessLevel(int theAccessLevel){
-        this.accessLevel = theAccessLevel;
+        this.AccessLevel = theAccessLevel;
     }
     
     
