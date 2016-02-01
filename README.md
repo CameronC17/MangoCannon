@@ -27,3 +27,5 @@ No
 - Have a location class because not just found by GPS coordinates, can be triangulated
 8. There shouldnt be a list of fields in the main GUI - do we need a new class of ListOfFields?
 - A user has a list of fields
+
+Hello world
