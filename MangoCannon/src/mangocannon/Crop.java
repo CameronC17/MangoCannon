@@ -15,6 +15,13 @@ public class Crop {
     private Date plantDate;
     private Date expectedHarvest;
     
+    Crop(String theCropType, float theEstimatedYield, Date thePlantDate, Date theExpectedHarvest) {
+        this.cropType = theCropType;
+        this.estimatedYield = theEstimatedYield;
+        this.plantDate = thePlantDate;
+        this.expectedHarvest = theExpectedHarvest;
+    }
+    
     String getCropType(){
         return cropType;
     }
