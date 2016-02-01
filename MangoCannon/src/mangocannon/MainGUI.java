@@ -21,17 +21,27 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         
-        Date d = new Date("10/02/2016");
-        Date e = new Date("20/02/2016");
-                
-        //Crop(String theCropType, float theEstimatedYield, Date thePlantDate, Date theExpectedHarvest)
-        Crop crop1 = new Crop("Carrots", 1, d, e);
-        Crop crop2 = new Crop("Mangos", 1, d, e);
-        Crop crop3 = new Crop("Donuts", 1, d, e);
+        GPS loc1 = new GPS(10.4f, 3.6f);
+        GPS loc2 = new GPS(20.2f, 3.6f);
+        GPS loc3 = new GPS(20.2f, 12.9f);
+        GPS loc4 = new GPS(10.4f, 12.9f);
         
-        Field field1 = new Field("Field 1", crop1);
-        Field field2 = new Field("Field 2", crop2);
-        Field field3 = new Field("Field 3", crop3);
+        GPSBoundary gpsB1 = new GPSBoundary();
+        gpsB1.addBoundary(loc1);
+        gpsB1.addBoundary(loc2);
+        gpsB1.addBoundary(loc3);
+        gpsB1.addBoundary(loc4);
+        
+        Date d = new Date("10/02/2016");
+        
+        //Crop(String theCropType, float theAverageYield, Date averageGrowTime)
+        Crop crop1 = new Crop("Carrots", 1, 3);
+        Crop crop2 = new Crop("Mangos", 1, 4);
+        Crop crop3 = new Crop("Donuts", 1, 5);
+        
+        Field field1 = new Field("Field 1", crop1, gpsB1);
+        Field field2 = new Field("Field 2", crop2, gpsB1);
+        Field field3 = new Field("Field 3", crop3, gpsB1);
         
         farm1.addField(field1);
         farm1.addField(field2);
@@ -47,19 +57,19 @@ public class MainGUI extends javax.swing.JFrame {
         }
         Vector<Date> datesPlanted = new Vector<Date>();
         for (int i=0; i < farm1.size(); i++){
-            datesPlanted.addElement(farm1.get(i).getCrop().getPlantDate());
+            datesPlanted.addElement(farm1.get(i).getPlantDate());
         }
-        Vector<Date> expectedDates = new Vector<Date>();
-        for (int i=0; i < farm1.size(); i++){
-            expectedDates.addElement(farm1.get(i).getCrop().getExpectedHarvest());
-        }
+//        Vector<int> expectedDates = new Vector<int>();
+//        for (int i=0; i < farm1.size(); i++){
+//            expectedDates.addElement(farm1.get(i).getExpectedDate());
+//        }
         
         //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUI
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
         model.addColumn("Fields", fieldNames);
         model.addColumn("Crop Type", cropTypes);
         model.addColumn("Date Planted", datesPlanted);
-        model.addColumn("Expected ", expectedDates);
+//        model.addColumn("Expected ", expectedDates);
         
     }
 

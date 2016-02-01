@@ -11,8 +11,7 @@ public class Farm extends Vector<Field>{
     
     void removeField(Field theField){
         super.remove(theField);
-    }
-       
+    }      
     
 }
 

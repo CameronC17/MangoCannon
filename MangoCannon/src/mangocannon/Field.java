@@ -5,6 +5,8 @@
  */
 package mangocannon;
 
+import java.util.Date;
+
 /**
  *
  * @author jacobburns
@@ -15,11 +17,18 @@ public class Field {
     //private GPSBoudary gpsBoundary;
     private GPSBoundary gpsBoundary;
     private FieldStation fieldStation;
-    private Crop crop;
+    private Crop crop;    
+    private Date plantDate;
     
-    Field(String fieldName, Crop theCrop){
+    Field(String fieldName, Crop theCrop, GPSBoundary theBoundary){
         this.fieldName = fieldName;
         this.crop = theCrop;
+        this.gpsBoundary = theBoundary;
+    }
+    
+    Field(String fieldName, GPSBoundary theBoundary){
+        this.fieldName = fieldName;
+        this.gpsBoundary = theBoundary;
     }
     
     public String getFieldName(){
@@ -30,8 +39,13 @@ public class Field {
         return this.crop;
     }
     
-    @Override
-    public String toString(){
-        return (fieldName);
+    public Date getPlantDate() {
+        return this.plantDate;
     }
+    
+//    public Date getExpectedDate() {
+//        return this.crop.getAverageGrowTime();
+//    }
+    
+    
 }

@@ -15,6 +15,11 @@ public class GPS {
 
 //    private float[] gpsCoordinates; //Can only be two columns
     private float[] gpsCoordinates = new float[2];
+    
+    GPS(float theX, float theY) {
+        gpsCoordinates[0] = theX;
+        gpsCoordinates[1] = theY;
+    }
         
     float[] getGlobalPosition() {
         return gpsCoordinates;
