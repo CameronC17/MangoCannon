@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class MainGUI extends javax.swing.JFrame {
 
-    private Farm farm1 = new Farm();
+    public Farm farm1 = new Farm();
 //    private SetOfFields theFields = new SetOfFields(); 
 
     /**
