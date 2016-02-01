@@ -7,7 +7,7 @@ package mangocannon;
 
 /**
  *
- * @author jacobburns
+ * @author Tom Hanson
  */
 public class User {
     private String firstName;
