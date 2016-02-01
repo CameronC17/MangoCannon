@@ -24,7 +24,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         Date d = new Date("10/02/2016");
         Date e = new Date("20/02/2016");
-        
+                
         //Crop(String theCropType, float theEstimatedYield, Date thePlantDate, Date theExpectedHarvest)
         Crop crop1 = new Crop("Carrots", 1, d, e);
         Crop crop2 = new Crop("Mangos", 1, d, e);
@@ -46,11 +46,21 @@ public class MainGUI extends javax.swing.JFrame {
         for (int i=0; i < farm1.size(); i++){
             cropTypes.addElement(farm1.get(i).getCrop().getCropType());
         }
+        Vector<Date> datesPlanted = new Vector<Date>();
+        for (int i=0; i < farm1.size(); i++){
+            datesPlanted.addElement(farm1.get(i).getCrop().getPlantDate());
+        }
+        Vector<Date> expectedDates = new Vector<Date>();
+        for (int i=0; i < farm1.size(); i++){
+            expectedDates.addElement(farm1.get(i).getCrop().getExpectedHarvest());
+        }
         
         //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUIs
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
         model.addColumn("Fields", fieldNames);
         model.addColumn("Crop Type", cropTypes);
+        model.addColumn("Date Planted", datesPlanted);
+        model.addColumn("Expected ", expectedDates);
                
 
     }

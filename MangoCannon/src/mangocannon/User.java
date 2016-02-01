@@ -59,7 +59,7 @@ public class User {
     }
     
     int getAccessLevel(){
-        return accessLevel;
+        return AccessLevel;
     }
     
     void setAccessLevel(int theAccessLevel){
