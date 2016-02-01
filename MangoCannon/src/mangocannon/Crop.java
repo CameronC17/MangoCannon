@@ -3,51 +3,32 @@ package mangocannon;
 
 import java.util.Date;
 
-/**
- *
- * @author tomhanson
- */
 public class Crop {
-    
     private String cropType;
-    private long uniqueId;
-    private float estimatedYield;
-    private Date plantDate;
-    private Date expectedHarvest;
+    private float averageYieldPerM;
+    private int averageTimeToGrow;
     
-    Crop(String theCropType, float theEstimatedYield, Date thePlantDate, Date theExpectedHarvest) {
+    Crop(String theCropType, float theAverageYield, int averageGrowTime) {
         this.cropType = theCropType;
-        this.estimatedYield = theEstimatedYield;
-        this.plantDate = thePlantDate;
-        this.expectedHarvest = theExpectedHarvest;
+        this.averageYieldPerM = theAverageYield;
+        this.averageTimeToGrow = averageGrowTime;
     }
     
     String getCropType(){
         return cropType;
     }
     
-    long getUniqueId(){
-        return uniqueId;
+    float getAverageYield(){
+        return averageYieldPerM;
+    }
+    void setAverageYield(float theEstimatedYield){
+        this.averageYieldPerM = theEstimatedYield;
     }
     
-    float getEstimatedYield(){
-        return estimatedYield;
+    int getAverageGrowTime(){
+        return averageTimeToGrow;
     }
-    void setEstimatedYield(float theEstimatedYield){
-        this.estimatedYield = theEstimatedYield;
-    }
-    
-    Date getPlantDate(){
-        return plantDate;
-    }
-    void setPlantDate(Date thePlantDate){
-        this.plantDate = thePlantDate;
-    }
-    
-    Date getExpectedHarvest(){
-        return expectedHarvest;
-    }
-    void setExpectedHarvest(Date theExpectedHarvest){
-        this.expectedHarvest = theExpectedHarvest;
+    void setAverageGrowTime(int theExpectedHarvest){
+        this.averageTimeToGrow = theExpectedHarvest;
     }
 }

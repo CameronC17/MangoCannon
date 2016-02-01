@@ -16,6 +16,10 @@ public class GPSBoundary {
         pointList.add(theGPS);
     }
     
+    void addMultipleBoundaries(GPS gpsArray[]) {
+        
+    }
+    
     void setBoundary(List<GPS> theBoundaries) {
         this.pointList = theBoundaries;
     }
