@@ -12,6 +12,8 @@ $ git commit -m "COMMIT MESSAGE HERE"
 $ git push -u origin new_branch
 # If you need to push again you can do
 $ git push
+Create pull request on github.com
+
 ```
 
 ## Merging branches into master
@@ -28,11 +30,14 @@ Say you are on a branch called `my_branch`, you have some uncommited changes, bu
 Do this:
 ```sh
 $ git stash -u
+# Only line above if your branch has any uncommitted changes
 $ git checkout master
 $ git pull
 $ git checkout my_branch
 $ git merge master
 $ git stash pop
+# Only line above if your branch has any uncommitted changes
+$ git log (to check the logs)
 ```
 
 If that all went well you should be back on `my_branch` with the changes from master merged into your work, and your
