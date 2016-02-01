@@ -16,7 +16,7 @@ public class FieldGUI extends javax.swing.JFrame {
      */
     public FieldGUI() {
         initComponents();
-     //test from jacob branch   
+     //test merge jacob   
     }
 
     /**
