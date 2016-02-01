@@ -38,6 +38,7 @@ $ git merge master
 $ git stash pop
 # Only line above if your branch has any uncommitted changes
 $ git log (to check the logs)
+$ q (to quit)
 ```
 
 If that all went well you should be back on `my_branch` with the changes from master merged into your work, and your
