@@ -25,15 +25,9 @@ public class Crop {
     String getCropType(){
         return cropType;
     }
-    void setCropType(String theCropType){
-        this.cropType = cropType;
-    }
     
     long getUniqueId(){
         return uniqueId;
-    }
-    void setUniqueId(long theUniqueId){
-        this.uniqueId = uniqueId;
     }
     
     float getEstimatedYield(){

@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 package mangocannon;
-import java.util.List;
-import java.util.ArrayList;
-import javax.swing.*;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
-import ca.odell.glazedlists.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class MainGUI extends javax.swing.JFrame {
@@ -24,25 +22,36 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         
-        Field field1 = new Field("Field 1");
-        Field field2 = new Field("Field 2");
-        Field field3 = new Field("Field 3");
+        Date d = new Date("10/02/2016");
+        Date e = new Date("20/02/2016");
+        
+        //Crop(String theCropType, float theEstimatedYield, Date thePlantDate, Date theExpectedHarvest)
+        Crop crop1 = new Crop("Carrots", 1, d, e);
+        Crop crop2 = new Crop("Mangos", 1, d, e);
+        Crop crop3 = new Crop("Donuts", 1, d, e);
+        
+        Field field1 = new Field("Field 1", crop1);
+        Field field2 = new Field("Field 2", crop2);
+        Field field3 = new Field("Field 3", crop3);
         
         farm1.addField(field1);
         farm1.addField(field2);
         farm1.addField(field3);
         
-        Vector<String> fieldNames = new Vector<String>();
-        
+        Vector<String> fieldNames = new Vector<String>();        
         for (int i=0; i < farm1.size(); i++){
             fieldNames.addElement(farm1.get(i).getFieldName());
+        }
+        Vector<String> cropTypes = new Vector<String>();
+        for (int i=0; i < farm1.size(); i++){
+            cropTypes.addElement(farm1.get(i).getCrop().getCropType());
         }
         
         //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUIs
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
         model.addColumn("Fields", fieldNames);
-        
-        
+        model.addColumn("Crop Type", cropTypes);
+               
 
     }
 

@@ -181,8 +181,12 @@ public class FieldGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         //this.setVisible(false);
         
-        Field field1 = new Field(jTextField1.getText());
-        System.out.println(field1.getFieldName());
+//        JACOB
+//        public Field getField(){
+//            Field field1 = new Field("Field from field GUI");//jTextField1.getText());
+//            System.out.println(field1.getFieldName());
+//            return field1;
+//        }
         
         
 //        Crop(String theCropType, float theEstimatedYield, Date thePlantDate, Date theExpectedHarvest) {

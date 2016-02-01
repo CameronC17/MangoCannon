@@ -17,13 +17,17 @@ public class Field {
     private FieldStation fieldStation;
     private Crop crop;
     
-    Field(String fieldName){
+    Field(String fieldName, Crop theCrop){
         this.fieldName = fieldName;
-        
+        this.crop = theCrop;
     }
     
     public String getFieldName(){
         return this.fieldName;
+    }
+    
+    public Crop getCrop() {
+        return this.crop;
     }
     
     @Override
