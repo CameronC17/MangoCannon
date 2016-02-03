@@ -198,12 +198,7 @@ public class FieldGUI extends MainGUI {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        
-        Field newField = new Field(jTextField1.getText(), null);//jTextField1.getText());
-        
-        currentFarm.addField(newField);
-        
-        
+
 
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
