@@ -205,8 +205,7 @@ public class FieldGUI extends javax.swing.JFrame {
         
         
         Field field1 = new Field(jTextField1.getText(), null);//jTextField1.getText());
-        
-        
+              
         
 
         this.dispose();

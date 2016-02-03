@@ -11,7 +11,15 @@ public class Farm extends Vector<Field>{
     
     void removeField(Field theField){
         super.remove(theField);
-    }      
+    }
+    
+    int getFieldIndex(String theFieldName) {
+        for (int i = 0; i < this.size(); i++) {
+            if (this.get(i).getFieldName() == theFieldName)
+                return i;
+        }
+        return -1;
+    }
     
 }
 

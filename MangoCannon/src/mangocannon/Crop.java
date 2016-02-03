@@ -1,34 +1,50 @@
 
 package mangocannon;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Crop {
-    private String cropType;
-    private float averageYieldPerM;
-    private int averageTimeToGrow;
+    private CropType cropType;
+    private float estimatedYield;
+    private LocalDate plantDate;
+    private LocalDate expectedHarvestDate;
+    private int fieldArea;
     
-    Crop(String theCropType, float theAverageYield, int averageGrowTime) {
+    Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM) {
         this.cropType = theCropType;
-        this.averageYieldPerM = theAverageYield;
-        this.averageTimeToGrow = averageGrowTime;
+        this.plantDate = thePlantDate;
+        this.fieldArea = fieldSizeInM;
+        this.estimatedYield = (fieldSizeInM * theCropType.getAverageYield());
+        this.expectedHarvestDate = thePlantDate.plusWeeks(theCropType.getAverageGrowTime());        
     }
     
     String getCropType(){
-        return cropType;
+        return cropType.getCropType();
+    }
+    void setCropType(CropType theCrop) {
+        this.cropType = theCrop;
+        this.estimatedYield = (this.fieldArea * cropType.getAverageYield());
+        this.expectedHarvestDate = this.plantDate.plusWeeks(cropType.getAverageGrowTime()); 
     }
     
-    float getAverageYield(){
-        return averageYieldPerM;
+    float getEstimatedYield(){
+        this.estimatedYield = (this.fieldArea * cropType.getAverageYield());
+        return estimatedYield;
     }
-    void setAverageYield(float theEstimatedYield){
-        this.averageYieldPerM = theEstimatedYield;
+    int getFieldSize() {
+        return fieldArea;
     }
     
-    int getAverageGrowTime(){
-        return averageTimeToGrow;
+    LocalDate getExpectedHarvest(){
+        this.expectedHarvestDate = this.plantDate.plusWeeks(cropType.getAverageGrowTime());
+        return expectedHarvestDate;
     }
-    void setAverageGrowTime(int theExpectedHarvest){
-        this.averageTimeToGrow = theExpectedHarvest;
+    void setPlantDate(LocalDate theDate) {
+        this.plantDate = theDate;
+        this.expectedHarvestDate = this.plantDate.plusWeeks(cropType.getAverageGrowTime()); 
+    }
+    LocalDate getPlantDate() {
+        return plantDate;
     }
 }
