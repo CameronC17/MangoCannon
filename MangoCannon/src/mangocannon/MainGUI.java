@@ -8,10 +8,12 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 
 public class MainGUI extends javax.swing.JFrame {
 
     public Farm currentFarm = new Farm();
+    public Vector<CropType> cropNames = new Vector<CropType>();
 
     /**
      * Creates new form MainGUI
@@ -32,9 +34,13 @@ public class MainGUI extends javax.swing.JFrame {
         
         //CropType (String theCropType, float theAverageYield, int averageGrowTime)
         CropType carrots = new CropType("Carrots", 10.5f, 40);
+        cropNames.addElement(carrots);
         CropType donuts = new CropType("Donuts", 1.3f, 1);
+        cropNames.addElement(donuts);        
         CropType lemons = new CropType("Lemons", 50f, 60);
+        cropNames.addElement(lemons);
         CropType apples = new CropType("Apples", 100f, 100);        
+        cropNames.addElement(apples);
         
         //Date d = new Date("10/02/2016");
         LocalDate date1 = LocalDate.parse("2016-02-10");
@@ -93,6 +99,12 @@ public class MainGUI extends javax.swing.JFrame {
         model.addColumn("Expected Harvest", expectedDates);
         model.addColumn("Field Size (Square M)", fieldSize);
         model.addColumn("Expected Yield", expectedYield);
+    
+        DefaultComboBoxModel model2 = (DefaultComboBoxModel)jComboBox1.getModel();
+        for (int i = 0; i < cropNames.size(); i++)
+        {
+            model2.addElement(cropNames.get(i).getCropType());
+        }
     }
     
 
@@ -148,6 +160,7 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         jLabel8.setText("X:");
 
@@ -238,18 +251,16 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton4)
                         .addGap(0, 582, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
@@ -383,6 +394,12 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Harvests", jPanel2);
 
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -390,10 +407,15 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -407,7 +429,9 @@ public class MainGUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2)
+                        .addGap(138, 138, 138)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -425,6 +449,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,6 +504,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
