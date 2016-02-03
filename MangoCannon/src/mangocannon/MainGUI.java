@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class MainGUI extends javax.swing.JFrame {
 
-    public Farm farm1 = new Farm();
+    public Farm currentFarm = new Farm();
 
     /**
      * Creates new form MainGUI
@@ -43,25 +43,25 @@ public class MainGUI extends javax.swing.JFrame {
         Field field2 = new Field("Field 2", crop2, gpsB1);
         Field field3 = new Field("Field 3", crop3, gpsB1);
         
-        farm1.addField(field1);
-        farm1.addField(field2);
-        farm1.addField(field3);
+        currentFarm.addField(field1);
+        currentFarm.addField(field2);
+        currentFarm.addField(field3);
         
         Vector<String> fieldNames = new Vector<String>();        
-        for (int i=0; i < farm1.size(); i++){
-            fieldNames.addElement(farm1.get(i).getFieldName());
+        for (int i=0; i < currentFarm.size(); i++){
+            fieldNames.addElement(currentFarm.get(i).getFieldName());
         }
         Vector<String> cropTypes = new Vector<String>();
-        for (int i=0; i < farm1.size(); i++){
-            cropTypes.addElement(farm1.get(i).getCrop().getCropType());
+        for (int i=0; i < currentFarm.size(); i++){
+            cropTypes.addElement(currentFarm.get(i).getCrop().getCropType());
         }
         Vector<Date> datesPlanted = new Vector<Date>();
-        for (int i=0; i < farm1.size(); i++){
-            datesPlanted.addElement(farm1.get(i).getPlantDate());
+        for (int i=0; i < currentFarm.size(); i++){
+            datesPlanted.addElement(currentFarm.get(i).getPlantDate());
         }
 //        Vector<int> expectedDates = new Vector<int>();
-//        for (int i=0; i < farm1.size(); i++){
-//            expectedDates.addElement(farm1.get(i).getExpectedDate());
+//        for (int i=0; i < currentFarm.size(); i++){
+//            expectedDates.addElement(currentFarm.get(i).getExpectedDate());
 //        }
         
         //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUI
@@ -71,7 +71,14 @@ public class MainGUI extends javax.swing.JFrame {
         model.addColumn("Date Planted", datesPlanted);
 //        model.addColumn("Expected ", expectedDates);
         
+        
+        
     }
+    
+    public void addFieldTofarm (Field theField) {
+        currentFarm.addField(theField);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
