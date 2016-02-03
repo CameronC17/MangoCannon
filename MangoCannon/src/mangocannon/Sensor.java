@@ -59,7 +59,11 @@ public class Sensor {
     }
     
     void startPolling(){
-        //polling start - needs to be implemented
+        // SensorSettings.getTimeInterval();
+        
+        SensorSettings sensorSettings= new SensorSettings();
+        boolean deltaBased = sensorSettings.getDeltaBased();
+        float valDelta = sensorSettings.getValDelta();
     }
     
     DataReading saveReading(DataReading dataReading){

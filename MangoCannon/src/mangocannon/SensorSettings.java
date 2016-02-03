@@ -17,11 +17,11 @@ public class SensorSettings {
     private boolean deltaBased;
     private String typeName;
     
-    /*public TimeInterval getInterval(){
+    /*public getTimeInterval getInterval(){
         return interval;
     }
     
-    public void setInterval(TimeInterval theInterval){
+    public void setTimeInterval(TimeInterval theInterval){
         this.interval = theInterval;
     }*/
     
