@@ -6,10 +6,8 @@
 package mangocannon;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
-
 
 public class MainGUI extends javax.swing.JFrame {
 
@@ -32,51 +30,69 @@ public class MainGUI extends javax.swing.JFrame {
         gpsB1.addBoundary(loc3);
         gpsB1.addBoundary(loc4);
         
-        Date d = new Date("10/02/2016");
+        //CropType (String theCropType, float theAverageYield, int averageGrowTime)
+        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType donuts = new CropType("Donuts", 1.3f, 1);
+        CropType lemons = new CropType("Lemons", 50f, 60);
+        CropType apples = new CropType("Apples", 100f, 100);        
         
-        //Crop(String theCropType, float theAverageYield, Date averageGrowTime)
-        Crop crop1 = new Crop("Carrots", 1, 3);
-        Crop crop2 = new Crop("Mangos", 1, 4);
-        Crop crop3 = new Crop("Donuts", 1, 5);
+        //Date d = new Date("10/02/2016");
+        LocalDate date1 = LocalDate.parse("2016-02-10");
+        LocalDate date2 = LocalDate.parse("2017-06-29");
+        //LocalDate date1 = LocalDate.parse("15-06-2016");
+        //LocalDate date2 = LocalDate.parse("29-08-2017");
         
-        Field field1 = new Field("Field 1", crop1, gpsB1);
-        Field field2 = new Field("Field 2", crop2, gpsB1);
-        Field field3 = new Field("Field 3", crop3, gpsB1);
+        Field field1 = new Field("Field 1", gpsB1);
+        Field field2 = new Field("Field 2", gpsB1);
+        Field field3 = new Field("Field 3", gpsB1);
+        
+        //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
+        //Evetually change last number to be field1.size() or whatever
+        Crop crop1 = new Crop(donuts, date1, 54);
+        field1.newCrop(crop1);
+        Crop crop2 = new Crop(lemons, date2, 120);
+        field2.newCrop(crop2);
         
         currentFarm.addField(field1);
         currentFarm.addField(field2);
         currentFarm.addField(field3);
+        Crop crop3 = new Crop(apples, date1, 3);
+        currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
         
-        Vector<String> fieldNames = new Vector<String>();        
+        createTableData();
+    }
+    
+    public void addFieldTofarm (Field theField) {
+        currentFarm.addField(theField);
+    }
+    
+    public void createTableData() {
+        //Creates stuff to display in GUI
+        Vector<String> fieldNames = new Vector<String>();
+        Vector<String> cropTypes = new Vector<String>();
+        Vector<LocalDate> datesPlanted = new Vector<LocalDate>();
+        Vector<LocalDate> expectedDates = new Vector<LocalDate>();
+        Vector<Integer> fieldSize = new Vector<Integer>();
+        Vector<Float> expectedYield = new Vector<Float>();
+        
         for (int i=0; i < currentFarm.size(); i++){
             fieldNames.addElement(currentFarm.get(i).getFieldName());
-        }
-        Vector<String> cropTypes = new Vector<String>();
-        for (int i=0; i < currentFarm.size(); i++){
             cropTypes.addElement(currentFarm.get(i).getCrop().getCropType());
+            datesPlanted.addElement(currentFarm.get(i).getCrop().getPlantDate());
+            expectedDates.addElement(currentFarm.get(i).getCrop().getExpectedHarvest());
+            //Change field size to get from field not crop when added boundaries!
+            fieldSize.addElement(currentFarm.get(i).getCrop().getFieldSize());
+            expectedYield.addElement(currentFarm.get(i).getCrop().getEstimatedYield());            
         }
-        Vector<Date> datesPlanted = new Vector<Date>();
-        for (int i=0; i < currentFarm.size(); i++){
-            datesPlanted.addElement(currentFarm.get(i).getPlantDate());
-        }
-//        Vector<int> expectedDates = new Vector<int>();
-//        for (int i=0; i < currentFarm.size(); i++){
-//            expectedDates.addElement(currentFarm.get(i).getExpectedDate());
-//        }
         
         //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUI
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
         model.addColumn("Fields", fieldNames);
         model.addColumn("Crop Type", cropTypes);
         model.addColumn("Date Planted", datesPlanted);
-//        model.addColumn("Expected ", expectedDates);
-        
-        
-        
-    }
-    
-    public void addFieldTofarm (Field theField) {
-        currentFarm.addField(theField);
+        model.addColumn("Expected Harvest", expectedDates);
+        model.addColumn("Field Size (Square M)", fieldSize);
+        model.addColumn("Expected Yield", expectedYield);
     }
     
 
