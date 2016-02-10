@@ -74,6 +74,9 @@ public class MainGUI extends javax.swing.JFrame {
     
     public void createTableData() {
         //Creates stuff to display in GUI
+        
+//        model.setRowCount(0);
+        
         Vector<String> fieldNames = new Vector<String>();
         Vector<String> cropTypes = new Vector<String>();
         Vector<LocalDate> datesPlanted = new Vector<LocalDate>();
@@ -93,6 +96,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUI
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
+        
         model.addColumn("Fields", fieldNames);
         model.addColumn("Crop Type", cropTypes);
         model.addColumn("Date Planted", datesPlanted);
@@ -105,6 +109,8 @@ public class MainGUI extends javax.swing.JFrame {
         {
             model2.addElement(cropNames.get(i).getCropType());
         }
+//        ((DefaultTableModel)table1.getModel()).removeRow(table1.getRowCount());
+
     }
     
 
@@ -161,6 +167,7 @@ public class MainGUI extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
+        jLabel14 = new javax.swing.JLabel();
 
         jLabel8.setText("X:");
 
@@ -232,6 +239,11 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         jButton5.setText("Remove Field");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -400,6 +412,8 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setText("Crop:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -409,14 +423,17 @@ public class MainGUI extends javax.swing.JFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(43, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,8 +447,10 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addGap(138, 138, 138)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(112, 112, 112)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))))
                 .addContainerGap())
         );
 
@@ -453,6 +472,12 @@ public class MainGUI extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int selectedRow = table1.getSelectedRow();
+        currentFarm.remove(selectedRow);
+        ((DefaultTableModel)table1.getModel()).removeRow(selectedRow);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -507,6 +532,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
