@@ -30,5 +30,9 @@ public class Field {
     
     public Crop getCrop() {
         return this.crop;
-    }  
+    }
+    
+    public float size() {
+        return gpsBoundary.getSize();
+    }
 }
