@@ -15,6 +15,18 @@ public class Sensor {
     private long uniqueId;
     private DataReading dataReadings[];
     
+    public Sensor(){
+        
+    }
+    
+    public Sensor(String theCategory, Timer theTimer, SensorSettings theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
+        category = theCategory;
+        timer = theTimer;
+        sensorSettings = theSensorSettings;
+        uniqueId = theUniqueId;
+        dataReadings = theDataReadings;
+    }
+    
     String getCategory(){
         return category;
     }
@@ -61,7 +73,7 @@ public class Sensor {
     void startPolling(){
         // SensorSettings.getTimeInterval();
         
-        SensorSettings sensorSettings= new SensorSettings();
+        SensorSettings sensorSettings = new SensorSettings();
         boolean deltaBased = sensorSettings.getDeltaBased();
         float valDelta = sensorSettings.getValDelta();
     }

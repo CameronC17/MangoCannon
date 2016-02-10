@@ -17,6 +17,18 @@ public class SensorSettings {
     private boolean deltaBased;
     private String typeName;
     
+    public SensorSettings()
+    {
+        // blank constructor
+    }
+    
+    public SensorSettings(float theValDelta, boolean theEnabled, boolean theDeltaBased, String theTypeName){
+        valDelta = theValDelta;
+        enabled = theEnabled;
+        deltaBased = theDeltaBased;
+        typeName = theTypeName;
+    }
+    
     /*public getTimeInterval getInterval(){
         return interval;
     }
