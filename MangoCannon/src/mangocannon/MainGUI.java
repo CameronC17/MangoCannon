@@ -39,7 +39,7 @@ public class MainGUI extends javax.swing.JFrame {
         cropNames.addElement(donuts);        
         CropType lemons = new CropType("Lemons", 50f, 60);
         cropNames.addElement(lemons);
-        CropType apples = new CropType("Apples", 100f, 100);        
+        CropType apples = new CropType("Apples", 100f, 100);
         cropNames.addElement(apples);
         
         //Date d = new Date("10/02/2016");
@@ -66,6 +66,8 @@ public class MainGUI extends javax.swing.JFrame {
         currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
         
         createTableData();
+        
+        field1.size();
     }
     
     public void addFieldTofarm (Field theField) {
@@ -90,6 +92,7 @@ public class MainGUI extends javax.swing.JFrame {
             fieldSize.addElement(currentFarm.get(i).getCrop().getFieldSize());
             expectedYield.addElement(currentFarm.get(i).getCrop().getEstimatedYield());            
         }
+        
         
         //Here we've created the model for the JTable. Any changes to the model will directly affect the JTable in the GUI
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
