@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 
-public class FieldGUI extends MainGUI {
+public class FieldGUI extends JFrame {
 
     /**
      * Creates new form FieldGUI
@@ -150,7 +150,7 @@ public class FieldGUI extends MainGUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-
+        
 
 
         this.dispose();
