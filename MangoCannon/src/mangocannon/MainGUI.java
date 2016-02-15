@@ -30,7 +30,7 @@ public class MainGUI extends javax.swing.JFrame {
 //        model.setRowCount(0);
         
         Vector<String> fieldNames = new Vector<String>();
-        Vector<String> cropTypes = new Vector<String>();
+        Vector<String> cropNames = new Vector<String>();
         Vector<LocalDate> datesPlanted = new Vector<LocalDate>();
         Vector<LocalDate> expectedDates = new Vector<LocalDate>();
         Vector<Integer> fieldSize = new Vector<Integer>();
@@ -38,7 +38,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         for (int i=0; i < globalVar.currentFarm.size(); i++){
             fieldNames.addElement(globalVar.currentFarm.get(i).getFieldName());
-            cropTypes.addElement(globalVar.currentFarm.get(i).getCrop().getCropType());
+            cropNames.addElement(globalVar.currentFarm.get(i).getCrop().getCropType());
             datesPlanted.addElement(globalVar.currentFarm.get(i).getCrop().getPlantDate());
             expectedDates.addElement(globalVar.currentFarm.get(i).getCrop().getExpectedHarvest());
             //Change field size to get from field not crop when added boundaries!
@@ -51,16 +51,16 @@ public class MainGUI extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)table1.getModel();
         
         model.addColumn("Fields", fieldNames);
-        model.addColumn("Crop Type", cropTypes);
+        model.addColumn("Crop Type", cropNames);
         model.addColumn("Date Planted", datesPlanted);
         model.addColumn("Expected Harvest", expectedDates);
         model.addColumn("Field Size (Square M)", fieldSize);
         model.addColumn("Expected Yield", expectedYield);
     
         DefaultComboBoxModel model2 = (DefaultComboBoxModel)jComboBox1.getModel();
-        for (int i = 0; i < globalVar.cropNames.size(); i++)
+        for (int i = 0; i < globalVar.cropTypes.size(); i++)
         {
-            model2.addElement(globalVar.cropNames.get(i).getCropType());
+            model2.addElement(globalVar.cropTypes.get(i).getCropType());
         }
 //        ((DefaultTableModel)table1.getModel()).removeRow(table1.getRowCount());
 

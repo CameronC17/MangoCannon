@@ -10,11 +10,22 @@ package mangocannon;
  * @author jacobburns
  */
 public class FieldStation {
-    private Sensor sensorList[];
+    private Sensor[] sensorList;
     private String name;
     private long uniqueId;
     private boolean fixed;
     private GPS gps;
+    
+    public FieldStation(){
+        
+    }
+    
+    public FieldStation(Sensor[] theSensorList, String theName, long theUniqueId, GPS theGPS){
+        sensorList = theSensorList;
+        name = theName;
+        uniqueId = theUniqueId;
+        gps = theGPS;
+    }
     
     Sensor[] getSensor(){
         return sensorList;

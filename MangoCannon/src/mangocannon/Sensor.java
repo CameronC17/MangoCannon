@@ -8,30 +8,20 @@ import javax.swing.Timer;
  * @author tomhanson
  */
 public class Sensor {
-    
-    private String category;
     private Timer timer;
-    private SensorTypes sensorSettings;
+    private SensorTypes sensorTypes;
     private long uniqueId;
-    private DataReading dataReadings[];
+    private DataReading dataReadings;
     
     public Sensor(){
         
     }
     
-    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
-        category = theCategory;
+    public Sensor(Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings){
         timer = theTimer;
-        sensorSettings = theSensorSettings;
+        sensorTypes = theSensorSettings;
         uniqueId = theUniqueId;
         dataReadings = theDataReadings;
-    }
-    
-    String getCategory(){
-        return category;
-    }
-    void setCategory(String theCategory){
-        this.category = theCategory;
     }
     
     Timer getTimer(){
@@ -42,10 +32,10 @@ public class Sensor {
     }
     
     SensorTypes getSensorSettings(){
-        return sensorSettings;
+        return sensorTypes;
     }
     void setSensorSettings(SensorTypes theSensorSettings){
-        this.sensorSettings = theSensorSettings;
+        this.sensorTypes = theSensorSettings;
     }
     
     long getUniqueId(){
@@ -55,19 +45,19 @@ public class Sensor {
         this.uniqueId = theUniqueId;
     }
     
-    DataReading[] getReadings(){
+    DataReading getReadings(){
         return dataReadings;
     }
     void setDataReadings(DataReading theDataReading){
         
     }
     
-    DataReading[] getLatestReading(){
+    DataReading getLatestReading(){
         return dataReadings;
     }
     
     String getSensorType(){
-        return sensorSettings.getTypeName();
+        return sensorTypes.getTypeName();
     }
     
     void startPolling(){
