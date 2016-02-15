@@ -15,6 +15,7 @@ import java.util.Vector;
 public class GlobalVariables {
     public Farm currentFarm = new Farm();
     public Vector<CropType> cropNames = new Vector<CropType>();
+    public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
     
     public GlobalVariables() 
     {
@@ -38,6 +39,16 @@ public class GlobalVariables {
         cropNames.addElement(lemons);
         CropType apples = new CropType("Apples", 100f, 100);
         cropNames.addElement(apples);
+        
+        // SensorSettings
+        SensorTypes rainFall = new SensorTypes(1.5f, true, true, "Rain Fall", "mm");
+        sensorTypes.addElement(rainFall);
+        SensorTypes sunshine = new SensorTypes(1.5f, true, true, "Sunshine", "mm");
+        sensorTypes.addElement(sunshine);
+        SensorTypes nutrientSaturation = new SensorTypes(1.5f, true, true, "Nutrient Saturation", "mm");
+        sensorTypes.addElement(nutrientSaturation);
+        SensorTypes temperature = new SensorTypes(1.5f, true, true, "Temperature", "f");
+        sensorTypes.addElement(temperature);
         
         //Date d = new Date("10/02/2016");
         LocalDate date1 = LocalDate.parse("2016-02-10");
