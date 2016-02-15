@@ -10,7 +10,7 @@ package mangocannon;
  * @author jacobburns
  */
 public class Settings {
-    private SensorSettings[][] sensorProfiles;
+    private SensorTypes[][] sensorProfiles;
     private String[] cropTypes;
     private FieldStation[] unallocatedFieldStations;
 }

@@ -9,24 +9,27 @@ package mangocannon;
  *
  * @author jacobburns
  */
-public class SensorSettings {
+public class SensorTypes {
     //private TimeInterval interval;
     private float valDelta;
     //private Unit units;
     private boolean enabled;
     private boolean deltaBased;
     private String typeName;
+    private String readingType;
     
-    public SensorSettings()
+    public SensorTypes()
     {
         // blank constructor
     }
     
-    public SensorSettings(float theValDelta, boolean theEnabled, boolean theDeltaBased, String theTypeName){
+    public SensorTypes(float theValDelta, boolean theEnabled, boolean theDeltaBased, String theTypeName, String theReadingType){
         valDelta = theValDelta;
         enabled = theEnabled;
         deltaBased = theDeltaBased;
         typeName = theTypeName;
+        readingType = theReadingType;
+        
     }
     
     /*public getTimeInterval getInterval(){
