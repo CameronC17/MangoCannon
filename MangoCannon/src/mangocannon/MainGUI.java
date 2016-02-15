@@ -11,67 +11,17 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 
 public class MainGUI extends javax.swing.JFrame {
-
-    public Farm currentFarm = new Farm();
-    public Vector<CropType> cropNames = new Vector<CropType>();
-
+    GlobalVariables globalVar = new GlobalVariables();
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         initComponents();
-        
-        GPS loc1 = new GPS(10.4f, 3.6f);
-        GPS loc2 = new GPS(20.2f, 3.6f);
-        GPS loc3 = new GPS(20.2f, 12.9f);
-        GPS loc4 = new GPS(10.4f, 12.9f);
-        
-        GPSBoundary gpsB1 = new GPSBoundary();
-        gpsB1.addBoundary(loc1);
-        gpsB1.addBoundary(loc2);
-        gpsB1.addBoundary(loc3);
-        gpsB1.addBoundary(loc4);
-        
-        //CropType (String theCropType, float theAverageYield, int averageGrowTime)
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
-        cropNames.addElement(carrots);
-        CropType donuts = new CropType("Donuts", 1.3f, 1);
-        cropNames.addElement(donuts);        
-        CropType lemons = new CropType("Lemons", 50f, 60);
-        cropNames.addElement(lemons);
-        CropType apples = new CropType("Apples", 100f, 100);
-        cropNames.addElement(apples);
-        
-        //Date d = new Date("10/02/2016");
-        LocalDate date1 = LocalDate.parse("2016-02-10");
-        LocalDate date2 = LocalDate.parse("2017-06-29");
-        //LocalDate date1 = LocalDate.parse("15-06-2016");
-        //LocalDate date2 = LocalDate.parse("29-08-2017");
-        
-        Field field1 = new Field("Field 1", gpsB1);
-        Field field2 = new Field("Field 2", gpsB1);
-        Field field3 = new Field("Field 3", gpsB1);
-        
-        //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
-        //Evetually change last number to be field1.size() or whatever
-        Crop crop1 = new Crop(donuts, date1, 54);
-        field1.newCrop(crop1);
-        Crop crop2 = new Crop(lemons, date2, 120);
-        field2.newCrop(crop2);
-        
-        currentFarm.addField(field1);
-        currentFarm.addField(field2);
-        currentFarm.addField(field3);
-        Crop crop3 = new Crop(apples, date1, 3);
-        currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
-        
         createTableData();
-        
-        field1.size();
     }
     
     public void addFieldTofarm (Field theField) {
-        currentFarm.addField(theField);
+        globalVar.currentFarm.addField(theField);
     }
     
     public void createTableData() {
@@ -86,14 +36,14 @@ public class MainGUI extends javax.swing.JFrame {
         Vector<Integer> fieldSize = new Vector<Integer>();
         Vector<Float> expectedYield = new Vector<Float>();
         
-        for (int i=0; i < currentFarm.size(); i++){
-            fieldNames.addElement(currentFarm.get(i).getFieldName());
-            cropTypes.addElement(currentFarm.get(i).getCrop().getCropType());
-            datesPlanted.addElement(currentFarm.get(i).getCrop().getPlantDate());
-            expectedDates.addElement(currentFarm.get(i).getCrop().getExpectedHarvest());
+        for (int i=0; i < globalVar.currentFarm.size(); i++){
+            fieldNames.addElement(globalVar.currentFarm.get(i).getFieldName());
+            cropTypes.addElement(globalVar.currentFarm.get(i).getCrop().getCropType());
+            datesPlanted.addElement(globalVar.currentFarm.get(i).getCrop().getPlantDate());
+            expectedDates.addElement(globalVar.currentFarm.get(i).getCrop().getExpectedHarvest());
             //Change field size to get from field not crop when added boundaries!
-            fieldSize.addElement(currentFarm.get(i).getCrop().getFieldSize());
-            expectedYield.addElement(currentFarm.get(i).getCrop().getEstimatedYield());            
+            fieldSize.addElement(globalVar.currentFarm.get(i).getCrop().getFieldSize());
+            expectedYield.addElement(globalVar.currentFarm.get(i).getCrop().getEstimatedYield());            
         }
         
         
@@ -108,9 +58,9 @@ public class MainGUI extends javax.swing.JFrame {
         model.addColumn("Expected Yield", expectedYield);
     
         DefaultComboBoxModel model2 = (DefaultComboBoxModel)jComboBox1.getModel();
-        for (int i = 0; i < cropNames.size(); i++)
+        for (int i = 0; i < globalVar.cropNames.size(); i++)
         {
-            model2.addElement(cropNames.get(i).getCropType());
+            model2.addElement(globalVar.cropNames.get(i).getCropType());
         }
 //        ((DefaultTableModel)table1.getModel()).removeRow(table1.getRowCount());
 
@@ -206,6 +156,11 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Search");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("List By:");
 
@@ -462,8 +417,11 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-//        JFrame FieldGUI = new FieldGUI();
-        new FieldGUI().setVisible(true);
+        FieldGUI fieldGUI = new FieldGUI();
+        fieldGUI.setGlobalVars(globalVar);
+        fieldGUI.setVisible(true);
+        //new FieldGUI().setVisible(true);
+        
         //this.AccessibleJFrame;
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -478,9 +436,14 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int selectedRow = table1.getSelectedRow();
-        currentFarm.remove(selectedRow);
+        globalVar.currentFarm.remove(selectedRow);
         ((DefaultTableModel)table1.getModel()).removeRow(selectedRow);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //System.out.println(globalVar.currentFarm.get(3).getFieldName());
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

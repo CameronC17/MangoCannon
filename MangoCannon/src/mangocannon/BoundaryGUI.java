@@ -10,11 +10,15 @@ package mangocannon;
  * @author cameron
  */
 public class BoundaryGUI extends javax.swing.JFrame {
-
+    GlobalVariables globalVar;
     int mouseStartX, mouseStartY, mouseEndX, mouseEndY;
     
     public BoundaryGUI() {
         initComponents();
+    }
+    
+    public void setGlobalVars(GlobalVariables usingVar) {
+        globalVar = usingVar;
     }
 
     /**
@@ -57,7 +61,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
