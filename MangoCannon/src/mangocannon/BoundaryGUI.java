@@ -43,7 +43,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/cameron/Downloads/galleydown2.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mangocannon/galleydown2.jpg"))); // NOI18N
         jScrollPane1.setViewportView(jLabel1);
 
         jLabel2.setText("jLabel2");
