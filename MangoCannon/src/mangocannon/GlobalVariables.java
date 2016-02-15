@@ -56,6 +56,15 @@ public class GlobalVariables {
         Crop crop2 = new Crop(lemons, date2, 120);
         field2.newCrop(crop2);
         
+        float[] floats1 = {1.1f, 2.8f, 3.5f, 1.2f, 5.2f, 1.1f, 0.1f};
+        float[] floats2 = {50.6f, 32.2f, 23.2f, 22.0f, 19.2f, 18.8f, 14.3f};
+        float[] floats3 = {102.6f, 100.1f, 99.5f, 90.4f, 88.8f, 84.5f, 77.6f};
+        
+        DataReading readings1 = new DataReading(floats1);
+        DataReading readings2 = new DataReading(floats2);
+        DataReading readings3 = new DataReading(floats3);
+
+        
         currentFarm.addField(field1);
         currentFarm.addField(field2);
         currentFarm.addField(field3);
