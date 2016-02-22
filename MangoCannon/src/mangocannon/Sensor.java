@@ -8,21 +8,31 @@ import javax.swing.Timer;
  * @author tomhanson
  */
 public class Sensor {
-
     private String category;
     private Timer timer;
-    private SensorTypes sensorSettings;
+    private SensorTypes sensorTypes;
     private long uniqueId;
+    
     private DataReading dataReadings[];
 
     public Sensor(){
 
     }
 
-    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
+//    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
+//        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
+
+    public Sensor(Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings[]){
+        timer = theTimer;
+        sensorTypes = theSensorTypes;
+        uniqueId = theUniqueId;
+        dataReadings = theDataReadings;
+    }
+    
+    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings[]){
         category = theCategory;
         timer = theTimer;
-        sensorSettings = theSensorSettings;
+        sensorTypes = theSensorTypes;
         uniqueId = theUniqueId;
         dataReadings = theDataReadings;
     }
@@ -42,10 +52,10 @@ public class Sensor {
     }
 
     SensorTypes getSensorSettings(){
-        return sensorSettings;
+        return sensorTypes;
     }
     void setSensorSettings(SensorTypes theSensorSettings){
-        this.sensorSettings = theSensorSettings;
+        this.sensorTypes = theSensorSettings;
     }
 
     long getUniqueId(){
@@ -54,6 +64,7 @@ public class Sensor {
     void setUniqueId(long theUniqueId){
         this.uniqueId = theUniqueId;
     }
+    
 
     DataReading[] getReadings(){
         return dataReadings;
@@ -67,7 +78,7 @@ public class Sensor {
     }
 
     String getSensorType(){
-        return sensorSettings.getTypeName();
+        return sensorTypes.getTypeName();
     }
 
     void startPolling(){
