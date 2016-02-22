@@ -51,14 +51,22 @@ open Vim (`:wq` to quit).
 
 ##Merging conflicts:
 ```sh
-$  git checkout master
-$  git pull
-$  git checkout jacob
-$  git merge master
+$ git checkout master
+$ git pull
+$ git checkout jacob
+$ git merge master
 resolve the conflicts
-$  git add .
-$  git status
-$  git commit (with no commit message)
-$  :wq
-$  git commit
-$  git push
+$ git add .
+$ git status
+$ git commit (with no commit message)
+$ :wq
+$ git commit
+$ git push
+```
+
+##Checking differences between files
+```sh
+$ git diff
+OR
+$ git diff --cached
+```
