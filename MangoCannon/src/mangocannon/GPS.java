@@ -21,7 +21,7 @@ public class GPS {
         gpsCoordinates[1] = theY;
     }
         
-    int[] getGlobalPosition() {
+    public int[] getGlobalPosition() {
         return gpsCoordinates;
     }
     

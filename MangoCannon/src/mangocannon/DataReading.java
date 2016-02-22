@@ -19,5 +19,13 @@ public class DataReading {
     float[] getReadingValues(){
         return readings;
     }
+    
+    float getReadingValue(int i){
+        return readings[i];
+    }
+    
+    int getArrayLength (){
+        return readings.length;
+    }
 
 }
