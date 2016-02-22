@@ -11,14 +11,18 @@ import javax.swing.JFrame;
 
 
 public class FieldGUI extends JFrame {
-
+    GlobalVariables globalVar;
     /**
      * Creates new form FieldGUI
      */
     public FieldGUI() {
         initComponents();
         
-//        jComboBox1.addItem(getCropType());
+    }
+    
+    public void setGlobalVars(GlobalVariables usingVar) {
+        globalVar = usingVar;
+        //jLabel1.setText(globalVar.currentFarm.get(0).getFieldName());
     }
 
 
@@ -80,6 +84,11 @@ public class FieldGUI extends JFrame {
         });
 
         jButton1.setText("Set");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,7 +159,20 @@ public class FieldGUI extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        GPS loc1 = new GPS(10.4f, 3.6f);
+        GPS loc2 = new GPS(20.2f, 3.6f);
+        GPS loc3 = new GPS(20.2f, 12.9f);
+        GPS loc4 = new GPS(10.4f, 12.9f);
         
+        GPSBoundary gpsB1 = new GPSBoundary();
+        gpsB1.addBoundary(loc1);
+        gpsB1.addBoundary(loc2);
+        gpsB1.addBoundary(loc3);
+        gpsB1.addBoundary(loc4);
+        
+        
+        Field myNewField = new Field("Dynamic Field", gpsB1);
+        globalVar.currentFarm.add(myNewField);
 
 
         this.dispose();
@@ -160,6 +182,12 @@ public class FieldGUI extends JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        BoundaryGUI boundaryGUI = new BoundaryGUI();
+        boundaryGUI.setGlobalVars(globalVar);
+        boundaryGUI.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
