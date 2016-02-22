@@ -65,18 +65,16 @@ public class GlobalVariables {
 
         
         //Sensors
-        //UNCOM HERE
-//        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
-//        Sensor sunshineSensor = new Sensor(null, sensorTypes.get(1), 002, readings2);
-//        Sensor nutrientSaturationSensor = new Sensor(null, sensorTypes.get(2), 003, readings3);
-//        Sensor temperatureSensor = new Sensor(null, sensorTypes.get(3), 004, readings4);
-//        
-//        //SensorList
-//        Sensor[] sensorList1 = {rainFallSensor, sunshineSensor, nutrientSaturationSensor, temperatureSensor};
-//        
-//        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
+        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
+        Sensor sunshineSensor = new Sensor(null, sensorTypes.get(1), 002, readings2);
+        Sensor nutrientSaturationSensor = new Sensor(null, sensorTypes.get(2), 003, readings3);
+        Sensor temperatureSensor = new Sensor(null, sensorTypes.get(3), 004, readings4);
+        
+        //SensorList
+        Sensor[] sensorList1 = {rainFallSensor, sunshineSensor, nutrientSaturationSensor, temperatureSensor};
+        
+        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
 //        FieldStation fieldStation1 = new FieldStation(sensorList1, 'Field Station 1', 001, true, loc1);
-        //UNCOM TO HERE
         
         
         //Date d = new Date("10/02/2016");

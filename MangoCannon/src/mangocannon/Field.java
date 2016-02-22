@@ -9,10 +9,11 @@ public class Field {
     private FieldStation fieldStation;
     private Crop crop;
     
-    Field(String fieldName, Crop theCrop, GPSBoundary theBoundary){
+    Field(String fieldName, Crop theCrop, GPSBoundary theBoundary, FieldStation theFieldStation){
         this.fieldName = fieldName;
         this.crop = theCrop;
         this.gpsBoundary = theBoundary;
+        this.fieldStation = theFieldStation;
     }
     
     Field(String fieldName, GPSBoundary theBoundary){
