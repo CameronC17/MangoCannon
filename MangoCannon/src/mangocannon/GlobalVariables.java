@@ -16,6 +16,7 @@ public class GlobalVariables {
     public Farm currentFarm = new Farm();
     public Vector<CropType> cropTypes = new Vector<CropType>();
     public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
+    public Vector<User> user = new Vector<User>();
 
     public GlobalVariables()
     {
@@ -61,7 +62,10 @@ public class GlobalVariables {
         DataReading readings3 = new DataReading(floats3);
         DataReading readings4 = new DataReading(floats4);
         
-
+        //User credentials
+        User user1 = new User("Carlos", "Rodriguez", "carlosr", 5312, 2, "carlos_rodriguez");
+        User user2 = new User("Sara", "Ackincacker", "saraa", 5142, 1, "sara_ackicakcer");
+        User user3 = new User("John", "Smith", "johns", 5332, 2, "john_smith");
 
         
         //Sensors

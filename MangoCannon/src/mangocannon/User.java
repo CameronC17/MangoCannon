@@ -17,6 +17,15 @@ public class User {
     private int AccessLevel;
     private String username;
     
+    public User(String theFirstName, String theSecondName, String thePassword, long theUniqueId, int theAccessLevel, String theUsername){
+        this.firstName = theFirstName;
+        this.secondName = theSecondName;
+        this.password = thePassword;
+        this.uniqueId = theUniqueId;
+        this.AccessLevel = theAccessLevel;
+        this.username = theUsername;
+        
+    }
     
     String getFirstName(){
         return firstName;
