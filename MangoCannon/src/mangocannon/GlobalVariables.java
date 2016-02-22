@@ -17,6 +17,7 @@ public class GlobalVariables {
     public Vector<CropType> cropTypes = new Vector<CropType>();
     public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
     public Vector<User> user = new Vector<User>();
+    public Vector<DataReading> dataReadings = new Vector<DataReading>();
 
     public GlobalVariables()
     {
@@ -58,6 +59,11 @@ public class GlobalVariables {
         DataReading readings2 = new DataReading(floats2);
         DataReading readings3 = new DataReading(floats3);
         DataReading readings4 = new DataReading(floats4);
+        dataReadings.addElement(readings1);
+        dataReadings.addElement(readings2);
+        dataReadings.addElement(readings3);
+        dataReadings.addElement(readings4);
+
         
         //User credentials
         User user1 = new User("Carlos", "Rodriguez", "carlosr", 5312, 2, "carlos_rodriguez");
