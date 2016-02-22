@@ -14,18 +14,18 @@ public class GPS {
     //I have added this gpsCoordinates class to hold the locational data of the FieldStation
 
 //    private float[] gpsCoordinates; //Can only be two columns
-    private float[] gpsCoordinates = new float[2];
+    private int[] gpsCoordinates = new int[2];
     
-    GPS(float theX, float theY) {
+    GPS(int theX, int theY) {
         gpsCoordinates[0] = theX;
         gpsCoordinates[1] = theY;
     }
         
-    float[] getGlobalPosition() {
+    int[] getGlobalPosition() {
         return gpsCoordinates;
     }
     
-    void setGlobalPosition(float theX, float theY) {
+    void setGlobalPosition(int theX, int theY) {
         gpsCoordinates[0] = theX;
         gpsCoordinates[1] = theY;
     }
