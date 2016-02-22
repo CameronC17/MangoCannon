@@ -17,8 +17,8 @@ public class SetOfBooks extends Vector<Book> implements java.io.Serializable {
         super();
     }
 
-    public void addBook(Book aBook) {        
-        
+    public void addBook(Book aBook) {
+
         if ((aBook.getTitle().equals("") || aBook.getAuthor().equals("") || aBook.getISBNNumber().equals(""))){
             System.out.println("Please enter a Title, Author and ISBN");
         }
@@ -67,15 +67,15 @@ public class SetOfBooks extends Vector<Book> implements java.io.Serializable {
 
     public SetOfBooks findBookFromISBN(String iSBN){
         SetOfBooks newSetOfBooks = new SetOfBooks();
-        
+
         for (int i = 0; i < this.size(); i++) {
             if (this.get(i).getISBNNumber().equals(iSBN)) {
                 newSetOfBooks.addBook(this.get(i));
             }
         }
         return newSetOfBooks;
-    }  
-    
+    }
+
     public void removeBook(Book aBook) {
         super.remove(aBook); //Removes aBook from the SetOfBooks vector (of type Book)
     }

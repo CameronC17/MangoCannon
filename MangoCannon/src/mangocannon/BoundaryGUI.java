@@ -1,10 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mangocannon;
 
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.util.ArrayList;
 /**
  *
  * @author cameron
@@ -12,14 +13,45 @@ package mangocannon;
 public class BoundaryGUI extends javax.swing.JFrame {
     GlobalVariables globalVar;
     int mouseStartX, mouseStartY, mouseEndX, mouseEndY;
-    
+    ArrayList<Shape> shapes = new ArrayList<Shape>();
+    Shape drawingShape;
+
     public BoundaryGUI() {
         initComponents();
+        //WORK FROM HERE!
+        //jScrollPane1.addComponentListener(null);
     }
-    
+
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
     }
+
+
+    public void paint(Graphics g) {
+        paintComponents(g);
+        Graphics2D g2 = (Graphics2D)g;
+        Color transColour = new Color(0, 252,0, 128 );
+        for (Shape shape : shapes) {
+          int shapeX = shape.getBounds().x,
+              shapeY = shape.getBounds().y,
+              widthX = shape.getBounds().width,
+              heightY = shape.getBounds().height;
+          if ((shapeX + widthX > jScrollPane1.getHorizontalScrollBar().getValue()) && (shapeX < jScrollPane1.getHorizontalScrollBar().getValue() + jScrollPane1.getWidth()) && (shapeY < jScrollPane1.getVerticalScrollBar().getValue() + jScrollPane1.getHeight()) && (shapeY + heightY > jScrollPane1.getVerticalScrollBar().getValue()))
+          {
+            Shape moveShape = new Rectangle(shapeX - jScrollPane1.getHorizontalScrollBar().getValue(), shapeY - jScrollPane1.getVerticalScrollBar().getValue(), widthX, heightY);
+            g2.setColor(transColour);
+            g2.fill(moveShape);
+            g2.setColor(Color.black);
+            g2.draw(moveShape);
+          }
+        }
+
+        //g2.setColor(transColour);
+        //g2.fill(drawingShape);
+        //g2.setColor(Color.black);
+        //g2.draw(drawingShape);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +78,33 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 mouseClick(evt);
             }
         });
+        jScrollPane1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                scrollChangedListener(evt);
+            }
+        });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mangocannon/galleydown2.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mangocannon/fieldOverview.png"))); // NOI18N
+        jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                BoundaryGUI.this.mouseMoved(evt);
+            }
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                recordDrag(evt);
+            }
+        });
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                BoundaryGUI.this.mousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                MouseUp(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BoundaryGUI.this.mouseClicked(evt);
+            }
+        });
+
         jScrollPane1.setViewportView(jLabel1);
 
         jLabel2.setText("jLabel2");
@@ -58,27 +115,25 @@ public class BoundaryGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addGap(157, 157, 157))
+
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 590, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(41, 41, 41))
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel2)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(20, 20, 20))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -86,10 +141,76 @@ public class BoundaryGUI extends javax.swing.JFrame {
 
     private void mouseClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClick
         // TODO add your handling code here:
+        //mouseStartX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
+        //mouseStartY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
+        //jLabel2.setText("Mouse Start X: " + mouseStartX + "   and Mouse Start Y: " + mouseStartY);
+    }//GEN-LAST:event_mouseClick
+
+    private void recordDrag(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordDrag
+        //jLabel3.setText("NOW!");
+        /*mouseEndX = evt.getX();
+        mouseEndY = evt.getY();
+
+        Shape shape = null;
+
+        if (mouseStartX != mouseEndX || mouseStartY != mouseEndY) {
+                shape = new Rectangle(mouseStartX, mouseStartY + 10, mouseEndX - mouseStartX, mouseEndY - mouseStartY + 10);
+            }
+
+        if (shape != null) {
+            drawingShape = shape;
+            this.repaint();
+        }*/
+    }//GEN-LAST:event_recordDrag
+
+    private void MouseUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseUp
+        mouseEndX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
+        mouseEndY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
+        //mouseEndX = evt.getX();
+        //mouseEndY = evt.getY();
+
+        //jLabel3.setText("Start X: " + mouseStartX + "  and Start Y: " + mouseStartY + "    and End X:" + mouseEndX + "  and End Y: " + mouseEndY);
+
+        Shape shape = null;
+
+        if (mouseStartX != mouseEndX || mouseStartY != mouseEndY) {
+                shape = new Rectangle(mouseStartX, mouseStartY + 10, mouseEndX - mouseStartX, mouseEndY - mouseStartY + 10);
+                // (x, y, width, height)
+                //shape = new Rectangle(10, 50, 100, 100);
+            }
+
+        if (shape != null) {
+            this.shapes.add(shape);
+            this.repaint();
+        }
+        mouseStartX = -1;
+        mouseStartY = -1;
+        mouseEndX = -1;
+        mouseEndY = -1;
+    }//GEN-LAST:event_MouseUp
+
+    private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
         mouseStartX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
         mouseStartY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
-        jLabel2.setText("Mouse Start X: " + mouseStartX + "   and Mouse Start Y: " + mouseStartY);
-    }//GEN-LAST:event_mouseClick
+        //mouseStartX = evt.getX();
+        //mouseStartY = evt.getY();
+        //jLabel2.setText("Mouse Start X: " + mouseStartX + "   and Mouse Start Y: " + mouseStartY);
+    }//GEN-LAST:event_mousePressed
+
+    private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClicked
+        //mouseStartX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
+        //mouseStartY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
+        //jLabel2.setText("Mouse Start X: " + mouseStartX + "   and Mouse Start Y: " + mouseStartY);
+    }//GEN-LAST:event_mouseClicked
+
+    private void mouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mouseMoved
+
+    private void scrollChangedListener(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_scrollChangedListener
+        // TODO add your handling code here:
+        //this.repaint();
+    }//GEN-LAST:event_scrollChangedListener
 
     /**
      * @param args the command line arguments
@@ -98,7 +219,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

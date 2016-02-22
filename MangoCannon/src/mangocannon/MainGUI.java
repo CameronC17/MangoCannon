@@ -25,10 +25,8 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void createTableData() {
-        //Creates stuff to display in GUI
-        
-//        model.setRowCount(0);
-        
+        //Creates stuff to display in GUI        
+        //model.setRowCount(0);        
         Vector<String> fieldNames = new Vector<String>();
         Vector<String> cropNames = new Vector<String>();
         Vector<LocalDate> datesPlanted = new Vector<LocalDate>();

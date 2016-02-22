@@ -16,20 +16,20 @@ public class GlobalVariables {
     public Farm currentFarm = new Farm();
     public Vector<CropType> cropTypes = new Vector<CropType>();
     public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
-    
-    public GlobalVariables() 
+
+    public GlobalVariables()
     {
         GPS loc1 = new GPS(10.4f, 3.6f);
         GPS loc2 = new GPS(20.2f, 3.6f);
         GPS loc3 = new GPS(20.2f, 12.9f);
         GPS loc4 = new GPS(10.4f, 12.9f);
-        
+
         GPSBoundary gpsB1 = new GPSBoundary();
         gpsB1.addBoundary(loc1);
         gpsB1.addBoundary(loc2);
         gpsB1.addBoundary(loc3);
         gpsB1.addBoundary(loc4);
-        
+
         //CropType (String theCropType, float theAverageYield, int averageGrowTime)
         CropType carrots = new CropType("Carrots", 10.5f, 40);
         CropType donuts = new CropType("Donuts", 1.3f, 1);        
@@ -40,6 +40,7 @@ public class GlobalVariables {
         cropTypes.addElement(lemons);
         cropTypes.addElement(apples);
         
+
         // SensorSettings
         SensorTypes rainFall = new SensorTypes(1.5f, true, true, "Rain Fall", "mm");
         SensorTypes sunshine = new SensorTypes(1.5f, true, true, "Sunshine", "mm");
@@ -60,17 +61,22 @@ public class GlobalVariables {
         DataReading readings3 = new DataReading(floats3);
         DataReading readings4 = new DataReading(floats4);
         
+
+
+        
         //Sensors
-        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
-        Sensor sunshineSensor = new Sensor(null, sensorTypes.get(1), 002, readings2);
-        Sensor nutrientSaturationSensor = new Sensor(null, sensorTypes.get(2), 003, readings3);
-        Sensor temperatureSensor = new Sensor(null, sensorTypes.get(3), 004, readings4);
-        
-        //SensorList
-        Sensor[] sensorList1 = {rainFallSensor, sunshineSensor, nutrientSaturationSensor, temperatureSensor};
-        
-        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
+        //UNCOM HERE
+//        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
+//        Sensor sunshineSensor = new Sensor(null, sensorTypes.get(1), 002, readings2);
+//        Sensor nutrientSaturationSensor = new Sensor(null, sensorTypes.get(2), 003, readings3);
+//        Sensor temperatureSensor = new Sensor(null, sensorTypes.get(3), 004, readings4);
+//        
+//        //SensorList
+//        Sensor[] sensorList1 = {rainFallSensor, sunshineSensor, nutrientSaturationSensor, temperatureSensor};
+//        
+//        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
 //        FieldStation fieldStation1 = new FieldStation(sensorList1, 'Field Station 1', 001, true, loc1);
+        //UNCOM TO HERE
         
         
         //Date d = new Date("10/02/2016");
@@ -78,18 +84,17 @@ public class GlobalVariables {
         LocalDate date2 = LocalDate.parse("2017-06-29");
         //LocalDate date1 = LocalDate.parse("15-06-2016");
         //LocalDate date2 = LocalDate.parse("29-08-2017");
-        
+
         Field field1 = new Field("Field 1", gpsB1);
         Field field2 = new Field("Field 2", gpsB1);
         Field field3 = new Field("Field 3", gpsB1);
-        
+
         //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
         //Evetually change last number to be field1.size() or whatever
         Crop crop1 = new Crop(donuts, date1, 54);
         Crop crop2 = new Crop(lemons, date2, 120);        
         field1.newCrop(crop1);
         field2.newCrop(crop2);
-        
         
 
         
