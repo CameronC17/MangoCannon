@@ -280,7 +280,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Graph goes here"/>
+                    <Property name="text" type="java.lang.String" value="Put new JTable Here"/>
                   </Properties>
                 </Component>
               </SubComponents>

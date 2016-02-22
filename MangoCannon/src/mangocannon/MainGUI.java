@@ -168,7 +168,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         jRadioButton4.setText("Sensor");
 
-        jLabel2.setText("Graph goes here");
+        jLabel2.setText("Put new JTable Here");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
