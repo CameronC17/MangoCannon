@@ -159,16 +159,13 @@ public class FieldGUI extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        GPS loc1 = new GPS(10.4f, 3.6f);
-        GPS loc2 = new GPS(20.2f, 3.6f);
-        GPS loc3 = new GPS(20.2f, 12.9f);
-        GPS loc4 = new GPS(10.4f, 12.9f);
-        
+        GPS loc1 = new GPS(60, 0);
+        GPS loc2 = new GPS(20, 10);
+        GPS loc3 = new GPS(10,20);
+        GPS loc4 = new GPS(20, 20);
+
         GPSBoundary gpsB1 = new GPSBoundary();
-        gpsB1.addBoundary(loc1);
-        gpsB1.addBoundary(loc2);
-        gpsB1.addBoundary(loc3);
-        gpsB1.addBoundary(loc4);
+        gpsB1.createBoundary(loc1, loc2, loc3, loc4);
         
         
         Field myNewField = new Field("Dynamic Field", gpsB1);
