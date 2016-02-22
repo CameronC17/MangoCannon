@@ -35,6 +35,8 @@ $ git checkout master
 $ git pull
 $ git checkout my_branch
 $ git merge master
+MAYBE git push (this is because the local copy of 'jacob' is now ahead [cos it has the stuff from master] compared with the one on github)
+
 $ git stash pop
 # Only line above if your branch has any uncommitted changes
 $ git log (to check the logs)
