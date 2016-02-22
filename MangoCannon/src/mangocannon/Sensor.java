@@ -13,7 +13,7 @@ public class Sensor {
     private SensorTypes sensorTypes;
     private long uniqueId;
     
-    private DataReading dataReadings[];
+    private DataReading dataReadings;
 
     public Sensor(){
 
@@ -22,14 +22,14 @@ public class Sensor {
 //    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
 //        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
 
-    public Sensor(Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings[]){
+    public Sensor(Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings){
         timer = theTimer;
         sensorTypes = theSensorTypes;
         uniqueId = theUniqueId;
         dataReadings = theDataReadings;
     }
     
-    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings[]){
+    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings){
         category = theCategory;
         timer = theTimer;
         sensorTypes = theSensorTypes;
@@ -66,16 +66,16 @@ public class Sensor {
     }
     
 
-    DataReading[] getReadings(){
-        return dataReadings;
-    }
-    void setDataReadings(DataReading theDataReading){
-
-    }
-
-    DataReading[] getLatestReading(){
-        return dataReadings;
-    }
+//    DataReading[] getReadings(){
+//        return dataReadings;
+//    }
+//    void setDataReadings(DataReading theDataReading){
+//
+//    }
+//
+//    DataReading[] getLatestReading(){
+//        return dataReadings;
+//    }
 
     String getSensorType(){
         return sensorTypes.getTypeName();
