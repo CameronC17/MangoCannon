@@ -47,3 +47,16 @@ get a merge conflict. You will need to resolve this yourself and then do a `git 
 open Vim (`:wq` to quit).
 
 
+##Merging conflicts:
+```sh
+$  git checkout master
+$  git pull
+$  git checkout jacob
+$  git merge master
+resolve the conflicts
+$  git add .
+$  git status
+$  git commit (with no commit message)
+$  :wq
+$  git commit
+$  git push
