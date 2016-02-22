@@ -17,17 +17,26 @@ public class GlobalVariables {
     public Vector<CropType> cropTypes = new Vector<CropType>();
     public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
     public Vector<User> user = new Vector<User>();
+    public GPSBoundary workingBoundary;
 
     public GlobalVariables()
     {
         GPS loc1 = new GPS(10, 10);
-        GPS loc2 = new GPS(20, 10);
-        GPS loc3 = new GPS(10,20);
-        GPS loc4 = new GPS(20, 20);
+        GPS loc2 = new GPS(50, 10);
+        GPS loc3 = new GPS(10, 50);
+        GPS loc4 = new GPS(50, 50);
+        
+        GPS loc5 = new GPS(870, 70);        
+        GPS loc6 = new GPS(900, 70);
+        GPS loc7 = new GPS(870, 100);
+        GPS loc8 = new GPS(900, 100);
 
         GPSBoundary gpsB1 = new GPSBoundary();
         gpsB1.createBoundary(loc1, loc2, loc3, loc4);
 
+        GPSBoundary gpsB2 = new GPSBoundary();
+        gpsB2.createBoundary(loc5, loc6, loc7, loc8);
+        
         //CropType (String theCropType, float theAverageYield, int averageGrowTime)
         CropType carrots = new CropType("Carrots", 10.5f, 40);
         CropType donuts = new CropType("Donuts", 1.3f, 1);        
@@ -85,7 +94,7 @@ public class GlobalVariables {
         //LocalDate date2 = LocalDate.parse("29-08-2017");
 
         Field field1 = new Field("Field 1", gpsB1);
-        Field field2 = new Field("Field 2", gpsB1);
+        Field field2 = new Field("Field 2", gpsB2);
         Field field3 = new Field("Field 3", gpsB1);
 
         //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
@@ -95,12 +104,10 @@ public class GlobalVariables {
         field1.newCrop(crop1);
         field2.newCrop(crop2);
         
-
-        
         currentFarm.addField(field1);
         currentFarm.addField(field2);
-        currentFarm.addField(field3);
-        Crop crop3 = new Crop(apples, date1, 3);
-        currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
+        //currentFarm.addField(field3);
+        //Crop crop3 = new Crop(apples, date1, 3);
+        //currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
     }
 }
