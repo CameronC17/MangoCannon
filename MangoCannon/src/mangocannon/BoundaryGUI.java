@@ -19,18 +19,30 @@ public class BoundaryGUI extends javax.swing.JFrame {
     public BoundaryGUI() {
         initComponents();
         //WORK FROM HERE!
-        //jScrollPane1.addComponentListener(null);
+        mouseStartX = -1;
+        mouseStartY = -1;
     }
 
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
+        
+        for (Field field : globalVar.currentFarm)
+        {
+            Shape shape = null;
+            //shape = new Rectangle(field.get, mouseStartY + 10, mouseEndX - mouseStartX, mouseEndY - mouseStartY + 10);
+            
+            if (shape != null) {
+            this.shapes.add(shape);
+            }            
+        }
+        this.repaint();
     }
 
 
     public void paint(Graphics g) {
         paintComponents(g);
         Graphics2D g2 = (Graphics2D)g;
-        Color transColour = new Color(0, 252,0, 128 );
+        Color transColour = new Color(0, 252, 0, 128);
         for (Shape shape : shapes) {
           int shapeX = shape.getBounds().x,
               shapeY = shape.getBounds().y,
@@ -38,7 +50,13 @@ public class BoundaryGUI extends javax.swing.JFrame {
               heightY = shape.getBounds().height;
           if ((shapeX + widthX > jScrollPane1.getHorizontalScrollBar().getValue()) && (shapeX < jScrollPane1.getHorizontalScrollBar().getValue() + jScrollPane1.getWidth()) && (shapeY < jScrollPane1.getVerticalScrollBar().getValue() + jScrollPane1.getHeight()) && (shapeY + heightY > jScrollPane1.getVerticalScrollBar().getValue()))
           {
-            Shape moveShape = new Rectangle(shapeX - jScrollPane1.getHorizontalScrollBar().getValue(), shapeY - jScrollPane1.getVerticalScrollBar().getValue(), widthX, heightY);
+            int xCoord = shapeX - jScrollPane1.getHorizontalScrollBar().getValue();
+            int yCoord = shapeY - jScrollPane1.getVerticalScrollBar().getValue();
+            if ((yCoord + heightY) > 638)
+            {
+                heightY = 638 - yCoord;
+            }
+            Shape moveShape = new Rectangle(xCoord, yCoord, widthX, heightY);
             g2.setColor(transColour);
             g2.fill(moveShape);
             g2.setColor(Color.black);
@@ -46,10 +64,10 @@ public class BoundaryGUI extends javax.swing.JFrame {
           }
         }
 
-        //g2.setColor(transColour);
-        //g2.fill(drawingShape);
-        //g2.setColor(Color.black);
-        //g2.draw(drawingShape);
+        g2.setColor(transColour);
+        g2.fill(drawingShape);
+        g2.setColor(Color.black);
+        g2.draw(drawingShape);
     }
 
 
@@ -104,7 +122,6 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 BoundaryGUI.this.mouseClicked(evt);
             }
         });
-
         jScrollPane1.setViewportView(jLabel1);
 
         jLabel2.setText("jLabel2");
@@ -118,12 +135,10 @@ public class BoundaryGUI extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 590, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(41, 41, 41))
-
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,10 +179,10 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_recordDrag
 
     private void MouseUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseUp
-        mouseEndX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
-        mouseEndY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
-        //mouseEndX = evt.getX();
-        //mouseEndY = evt.getY();
+        //mouseEndX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
+        //mouseEndY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
+        mouseEndX = evt.getX();
+        mouseEndY = evt.getY();
 
         //jLabel3.setText("Start X: " + mouseStartX + "  and Start Y: " + mouseStartY + "    and End X:" + mouseEndX + "  and End Y: " + mouseEndY);
 
@@ -190,11 +205,14 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_MouseUp
 
     private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
-        mouseStartX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
-        mouseStartY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
+        //mouseStartX = evt.getX() + jScrollPane1.getHorizontalScrollBar().getValue();
+        //mouseStartY = evt.getY() + jScrollPane1.getVerticalScrollBar().getValue();
+        mouseStartX = evt.getX();
+        mouseStartY = evt.getY();
         //mouseStartX = evt.getX();
         //mouseStartY = evt.getY();
         //jLabel2.setText("Mouse Start X: " + mouseStartX + "   and Mouse Start Y: " + mouseStartY);
+        //jLabel3.setText("X: " + evt.getX() + " Y:" + evt.getY() + "  ScrollX:" + jScrollPane1.getHorizontalScrollBar().getValue() + "  Y:" + jScrollPane1.getVerticalScrollBar().getValue());
     }//GEN-LAST:event_mousePressed
 
     private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClicked
@@ -204,12 +222,27 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mouseClicked
 
     private void mouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseMoved
-        // TODO add your handling code here:
+        /*if ((mouseStartX != -1) && (mouseStartY != -1))
+        {
+            mouseEndX = evt.getX();
+            mouseEndY = evt.getY();
+
+            Shape shape = null;
+
+            if (mouseStartX != mouseEndX || mouseStartY != mouseEndY) {
+                    shape = new Rectangle(mouseStartX, mouseStartY + 10, mouseEndX - mouseStartX, mouseEndY - mouseStartY + 10);
+                }
+
+            if (shape != null) {
+                drawingShape = shape;
+                this.repaint();
+            }
+        }*/
     }//GEN-LAST:event_mouseMoved
 
     private void scrollChangedListener(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_scrollChangedListener
         // TODO add your handling code here:
-        //this.repaint();
+        this.repaint();
     }//GEN-LAST:event_scrollChangedListener
 
     /**
