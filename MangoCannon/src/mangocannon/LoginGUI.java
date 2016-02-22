@@ -127,10 +127,10 @@ public class LoginGUI extends javax.swing.JFrame {
         String password = jTextField2.getText();
         
         for (int i = 0; i< globalVar.user.size(); i++){
-            if(globalVar.user.elementAt(i).getPassword() == password){
-                if(globalVar.user.elementAt(i).getUsername() == username){
-                    // return globalVar.user[i]
-                }
+            if(globalVar.user.elementAt(i).getPassword() == password && globalVar.user.elementAt(i).getUsername() == username){
+                System.out.println(globalVar.user.elementAt(i));
+            } else {
+                i++;
             }
         }
         
