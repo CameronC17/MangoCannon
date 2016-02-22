@@ -8,7 +8,6 @@ import javax.swing.Timer;
  * @author tomhanson
  */
 public class Sensor {
-    private String category;
     private Timer timer;
     private SensorTypes sensorTypes;
     private long uniqueId;
@@ -27,21 +26,6 @@ public class Sensor {
         sensorTypes = theSensorTypes;
         uniqueId = theUniqueId;
         dataReadings = theDataReadings;
-    }
-    
-    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings){
-        category = theCategory;
-        timer = theTimer;
-        sensorTypes = theSensorTypes;
-        uniqueId = theUniqueId;
-        dataReadings = theDataReadings;
-    }
-
-    String getCategory(){
-        return category;
-    }
-    void setCategory(String theCategory){
-        this.category = theCategory;
     }
 
     Timer getTimer(){
