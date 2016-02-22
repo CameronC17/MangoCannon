@@ -1,6 +1,7 @@
 package mangocannon;
 
 import java.util.Date;
+import java.util.List;
 
 public class Field {
     private String fieldName;
@@ -31,6 +32,10 @@ public class Field {
     
     public Crop getCrop() {
         return this.crop;
+    }
+    
+    public List<GPS> getBoundaries() {
+        return gpsBoundary.getBoundary();
     }
     
     public float size() {
