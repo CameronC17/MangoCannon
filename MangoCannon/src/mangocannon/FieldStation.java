@@ -32,7 +32,7 @@ public class FieldStation {
         this.gps = theGPS;        
     }
     
-    Sensor[] getSensor(){
+    Sensor[] getSensors(){
         return sensorList;
     }
     

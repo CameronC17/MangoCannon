@@ -9,9 +9,8 @@ import javax.swing.Timer;
  */
 public class Sensor {
     private Timer timer;
-    private SensorTypes sensorTypes;
-    private long uniqueId;
-    
+    private SensorTypes sensorType;
+    private long uniqueId;    
     private DataReading dataReadings;
 
     public Sensor(){
@@ -21,10 +20,8 @@ public class Sensor {
 //    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
 //        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
 
-    public Sensor(Timer theTimer, SensorTypes theSensorTypes, long theUniqueId, DataReading theDataReadings){
-        timer = theTimer;
-        sensorTypes = theSensorTypes;
-        uniqueId = theUniqueId;
+    public Sensor(SensorTypes theSensorTypes, DataReading theDataReadings){
+        sensorType = theSensorTypes;
         dataReadings = theDataReadings;
     }
 
@@ -35,11 +32,11 @@ public class Sensor {
         this.timer = theTimer;
     }
 
-    SensorTypes getSensorSettings(){
-        return sensorTypes;
+    SensorTypes getSensorType(){
+        return sensorType;
     }
-    void setSensorSettings(SensorTypes theSensorSettings){
-        this.sensorTypes = theSensorSettings;
+    void setSensorType(SensorTypes theSensorType){
+        this.sensorType = theSensorType;
     }
 
     long getUniqueId(){
@@ -47,12 +44,12 @@ public class Sensor {
     }
     void setUniqueId(long theUniqueId){
         this.uniqueId = theUniqueId;
+    }    
+
+    DataReading getReadings(){
+        return dataReadings;
     }
     
-
-//    DataReading[] getReadings(){
-//        return dataReadings;
-//    }
 //    void setDataReadings(DataReading theDataReading){
 //
 //    }
@@ -61,8 +58,8 @@ public class Sensor {
 //        return dataReadings;
 //    }
 
-    String getSensorType(){
-        return sensorTypes.getTypeName();
+    String getSensorTypeName(){
+        return sensorType.getTypeName();
     }
 
     void startPolling(){

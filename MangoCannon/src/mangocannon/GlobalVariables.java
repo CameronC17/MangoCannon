@@ -15,9 +15,7 @@ import java.util.Vector;
 public class GlobalVariables {
     public Farm currentFarm = new Farm();
     public Vector<CropType> cropTypes = new Vector<CropType>();
-    public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
     public Vector<User> user = new Vector<User>();
-    public Vector<DataReading> dataReadings = new Vector<DataReading>();
     public GPSBoundary workingBoundary;
 
     public GlobalVariables()
@@ -54,10 +52,6 @@ public class GlobalVariables {
         SensorTypes sunshine = new SensorTypes(1.5f, true, true, "Sunshine", "mm");
         SensorTypes nutrientSaturation = new SensorTypes(1.5f, true, true, "Nutrient Saturation", "mm");
         SensorTypes temperature = new SensorTypes(1.5f, true, true, "Temperature", "f");
-        sensorTypes.addElement(sunshine);
-        sensorTypes.addElement(nutrientSaturation);        
-        sensorTypes.addElement(rainFall);
-        sensorTypes.addElement(temperature);
         
         //DataReadings Data
         float[] floats1 = {1.1f, 2.8f, 3.5f, 1.2f, 5.2f, 1.1f, 0.1f};
@@ -68,10 +62,10 @@ public class GlobalVariables {
         DataReading readings2 = new DataReading(floats2);
         DataReading readings3 = new DataReading(floats3);
         DataReading readings4 = new DataReading(floats4);
-        dataReadings.addElement(readings1);
+        /*dataReadings.addElement(readings1);
         dataReadings.addElement(readings2);
         dataReadings.addElement(readings3);
-        dataReadings.addElement(readings4);
+        dataReadings.addElement(readings4);*/
 
         
         //User credentials
@@ -85,15 +79,17 @@ public class GlobalVariables {
 
         
         //Sensors
-        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
-        Sensor sunshineSensor = new Sensor(null, sensorTypes.get(1), 002, readings2);
-        Sensor nutrientSaturationSensor = new Sensor(null, sensorTypes.get(2), 003, readings3);
-        Sensor temperatureSensor = new Sensor(null, sensorTypes.get(3), 004, readings4);
+        Sensor rainFallSensor = new Sensor(rainFall, readings1);
+        Sensor sunshineSensor = new Sensor(sunshine, readings2);
+        Sensor nutrientSaturationSensor = new Sensor(nutrientSaturation, readings3);
+        Sensor temperatureSensor = new Sensor(temperature, readings4);
         
         //SensorList
         Sensor[] sensorList1 = {rainFallSensor, sunshineSensor, nutrientSaturationSensor, temperatureSensor};
+        Sensor[] sensorList2 = {sunshineSensor, nutrientSaturationSensor, temperatureSensor, rainFallSensor};
         
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
+        FieldStation fieldStation2 = new FieldStation(sensorList2, "FS2", 002, loc1);
         //FieldStation fieldStation1 = new FieldStation(sensorList1, 'Field Station 1', 001, true, loc1);
         
         
@@ -114,8 +110,12 @@ public class GlobalVariables {
         field1.newCrop(crop1);
         field2.newCrop(crop2);
         
+        field1.setFieldStation(fieldStation1);
+        field2.setFieldStation(fieldStation2);
+        
         currentFarm.addField(field1);
         currentFarm.addField(field2);
+        
         //currentFarm.addField(field3);
         //Crop crop3 = new Crop(apples, date1, 3);
         //currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
@@ -131,5 +131,9 @@ public class GlobalVariables {
     
     GPSBoundary getWorkingBoundary() {
         return workingBoundary;
+    }
+    
+    Field getFieldInFarmIndex(int i) {
+        return currentFarm.get(i);
     }
 }

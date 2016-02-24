@@ -28,7 +28,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void createTableData() {
-        //Creates stuff to display in GUI        
+        //Creates stuff to display in GUI
         //model.setRowCount(0);        
         Vector<String> fieldNames = new Vector<String>();
         Vector<String> cropNames = new Vector<String>();
@@ -49,7 +49,9 @@ public class MainGUI extends javax.swing.JFrame {
         
         
         //TableModel for Fields table
-        DefaultTableModel model = (DefaultTableModel)table1.getModel();
+        DefaultTableModel model = (DefaultTableModel)table1.getModel();        
+        model.setRowCount(0);
+        model.setColumnCount(0);
         
         model.addColumn("Fields", fieldNames);
         model.addColumn("Crop Type", cropNames);
@@ -59,18 +61,30 @@ public class MainGUI extends javax.swing.JFrame {
         model.addColumn("Expected Yield", expectedYield);
   
         //TableModel for Sensor/Readings table
-        Vector<String> sensorTypes = new Vector<String>();
+        /*Vector<String> sensorTypes = new Vector<String>();
         Vector<Float> readings = new Vector<Float>();
         for (int i=0; i < globalVar.sensorTypes.size(); i++){
             sensorTypes.addElement(globalVar.sensorTypes.get(i).getTypeName());
             //gets the latest reading in the array of readings
             float readingNumber = globalVar.dataReadings.get(i).getReadingValue(globalVar.dataReadings.get(i).getArrayLength()-1);
             readings.addElement(readingNumber);
+        }*/
+        
+        Vector<String> sensors = new Vector<String>();
+        Vector<Float> readings = new Vector<Float>();
+        
+        for (Sensor sensor : globalVar.currentFarm.get(table1.getSelectedRow() + 1).getFieldStation().getSensors())
+        {
+            sensors.addElement(sensor.getSensorTypeName());
+            readings.addElement(sensor.getReadings().getAverageReading());
         }
         
-        DefaultTableModel model3 = (DefaultTableModel)jTable1.getModel();
         
-        model3.addColumn("Sensor", sensorTypes);
+        DefaultTableModel model3 = (DefaultTableModel)jTable1.getModel();
+        model3.setRowCount(0);
+        model3.setColumnCount(0);
+        
+        model3.addColumn("Sensor", sensors);
         model3.addColumn("Reading", readings);
     }
     
@@ -212,6 +226,9 @@ public class MainGUI extends javax.swing.JFrame {
             }
         ));
         table1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                MainGUI.this.mousePressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 table1MouseClicked(evt);
             }
@@ -455,6 +472,12 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         createTableData();
     }//GEN-LAST:event_btnUpdateFieldsActionPerformed
+
+    private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
+        int selectedRow = table1.getSelectedRow();
+        createTableData();
+        table1.setRowSelectionInterval(selectedRow, selectedRow);
+    }//GEN-LAST:event_mousePressed
 
     /**
      * @param args the command line arguments
