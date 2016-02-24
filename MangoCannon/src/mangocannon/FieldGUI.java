@@ -7,6 +7,7 @@ package mangocannon;
 
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 
 
@@ -17,12 +18,15 @@ public class FieldGUI extends JFrame {
      */
     public FieldGUI() {
         initComponents();
-        
     }
     
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
-        //jLabel1.setText(globalVar.currentFarm.get(0).getFieldName());
+        DefaultComboBoxModel model2 = (DefaultComboBoxModel)jComboBox1.getModel();
+        for (int i = 0; i < globalVar.cropTypes.size(); i++)
+        {
+            model2.addElement(globalVar.cropTypes.get(i).getCropType());
+        }
     }
 
 
@@ -47,6 +51,7 @@ public class FieldGUI extends JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Field Name:");
 
@@ -57,8 +62,6 @@ public class FieldGUI extends JFrame {
         });
 
         jLabel2.setText("Sowing date:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Crop");
 
