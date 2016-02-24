@@ -120,29 +120,43 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        // on click get values from username and password field
+
         String username = jTextField1.getText();
         String password = jTextField2.getText();
+        boolean foundUser = false;
+        String loginMessage = "";
         
-        for (int i = 0; i< globalVar.user.size(); i++){
-            if(globalVar.user.elementAt(i).getPassword() == password && globalVar.user.elementAt(i).getUsername() == username){
-                System.out.println(globalVar.user.elementAt(i));
+        System.out.println(globalVar.user.elements());
+        
+        
+        for (int i = 0; i <= globalVar.user.size(); i++){
+            
+            if(globalVar.user.elementAt(i).getPassword().contentEquals(password) && globalVar.user.elementAt(i).getUsername().contentEquals(username)){
+                //Set userFound to true
+                foundUser = true;
             } else {
-                i++;
+                //Set userFound to false
+                foundUser = false;
             }
+            i++;
         }
+        
+        if(foundUser == true){
+            loginMessage = "Login Success";
+        } else {
+            loginMessage = "Login Error";
+        }
+        
+        JOptionPane.showMessageDialog(rootPane, loginMessage);   
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        // TODO add your handling code here:
         JOptionPane.showMessageDialog(rootPane, "Forgotten your password? Naughty");
     }//GEN-LAST:event_jLabel4MouseClicked
 
