@@ -24,6 +24,16 @@ public class DataReading {
         return readings[i];
     }
     
+    float getAverageReading() {
+        float avgNum = 0;
+        for(float theNum : readings)
+        {
+            avgNum += theNum;
+        }
+        avgNum /= (avgNum / readings.length);
+        return avgNum;
+    }
+    
     int getArrayLength (){
         return readings.length;
     }
