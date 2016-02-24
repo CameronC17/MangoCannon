@@ -76,9 +76,9 @@ public class GlobalVariables {
         
         //User credentials
         // firstName, secondName, password, uniqueId, AccessLevel, username
-        User user1 = new User("Carlos", "Rodriguez", "carlosr", 5312, 2, "carlos_rodriguez");
-        User user2 = new User("Sara", "Ackincacker", "saraa", 5142, 1, "sara_ackicakcer");
-        User user3 = new User("John", "Smith", "johns", 5332, 2, "john_smith");
+        User user1 = new User("Carlos", "Gill", "carlosg", 5312, 2, "carlos_gill");
+        User user2 = new User("Sarah", "Smith", "sarahs", 5142, 1, "sarah_smith");
+        User user3 = new User("John", "Gill", "johng", 5332, 2, "john_gill");
         user.add(user1);
         user.add(user2);
         user.add(user3);
