@@ -274,17 +274,19 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if (drawingShape != null)
+       //if (drawingShape != null)
         {
             GPS loc1 = new GPS(drawingShape.getBounds().x, drawingShape.getBounds().y);
             GPS loc2 = new GPS(drawingShape.getBounds().x + drawingShape.getBounds().width, drawingShape.getBounds().y);
             GPS loc3 = new GPS(drawingShape.getBounds().x, drawingShape.getBounds().y + drawingShape.getBounds().height);
             GPS loc4 = new GPS(drawingShape.getBounds().x + drawingShape.getBounds().width, drawingShape.getBounds().y + drawingShape.getBounds().height);
-            globalVar.workingBoundary.createBoundary(loc1, loc2, loc3, loc4);
+            GPSBoundary newGPSBndry = new GPSBoundary();
+            newGPSBndry.createBoundary(loc1, loc2, loc3, loc4);
+            globalVar.setWorkingBoundary(newGPSBndry);
         }
-        else
+        //else
         {
-            JOptionPane.showMessageDialog(null, "Please ensure you have drawn a field.");
+         //   JOptionPane.showMessageDialog(null, "Please ensure you have drawn a field.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

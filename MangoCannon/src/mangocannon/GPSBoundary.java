@@ -17,13 +17,26 @@ public class GPSBoundary {
         pointList.add(theGPS2);
         pointList.add(theGPS3);
         pointList.add(theGPS4);
-
+    }
+    
+    void deleteBoundary() {
+        pointList.clear();
     }
     
     int getSize() {
-        //int fullArea = pointList.get(0) * pointList.get(2);
+        int xLength = 0, yLength = 0;
+        xLength = pointList.get(1).getGlobalPosition()[0] - pointList.get(0).getGlobalPosition()[0];
+        yLength = pointList.get(3).getGlobalPosition()[1] - pointList.get(0).getGlobalPosition()[1];
         
-        
-        return 0;
+        return (xLength * yLength);
+    }
+    
+    GPS getCentre() {
+        int gpsX, gpsY;
+        gpsX = (pointList.get(1).getGlobalPosition()[0] - pointList.get(0).getGlobalPosition()[0]) / 2;
+        gpsY = (pointList.get(3).getGlobalPosition()[1] - pointList.get(0).getGlobalPosition()[1]) / 2;        
+        GPS gpsCentre = new GPS(gpsX, gpsY);
+
+        return gpsCentre;
     }
 }

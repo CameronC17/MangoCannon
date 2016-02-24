@@ -10,9 +10,9 @@ package mangocannon;
  * @author jacobburns
  */
 public class FieldStation {
+    private long uniqueId;
     private Sensor[] sensorList;
     private String name;
-    private long uniqueId;
     private boolean fixed;
     private GPS gps;
     
@@ -25,6 +25,11 @@ public class FieldStation {
         name = theName;
         uniqueId = theUniqueId;
         gps = theGPS;
+    }
+    
+    public FieldStation(String theName, GPS theGPS) {
+        this.name = theName;
+        this.gps = theGPS;        
     }
     
     Sensor[] getSensor(){
