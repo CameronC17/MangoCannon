@@ -94,7 +94,7 @@ public class GlobalVariables {
         Sensor[] sensorList1 = {rainFallSensor, sunshineSensor, nutrientSaturationSensor, temperatureSensor};
         
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
-//        FieldStation fieldStation1 = new FieldStation(sensorList1, 'Field Station 1', 001, true, loc1);
+        //FieldStation fieldStation1 = new FieldStation(sensorList1, 'Field Station 1', 001, true, loc1);
         
         
         //Date d = new Date("10/02/2016");
@@ -119,5 +119,17 @@ public class GlobalVariables {
         //currentFarm.addField(field3);
         //Crop crop3 = new Crop(apples, date1, 3);
         //currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
+    }
+    
+    void setWorkingBoundary(GPSBoundary theGPSBndry) {
+        workingBoundary = theGPSBndry;
+    }
+    
+    void clearWorkingBoundary() {
+        workingBoundary.deleteBoundary();
+    }
+    
+    GPSBoundary getWorkingBoundary() {
+        return workingBoundary;
     }
 }
