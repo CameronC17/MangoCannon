@@ -5,13 +5,16 @@
  */
 package mangocannon;
 
+import java.util.Vector;
+
 /**
  *
  * @author jacobburns
  */
 public class FieldStation {
     private long uniqueId;
-    private Sensor[] sensorList;
+    //private Sensor[] sensorList;
+    public Vector<Sensor> sensorList = new Vector<Sensor>();
     private String name;
     private boolean fixed;
     private GPS gps;
@@ -20,7 +23,7 @@ public class FieldStation {
         
     }
     
-    public FieldStation(Sensor[] theSensorList, String theName, long theUniqueId, GPS theGPS){
+    public FieldStation(Vector<Sensor> theSensorList, String theName, long theUniqueId, GPS theGPS){
         sensorList = theSensorList;
         name = theName;
         uniqueId = theUniqueId;
@@ -32,11 +35,15 @@ public class FieldStation {
         this.gps = theGPS;        
     }
     
-    Sensor[] getSensors(){
+    Vector<Sensor> getSensors(){
         return sensorList;
     }
     
-    void setSensor(Sensor[] theSensorList){
+    void addSensor(Sensor sensor) {
+        this.sensorList.add(sensor);
+    }
+    
+    void setSensor(Vector<Sensor> theSensorList){
         /*for (int i = 0; i < theSensorList.length; i++){
             this.sensorList.add(theSensorList[i]);
         }*/

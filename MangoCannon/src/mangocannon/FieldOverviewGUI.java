@@ -9,19 +9,19 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 
-public class BoundaryGUI extends javax.swing.JFrame {
+public class FieldOverviewGUI extends javax.swing.JFrame {
     GlobalVariables globalVar;
-    int mouseStartX, mouseStartY, mouseEndX, mouseEndY;
+    int mouseX, mouseY;
     ArrayList<Shape> shapes = new ArrayList<Shape>();
     ArrayList<Shape> sensorShapes = new ArrayList<Shape>();
     Shape drawingShape;
     ArrayList<String> ShapeFieldNames = new ArrayList<String>();
 
-    public BoundaryGUI() {
+    public FieldOverviewGUI() {
         initComponents();
         //WORK FROM HERE!
-        mouseStartX = -1;
-        mouseStartY = -1;
+        mouseX = -1;
+        mouseY = -1;
     }
 
     public void setGlobalVars(GlobalVariables usingVar) {
@@ -42,7 +42,39 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 this.shapes.add(shape);
                 ShapeFieldNames.add(field.getFieldName());
             }
+            
+            for (Sensor sensor : field.getFieldStation().getSensors())
+            {
+                Shape sShape = null;
+                posX = sensor.getLocation().getGlobalPosition()[0] - 3;
+                posY = sensor.getLocation().getGlobalPosition()[1] - 3;
+                width = 6;
+                height = 6;
+                
+                sShape = new Rectangle(posX, posY, width, height);
+            
+                if (sShape != null) {
+                    this.sensorShapes.add(sShape);
+                }
+            }
         }
+        
+        for (Sensor sensor : globalVar.unallocatedSensors)
+        {
+            Shape sShape = null;
+            int posX = sensor.getLocation().getGlobalPosition()[0] - 3;
+            int posY = sensor.getLocation().getGlobalPosition()[1] - 3;
+            int width = 6;
+            int height = 6;
+                
+            sShape = new Rectangle(posX, posY, width, height);
+            
+                if (sShape != null) {
+                    this.sensorShapes.add(sShape);
+                }
+        }
+        
+        
         this.repaint();
     }
     
@@ -147,14 +179,17 @@ public class BoundaryGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 23, 1000, 1000));
         setResizable(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MouseClicked(evt);
+            }
+        });
 
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -170,7 +205,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/mangocannon/fieldOverview.png"))); // NOI18N
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                BoundaryGUI.this.mouseMoved(evt);
+                FieldOverviewGUI.this.mouseMoved(evt);
             }
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 recordDrag(evt);
@@ -178,29 +213,21 @@ public class BoundaryGUI extends javax.swing.JFrame {
         });
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                BoundaryGUI.this.mousePressed(evt);
+                FieldOverviewGUI.this.mousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 MouseUp(evt);
             }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BoundaryGUI.this.mouseClicked(evt);
+                FieldOverviewGUI.this.mouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jLabel1);
 
-        jLabel2.setText("View current fields");
+        jLabel2.setText("Add Sensor");
+        jLabel2.setToolTipText("");
 
-        jLabel3.setText("Add these boundaries to field");
-
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("View");
+        jButton2.setText("Add");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -224,11 +251,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addGap(153, 153, 153)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 549, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(14, 14, 14))
         );
@@ -239,8 +262,6 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -258,33 +279,24 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_recordDrag
 
     private void MouseUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseUp
-        mouseEndX = evt.getX();
-        mouseEndY = evt.getY();
-
-        Shape shape = null;
-
-        if (mouseStartX != mouseEndX && mouseStartY != mouseEndY) {
-                shape = new Rectangle(mouseStartX, mouseStartY + 10, mouseEndX - mouseStartX, mouseEndY - mouseStartY + 10);
-        }
-
-        if (shape != null) {
-            drawingShape = shape;
-            this.repaint();
-        }
         
-        mouseStartX = -1;
-        mouseStartY = -1;
-        mouseEndX = -1;
-        mouseEndY = -1;
     }//GEN-LAST:event_MouseUp
 
     private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
-        mouseStartX = evt.getX();
-        mouseStartY = evt.getY();
+        
     }//GEN-LAST:event_mousePressed
 
     private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClicked
+        mouseX = evt.getX();
+        mouseY = evt.getY();
+
+        Shape shape = new Rectangle(mouseX - 3, mouseY + 18, 6, 6);
         
+        drawingShape = shape;
+        this.repaint();
+        
+        mouseX = -1;
+        mouseY = -1;
     }//GEN-LAST:event_mouseClicked
 
     private void mouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseMoved
@@ -297,29 +309,34 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_scrollChangedListener
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.repaint();
+        globalVar.workingField = -1;
+        GPS newGPS = new GPS(drawingShape.getBounds().x + 3, drawingShape.getBounds().y - 22);
+        globalVar.workingGPS = newGPS;
+        /*for (Field field : globalVar.currentFarm)
+        {
+            if (field.isInside(newGPS))
+               globalVar.workingField = field;
+        }*/
+        for (int i = 0; i < globalVar.currentFarm.size(); i++)
+        {
+            Field field = globalVar.currentFarm.get(i);
+            if (field.isInside(newGPS))
+                globalVar.workingField = i;
+        }
+        
+        CreateSensorGUI sensorGUI = new CreateSensorGUI();
+        sensorGUI.setVisible(true);
+        sensorGUI.setGlobalVars(globalVar);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       //if (drawingShape != null)
-        {
-            GPS loc1 = new GPS(drawingShape.getBounds().x, drawingShape.getBounds().y);
-            GPS loc2 = new GPS(drawingShape.getBounds().x + drawingShape.getBounds().width, drawingShape.getBounds().y);
-            GPS loc3 = new GPS(drawingShape.getBounds().x, drawingShape.getBounds().y + drawingShape.getBounds().height);
-            GPS loc4 = new GPS(drawingShape.getBounds().x + drawingShape.getBounds().width, drawingShape.getBounds().y + drawingShape.getBounds().height);
-            GPSBoundary newGPSBndry = new GPSBoundary();
-            newGPSBndry.createBoundary(loc1, loc2, loc3, loc4);
-            globalVar.setWorkingBoundary(newGPSBndry);
-        }
-        //else
-        {
-         //   JOptionPane.showMessageDialog(null, "Please ensure you have drawn a field.");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MouseClicked
 
     /**
      * @param args the command line arguments
@@ -338,31 +355,29 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BoundaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FieldOverviewGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BoundaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FieldOverviewGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BoundaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FieldOverviewGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BoundaryGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FieldOverviewGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BoundaryGUI().setVisible(true);
+                new FieldOverviewGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

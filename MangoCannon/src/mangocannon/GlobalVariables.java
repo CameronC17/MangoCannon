@@ -15,8 +15,13 @@ import java.util.Vector;
 public class GlobalVariables {
     public Farm currentFarm = new Farm();
     public Vector<CropType> cropTypes = new Vector<CropType>();
-    public Vector<User> user = new Vector<User>();
+    public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
+    public Vector<User> user = new Vector<User>();    
+    public Vector<Sensor> unallocatedSensors = new Vector<Sensor>();
+  
     public GPSBoundary workingBoundary;
+    public GPS workingGPS;
+    public int workingField = -1;   
 
     public GlobalVariables()
     {
@@ -53,6 +58,11 @@ public class GlobalVariables {
         SensorTypes nutrientSaturation = new SensorTypes(1.5f, true, true, "Nutrient Saturation", "mm");
         SensorTypes temperature = new SensorTypes(1.5f, true, true, "Temperature", "f");
         
+        sensorTypes.add(sunshine);
+        sensorTypes.add(rainFall);
+        sensorTypes.add(nutrientSaturation);
+        sensorTypes.add(temperature);
+        
         //DataReadings Data
         float[] floats1 = {1.1f, 2.8f, 3.5f, 1.2f, 5.2f, 1.1f, 0.1f};
         float[] floats2 = {50.6f, 32.2f, 23.2f, 22.0f, 19.2f, 18.8f, 14.3f};
@@ -79,14 +89,23 @@ public class GlobalVariables {
 
         
         //Sensors
-        Sensor rainFallSensor = new Sensor(rainFall, readings1);
-        Sensor sunshineSensor = new Sensor(sunshine, readings2);
-        Sensor nutrientSaturationSensor = new Sensor(nutrientSaturation, readings3);
-        Sensor temperatureSensor = new Sensor(temperature, readings4);
+        Sensor rainFallSensor = new Sensor(rainFall, readings1, loc3);
+        Sensor sunshineSensor = new Sensor(sunshine, readings2, loc5);
+        Sensor nutrientSaturationSensor = new Sensor(nutrientSaturation, readings3, loc6);
+        Sensor temperatureSensor = new Sensor(temperature, readings4, loc7);
         
         //SensorList
-        Sensor[] sensorList1 = {rainFallSensor, sunshineSensor, nutrientSaturationSensor, temperatureSensor};
-        Sensor[] sensorList2 = {sunshineSensor, nutrientSaturationSensor, temperatureSensor, rainFallSensor};
+        Vector<Sensor> sensorList1 = new Vector<Sensor>();
+        sensorList1.add(rainFallSensor);
+        sensorList1.add(sunshineSensor);
+        sensorList1.add(nutrientSaturationSensor);
+        sensorList1.add(temperatureSensor);
+                
+        Vector<Sensor> sensorList2 = new Vector<Sensor>();
+        sensorList2.add(sunshineSensor);
+        sensorList2.add(rainFallSensor);
+        sensorList2.add(temperatureSensor);
+        sensorList2.add(nutrientSaturationSensor);
         
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
         FieldStation fieldStation2 = new FieldStation(sensorList2, "FS2", 002, loc1);
