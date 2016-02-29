@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class MainGUI extends javax.swing.JFrame {
     GlobalVariables globalVar = new GlobalVariables();
+    private int selectedRow = 0;
     /**
      * Creates new form MainGUI
      */
@@ -73,19 +74,20 @@ public class MainGUI extends javax.swing.JFrame {
         Vector<String> sensors = new Vector<String>();
         Vector<Float> readings = new Vector<Float>();
         
-        for (Sensor sensor : globalVar.currentFarm.get(table1.getSelectedRow() + 1).getFieldStation().getSensors())
+               
+        for (Sensor sensor : globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors())
         {
             sensors.addElement(sensor.getSensorTypeName());
             readings.addElement(sensor.getReadings().getAverageReading());
         }
-        
-        
+
         DefaultTableModel model3 = (DefaultTableModel)jTable1.getModel();
         model3.setRowCount(0);
         model3.setColumnCount(0);
-        
+
         model3.addColumn("Sensor", sensors);
         model3.addColumn("Reading", readings);
+            
     }
     
 
@@ -453,7 +455,6 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        int selectedRow = table1.getSelectedRow();
         globalVar.currentFarm.remove(selectedRow);
         ((DefaultTableModel)table1.getModel()).removeRow(selectedRow);
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -474,7 +475,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateFieldsActionPerformed
 
     private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
-        int selectedRow = table1.getSelectedRow();
+        selectedRow = table1.getSelectedRow();
         createTableData();
         table1.setRowSelectionInterval(selectedRow, selectedRow);
     }//GEN-LAST:event_mousePressed
