@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Field {
     private String fieldName;
-    private long uniqueId;
     private GPSBoundary gpsBoundary;
     private FieldStation fieldStation;
     private Crop crop;
