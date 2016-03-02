@@ -12,6 +12,17 @@ public class GPSBoundary {
         return pointList;
     }
     
+    /*
+    The boundary is like this:
+    
+        0         1
+    
+    
+    
+        2         3
+    
+    */
+    
     void createBoundary(GPS theGPS1,GPS theGPS2, GPS theGPS3, GPS theGPS4) {
         pointList.add(theGPS1);
         pointList.add(theGPS2);
@@ -38,5 +49,12 @@ public class GPSBoundary {
         GPS gpsCentre = new GPS(gpsX, gpsY);
 
         return gpsCentre;
+    }
+    
+    public boolean isInside(GPS theGPS) {
+        if (theGPS.getGlobalPosition()[0] >= pointList.get(0).getGlobalPosition()[0] && theGPS.getGlobalPosition()[0] <= pointList.get(1).getGlobalPosition()[0] && theGPS.getGlobalPosition()[1] >= pointList.get(0).getGlobalPosition()[1] && theGPS.getGlobalPosition()[1] <= pointList.get(3).getGlobalPosition()[1])
+            return true;
+        else
+            return false;
     }
 }

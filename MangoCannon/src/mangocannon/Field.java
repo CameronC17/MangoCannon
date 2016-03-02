@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Field {
     private String fieldName;
-    private long uniqueId;
     private GPSBoundary gpsBoundary;
     private FieldStation fieldStation;
     private Crop crop;
@@ -54,4 +53,7 @@ public class Field {
         return this.gpsBoundary;
     }
     
+    public boolean isInside(GPS theGPS) {
+        return gpsBoundary.isInside(theGPS);
+    }
 }
