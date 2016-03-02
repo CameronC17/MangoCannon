@@ -12,17 +12,23 @@ public class Sensor {
     private SensorTypes sensorType;
     private long uniqueId;    
     private DataReading dataReadings;
+    private GPS location;
 
-    public Sensor(){
-
+    public Sensor(SensorTypes theSensorTypes, GPS theGPS){
+        float[] emptyArray = {0};
+        DataReading emptyData = new DataReading(emptyArray);
+        sensorType = theSensorTypes;
+        dataReadings = emptyData;
+        location = theGPS;
     }
 
 //    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
 //        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
 
-    public Sensor(SensorTypes theSensorTypes, DataReading theDataReadings){
+    public Sensor(SensorTypes theSensorTypes, DataReading theDataReadings, GPS theGPS){
         sensorType = theSensorTypes;
         dataReadings = theDataReadings;
+        location = theGPS;
     }
 
     Timer getTimer(){
@@ -48,6 +54,10 @@ public class Sensor {
 
     DataReading getReadings(){
         return dataReadings;
+    }
+    
+    GPS getLocation() {
+        return location;
     }
     
 //    void setDataReadings(DataReading theDataReading){

@@ -78,8 +78,10 @@ public class MainGUI extends javax.swing.JFrame {
         Vector<Float> readings = new Vector<Float>();
         
                
-        for (Sensor sensor : globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors())
+        //for (Sensor sensor : globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors())
+        for (int i = 0; i < globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors().size(); i++)
         {
+            Sensor sensor = globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors().get(i);
             sensors.addElement(sensor.getSensorTypeName());
             readings.addElement(sensor.getReadings().getAverageReading());
         }
@@ -333,7 +335,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton5)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Fields", jPanel1);
@@ -414,7 +416,12 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Display Settings", jPanel6);
 
-        jButton12.setText("New Station");
+        jButton12.setText("New Sensor");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
 
         jButton13.setText("Search");
 
@@ -478,14 +485,9 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         FieldGUI fieldGUI = new FieldGUI();
         fieldGUI.setGlobalVars(globalVar);
-        fieldGUI.setVisible(true);
-        //new FieldGUI().setVisible(true);
-        
-        //this.AccessibleJFrame;
-        
+        fieldGUI.setVisible(true);        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -517,6 +519,12 @@ public class MainGUI extends javax.swing.JFrame {
         createTableData();
         table1.setRowSelectionInterval(selectedRow, selectedRow);
     }//GEN-LAST:event_mousePressed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        FieldOverviewGUI fieldOverviewGUI = new FieldOverviewGUI();
+        fieldOverviewGUI.setGlobalVars(globalVar);
+        fieldOverviewGUI.setVisible(true);
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     /**
      * @param args the command line arguments
