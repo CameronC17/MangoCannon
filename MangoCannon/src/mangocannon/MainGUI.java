@@ -25,7 +25,6 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel2.setFont(new Font("SansSerif", Font.PLAIN, 30));
         jLabel11.setFont(new Font("SansSerif", Font.PLAIN, 30));
         jLabel12.setFont(new Font("SansSerif", Font.PLAIN, 30));
-
     }
     
     public void setGlobalVars(GlobalVariables usingVar) {
@@ -107,6 +106,24 @@ public class MainGUI extends javax.swing.JFrame {
         modelFieldStations.addColumn("No. of Sensors", sensorNumber);
         modelFieldStations.addColumn("GPS Location", gpsLocation);
     
+        
+        Vector<String> sensorNames = new Vector<String>();
+        Vector<String> sensorMeasurement = new Vector<String>();
+        Vector<Integer> sensorTimeInterval = new Vector<Integer>();
+        for (SensorTypes sensorT : globalVar.sensorTypes)
+        {
+            sensorNames.add(sensorT.getTypeName());
+            sensorMeasurement.add(sensorT.getReadingType());
+            sensorTimeInterval.add(sensorT.getTimeInterval());
+        }
+        
+        DefaultTableModel modelSensorTypes = (DefaultTableModel)tableSensorTypes.getModel();
+        modelSensorTypes.setColumnCount(0);
+        modelSensorTypes.setRowCount(0);
+        modelSensorTypes.addColumn("Sensor Type Name", sensorNames);
+        modelSensorTypes.addColumn("Measurement Unit", sensorMeasurement);
+        modelSensorTypes.addColumn("Sensor Time Interval (sec)", sensorTimeInterval);
+        
     }
     
 
@@ -163,9 +180,10 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tableFieldStations = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableSensorTypes = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblUserStatus = new javax.swing.JLabel();
 
@@ -212,8 +230,8 @@ public class MainGUI extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,6 +262,11 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane3.setViewportView(table1);
 
         jButton3.setText("Detail View");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Edit Field");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -410,15 +433,31 @@ public class MainGUI extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Field Stations", jPanel4);
 
+        tableSensorTypes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tableSensorTypes);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 633, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Sensor Categories/Types", jPanel5);
@@ -443,8 +482,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton13.setText("Search");
-
         jLabel2.setText("Settings");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -453,34 +490,29 @@ public class MainGUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jTabbedPane2)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34))))
+                        .addComponent(jButton12)
+                        .addGap(33, 33, 33))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton13))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Settings", jPanel3);
+        jTabbedPane1.addTab("Field Stations / Sensors", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -590,6 +622,10 @@ public class MainGUI extends javax.swing.JFrame {
         fieldOverviewGUI.setVisible(true);
     }//GEN-LAST:event_jButton12ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -634,7 +670,6 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -662,6 +697,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -674,6 +710,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblUserStatus;
     private javax.swing.JTable table1;
     private javax.swing.JTable tableFieldStations;
+    private javax.swing.JTable tableSensorTypes;
     private javax.swing.JTextField txtBoxSearch;
     // End of variables declaration//GEN-END:variables
 }
