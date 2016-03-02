@@ -1,13 +1,26 @@
-
 package mangocannon;
 
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 public class LoginGUI extends javax.swing.JFrame {
     GlobalVariables globalVar = new GlobalVariables();
+    public Vector<User> localUser = new Vector<User>();
 
     public LoginGUI() {
         initComponents();
+    }
+    
+    int UserAuth(String theUsername, String thePassword){
+        int foundUser = -1;
+        
+        for (int i = 0; i < globalVar.user.size(); i++)
+        {
+            if (globalVar.user.get(i).getUsername().contentEquals(theUsername))
+                if (globalVar.user.get(i).getPassword().contentEquals(thePassword))
+                    foundUser = i;
+        }
+        return foundUser;
     }
 
     /**
@@ -26,6 +39,7 @@ public class LoginGUI extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +76,13 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Skip");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,6 +90,8 @@ public class LoginGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(301, 301, 301)
                 .addComponent(jButton1)
+                .addGap(81, 81, 81)
+                .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -108,7 +131,9 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGap(34, 34, 34)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(177, Short.MAX_VALUE))
         );
 
@@ -120,35 +145,23 @@ public class LoginGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
         String username = jTextField1.getText();
         String password = jTextField2.getText();
-        boolean foundUser = false;
         String loginMessage = "";
+        int foundUser = UserAuth(username, password);
         
-        System.out.println(globalVar.user.elements());
-        
-        
-        for (int i = 0; i <= globalVar.user.size(); i++){
-            
-            if(globalVar.user.elementAt(i).getPassword().contentEquals(password) && globalVar.user.elementAt(i).getUsername().contentEquals(username)){
-                //Set userFound to true
-                foundUser = true;
-            } else {
-                //Set userFound to false
-                foundUser = false;
-            }
-            i++;
-        }
-        
-        if(foundUser == true){
+        if(foundUser > -1){
+            globalVar.currentUser = globalVar.user.get(foundUser);
             loginMessage = "Login Success";
+            MainGUI main = new MainGUI();
+            main.setGlobalVars(globalVar);
+            main.setVisible(true);
+            this.dispose();
+            // Spawn MainGUI
         } else {
             loginMessage = "Login Error";
         }
-        
         JOptionPane.showMessageDialog(rootPane, loginMessage);   
-        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -159,6 +172,14 @@ public class LoginGUI extends javax.swing.JFrame {
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         JOptionPane.showMessageDialog(rootPane, "Forgotten your password? Naughty");
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        globalVar.currentUser = globalVar.user.get(3);
+        MainGUI main = new MainGUI();
+        main.setGlobalVars(globalVar);
+        main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +218,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
