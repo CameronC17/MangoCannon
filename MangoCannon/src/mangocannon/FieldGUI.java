@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 
 public class FieldGUI extends JFrame {
     GlobalVariables globalVar;
+
+    
     /**
      * Creates new form FieldGUI
      */
@@ -66,6 +68,12 @@ public class FieldGUI extends JFrame {
         });
 
         jLabel2.setText("Sowing date:");
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Crop");
 
@@ -212,6 +220,10 @@ public class FieldGUI extends JFrame {
         boundaryGUI.setVisible(true);
         boundaryGUI.setGlobalVars(globalVar);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

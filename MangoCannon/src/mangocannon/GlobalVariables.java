@@ -116,7 +116,7 @@ public class GlobalVariables {
         currentFarm.addField(field1);
         currentFarm.addField(field2);
         
-        //currentFarm.addField(field3);
+//        currentFarm.addField(field3);
         //Crop crop3 = new Crop(apples, date1, 3);
         //currentFarm.get(currentFarm.getFieldIndex("Field 3")).newCrop(crop3);
     }
@@ -135,5 +135,10 @@ public class GlobalVariables {
     
     Field getFieldInFarmIndex(int i) {
         return currentFarm.get(i);
+    }
+    
+    int getCropAtIndex(String theCrop){
+//        return cropTypes.
+        return 0;
     }
 }

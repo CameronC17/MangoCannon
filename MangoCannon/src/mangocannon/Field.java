@@ -49,4 +49,9 @@ public class Field {
     public void setFieldStation(FieldStation theFS) {
         this.fieldStation = theFS;
     }
+    
+    public GPSBoundary getGPSBoundary(){
+        return this.gpsBoundary;
+    }
+    
 }
