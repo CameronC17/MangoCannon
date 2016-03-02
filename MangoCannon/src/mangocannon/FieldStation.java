@@ -19,10 +19,6 @@ public class FieldStation {
     private boolean fixed;
     private GPS gps;
     
-    public FieldStation(){
-        
-    }
-    
     public FieldStation(Vector<Sensor> theSensorList, String theName, long theUniqueId, GPS theGPS){
         sensorList = theSensorList;
         name = theName;

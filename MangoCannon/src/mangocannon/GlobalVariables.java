@@ -19,6 +19,7 @@ public class GlobalVariables {
     public Vector<User> user = new Vector<User>();    
     public Vector<Sensor> unallocatedSensors = new Vector<Sensor>();
   
+    public User currentUser;
     public GPSBoundary workingBoundary;
     public GPS workingGPS;
     public int workingField = -1;   
@@ -83,9 +84,11 @@ public class GlobalVariables {
         User user1 = new User("Carlos", "Adams", "carlosa", 5312, 2, "carlos_adams");
         User user2 = new User("Sara", "James", "saraj", 5142, 1, "sara_james");
         User user3 = new User("John", "Smith", "johns", 5332, 2, "john_smith");
+        User user4 = new User("Super", "Admin", "super", 1337, 2, "admin");
         user.add(user1);
         user.add(user2);
         user.add(user3);
+        user.add(user4);
 
         
         //Sensors
@@ -107,9 +110,6 @@ public class GlobalVariables {
         sensorList2.add(temperatureSensor);
         sensorList2.add(nutrientSaturationSensor);
         
-        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, loc1);
-        FieldStation fieldStation2 = new FieldStation(sensorList2, "FS2", 002, loc1);
-        //FieldStation fieldStation1 = new FieldStation(sensorList1, 'Field Station 1', 001, true, loc1);
         
         
         //Date d = new Date("10/02/2016");
@@ -121,6 +121,9 @@ public class GlobalVariables {
         Field field1 = new Field("Field 1", gpsB1);
         Field field2 = new Field("Field 2", gpsB2);
         Field field3 = new Field("Field 3", gpsB1);
+        
+        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, field1.getGPSBoundary().getCentre());
+        FieldStation fieldStation2 = new FieldStation(sensorList2, "FS2", 002, field2.getGPSBoundary().getCentre());
 
         //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
         //Evetually change last number to be field1.size() or whatever
