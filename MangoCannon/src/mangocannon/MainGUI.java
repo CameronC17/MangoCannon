@@ -49,7 +49,7 @@ public class MainGUI extends javax.swing.JFrame {
         
         for (int i=0; i < globalVar.currentFarm.size(); i++){
             fieldNames.addElement(globalVar.currentFarm.get(i).getFieldName());
-            cropNames.addElement(globalVar.currentFarm.get(i).getCrop().getCropType());
+            cropNames.addElement(globalVar.currentFarm.get(i).getCrop().getCropType().getCropName());
             datesPlanted.addElement(globalVar.currentFarm.get(i).getCrop().getPlantDate());
             expectedDates.addElement(globalVar.currentFarm.get(i).getCrop().getExpectedHarvest());
             //Change field size to get from field not crop when added boundaries!
@@ -516,11 +516,11 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         EditFieldGUI editFieldGUI = new EditFieldGUI();
-        
         //Gets the fields original data from selection
         selectedRow = table1.getSelectedRow();
+        globalVar.editField = globalVar.currentFarm.get(selectedRow);
         editFieldGUI.setGlobalVars(globalVar);
-        editFieldGUI.populateGUIData(globalVar.currentFarm.get(selectedRow));
+        //editFieldGUI.populateGUIData(globalVar.currentFarm.get(selectedRow));
         editFieldGUI.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -544,7 +544,7 @@ public class MainGUI extends javax.swing.JFrame {
                 if (globalVar.currentFarm.get(i).getFieldName().toLowerCase().contains(searchTerm.toLowerCase()))
                 {
                     fieldNames.addElement(globalVar.currentFarm.get(i).getFieldName());
-                    cropNames.addElement(globalVar.currentFarm.get(i).getCrop().getCropType());
+                    cropNames.addElement(globalVar.currentFarm.get(i).getCrop().getCropType().getCropName());
                     datesPlanted.addElement(globalVar.currentFarm.get(i).getCrop().getPlantDate());
                     expectedDates.addElement(globalVar.currentFarm.get(i).getCrop().getExpectedHarvest());
                     //Change field size to get from field not crop when added boundaries!

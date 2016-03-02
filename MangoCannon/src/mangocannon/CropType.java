@@ -11,9 +11,10 @@ public class CropType {
         this.averageTimeToGrow = averageGrowTime;
     }
     
-    String getCropType(){
+    String getCropName(){
         return cropType;
     }
+    
     void setCropType(String theCropType) {
         this.cropType = theCropType;
     }
@@ -32,8 +33,10 @@ public class CropType {
         this.averageTimeToGrow = theExpectedHarvest;
     }
     
-    String getCropTypeAtIndex(int i){
-        return this.getCropTypeAtIndex(i);
-    }
+//    String getCropTypeAtIndex(int i){
+//        return this.getCropTypeAtIndex(i);
+//    }
+    
+    
     
 }

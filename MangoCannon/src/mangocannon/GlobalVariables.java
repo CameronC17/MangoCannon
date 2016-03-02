@@ -23,6 +23,7 @@ public class GlobalVariables {
     public GPSBoundary workingBoundary;
     public GPS workingGPS;
     public int workingField = -1;   
+    public Field editField = null;
 
     public GlobalVariables()
     {
@@ -146,11 +147,7 @@ public class GlobalVariables {
     void setWorkingBoundary(GPSBoundary theGPSBndry) {
         workingBoundary = theGPSBndry;
     }
-    
-    void clearWorkingBoundary() {
-        workingBoundary.deleteBoundary();
-    }
-    
+        
     GPSBoundary getWorkingBoundary() {
         return workingBoundary;
     }
@@ -159,8 +156,11 @@ public class GlobalVariables {
         return currentFarm.get(i);
     }
     
-    int getCropAtIndex(String theCrop){
-//        return cropTypes.
-        return 0;
+    CropType getCropAtIndex(int index){
+        return cropTypes.elementAt(index);
+    }
+    
+    int getIndexFromCrop(CropType theCrop){
+        return cropTypes.indexOf(theCrop);
     }
 }
