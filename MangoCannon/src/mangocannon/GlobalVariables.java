@@ -53,11 +53,11 @@ public class GlobalVariables {
         cropTypes.addElement(apples);
         
 
-        // SensorSettings
-        SensorTypes rainFall = new SensorTypes(1.5f, true, true, "Rain Fall", "mm");
-        SensorTypes sunshine = new SensorTypes(1.5f, true, true, "Sunshine", "mm");
-        SensorTypes nutrientSaturation = new SensorTypes(1.5f, true, true, "Nutrient Saturation", "mm");
-        SensorTypes temperature = new SensorTypes(1.5f, true, true, "Temperature", "f");
+        // SensorSettings (Type, measurements, time interval (in seconds)
+        SensorTypes rainFall = new SensorTypes("Rain Fall", "mm", 600);
+        SensorTypes sunshine = new SensorTypes("Sunshine", "mm", 60);
+        SensorTypes nutrientSaturation = new SensorTypes("Nutrient Saturation", "mm", 6000);
+        SensorTypes temperature = new SensorTypes("Temperature", "f", 300);
         
         sensorTypes.add(sunshine);
         sensorTypes.add(rainFall);

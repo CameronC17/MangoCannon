@@ -10,66 +10,23 @@ package mangocannon;
  * @author jacobburns
  */
 public class SensorTypes {
-    //private TimeInterval interval;
-    private float valDelta;
-    //private Unit units;
-    private boolean enabled;
-    private boolean deltaBased;
     private String typeName;
     private String readingType;
+    private int timeInterval;
 
-    public SensorTypes()
-    {
-        // blank constructor
-    }
-
-    public SensorTypes(float theValDelta, boolean theEnabled, boolean theDeltaBased, String theTypeName, String theReadingType){
-        valDelta = theValDelta;
-        enabled = theEnabled;
-        deltaBased = theDeltaBased;
+    
+    public SensorTypes(String theTypeName, String theReadingType, int theTimeInterval){
         typeName = theTypeName;
         readingType = theReadingType;
-
+        timeInterval = theTimeInterval;
     }
 
-    /*public getTimeInterval getInterval(){
-        return interval;
+    public String getReadingType(){
+        return this.readingType;
     }
 
-    public void setTimeInterval(TimeInterval theInterval){
-        this.interval = theInterval;
-    }*/
-
-    public float getValDelta(){
-        return valDelta;
-    }
-
-    public void setValDelta(float theValDelta){
-        this.valDelta = theValDelta;
-    }
-
-    /*public Unit getUnits(){
-        return this.units;
-    }
-
-    public void setUnits(Unit theUnits){
-        this.units = theUnits;
-    }*/
-
-    public boolean getEnabled(){
-        return this.enabled;
-    }
-
-    public void setEnabled(boolean theEnabled){
-        this.enabled = theEnabled;
-    }
-
-    public boolean getDeltaBased(){
-        return this.deltaBased;
-    }
-
-    public void setDeltaBased(boolean theDeltaBased){
-        this.deltaBased = theDeltaBased;
+    public void setReadingType(String unitType){
+        this.readingType = unitType;
     }
 
     public String getTypeName(){
@@ -79,6 +36,13 @@ public class SensorTypes {
     public void setTypeName(String theTypeName){
         this.typeName = theTypeName;
     }
-
+    
+    public int getTimeInterval() {
+        return this.timeInterval;
+    }
+    
+    public void setTimeInterval(int theTimeInterval){
+        this.timeInterval = theTimeInterval;
+    }
 
 }
