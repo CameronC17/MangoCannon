@@ -25,6 +25,10 @@ public class Field {
         return this.fieldName;
     }
     
+    public void setFieldName(String theName) {
+        this.fieldName = theName;
+    }
+    
     public void newCrop(Crop theCrop) {
         this.crop = theCrop;
     }
@@ -35,6 +39,10 @@ public class Field {
     
     public List<GPS> getBoundaries() {
         return gpsBoundary.getBoundary();
+    }
+    
+    public void setBoundaries(GPSBoundary theBoundaries) {
+        this.gpsBoundary = theBoundaries;
     }
     
     public float size() {

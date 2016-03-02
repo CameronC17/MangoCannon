@@ -19,8 +19,8 @@ public class Crop {
         this.expectedHarvestDate = thePlantDate.plusWeeks(theCropType.getAverageGrowTime());
     }
 
-    String getCropType(){
-        return cropType.getCropType();
+    CropType getCropType(){
+        return cropType;
     }
     void setCropType(CropType theCrop) {
         this.cropType = theCrop;
