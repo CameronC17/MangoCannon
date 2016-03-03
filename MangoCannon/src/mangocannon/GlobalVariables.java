@@ -24,6 +24,7 @@ public class GlobalVariables {
     public GPS workingGPS;
     public int workingField = -1;   
     public Field editField = null;
+    public Sensor workingSensor = null;
 
     public GlobalVariables()
     {
