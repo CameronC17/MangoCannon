@@ -46,7 +46,7 @@ public class Field {
     }
     
     public float size() {
-        return gpsBoundary.getSize();
+        return gpsBoundary.getFieldArea();
     }
     
     public FieldStation getFieldStation() {

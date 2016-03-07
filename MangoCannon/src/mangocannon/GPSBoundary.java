@@ -34,7 +34,7 @@ public class GPSBoundary {
         pointList.clear();
     }
     
-    int getSize() {
+    int getFieldArea() {
         int xLength = 0, yLength = 0;
         xLength = pointList.get(1).getGlobalPosition()[0] - pointList.get(0).getGlobalPosition()[0];
         yLength = pointList.get(3).getGlobalPosition()[1] - pointList.get(0).getGlobalPosition()[1];

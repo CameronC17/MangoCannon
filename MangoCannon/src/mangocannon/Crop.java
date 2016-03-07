@@ -11,6 +11,7 @@ public class Crop {
     private LocalDate expectedHarvestDate;
     private int fieldArea;
 
+    
     Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM) {
         this.cropType = theCropType;
         this.plantDate = thePlantDate;
