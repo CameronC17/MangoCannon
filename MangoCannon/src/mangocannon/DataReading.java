@@ -3,7 +3,6 @@ package mangocannon;
 
 import java.util.Vector;
 
-
 /**
  *
  * @author tomhanson
@@ -25,10 +24,14 @@ public class DataReading {
     }
     
     public void setReadings(Vector<Float> theReadings) {
-        this.readings = theReadings.toArray(new Float[theReadings.size()]);
+        //int[] myIntArray = new int[3];
+        float[] myFloatArr = new float[theReadings.size()];
+        for (int i = 0; i < theReadings.size(); i++)
+        {
+            myFloatArr[i] = theReadings.get(i);
+        }
         
-        //Vector<String> vector = new Vector<String>();
-        //String[] strings = vector.toArray(new String[vector.size()]);
+        this.readings = myFloatArr;
     }
     
     float getReadingValue(int i){

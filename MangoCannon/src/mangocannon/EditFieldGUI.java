@@ -27,27 +27,23 @@ public class EditFieldGUI extends javax.swing.JFrame {
 
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
-        DefaultComboBoxModel model2 = (DefaultComboBoxModel)jComboBox1.getModel();
+        DefaultComboBoxModel model2 = (DefaultComboBoxModel)ddlCrop.getModel();
         for (int i = 0; i < globalVar.cropTypes.size(); i++)
         {
             model2.addElement(globalVar.cropTypes.get(i).getCropName());
         }
         globalVar.workingBoundary = null;
         
-        fieldName.setText(globalVar.editField.getFieldName());
+        txtBoxFieldName.setText(globalVar.editField.getFieldName());
         Date expectedHarvestDate = fromLocalDate(globalVar.editField.getCrop().getPlantDate());
-        jXDatePicker1.setDate(expectedHarvestDate);
-        jComboBox1.setSelectedIndex(globalVar.cropTypes.indexOf(globalVar.editField.getCrop().getCropType()));
-        fieldName1.setText(globalVar.editField.getFieldStation().getName());
+        dpSowDate.setDate(expectedHarvestDate);
+        ddlCrop.setSelectedIndex(globalVar.cropTypes.indexOf(globalVar.editField.getCrop().getCropType()));
+        txtBoxStationName.setText(globalVar.editField.getFieldStation().getName());
         
     }
     
     public void populateGUIData(Field theField){
-        /*fieldName.setText(theField.getFieldName());
-        Date expectedHarvestDate = fromLocalDate(theField.getCrop().getExpectedHarvest());
-        jXDatePicker1.setDate(expectedHarvestDate);
-        jComboBox1.setSelectedIndex(globalVar.cropTypes.indexOf(theField.getCrop().getCropType()));
-        fieldName1.setText(theField.getFieldStation().getName());*/
+        
     }
     
     //converts a localDate to a date
@@ -70,13 +66,13 @@ public class EditFieldGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        fieldName = new javax.swing.JTextField();
-        fieldName1 = new javax.swing.JTextField();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtBoxFieldName = new javax.swing.JTextField();
+        txtBoxStationName = new javax.swing.JTextField();
+        dpSowDate = new org.jdesktop.swingx.JXDatePicker();
+        ddlCrop = new javax.swing.JComboBox();
+        btnSave = new javax.swing.JButton();
+        btnSetBoundaries = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,24 +86,24 @@ public class EditFieldGUI extends javax.swing.JFrame {
 
         jLabel8.setText("Field Station Name:");
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Reset");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSetBoundaries.setText("Reset");
+        btnSetBoundaries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSetBoundariesActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Cancel");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
@@ -116,31 +112,29 @@ public class EditFieldGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addGap(1, 1, 1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel8)))
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(fieldName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fieldName1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtBoxFieldName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dpSowDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtBoxStationName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ddlCrop, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSetBoundaries, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(btnCancel)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnSave)
                 .addGap(106, 106, 106))
         );
         layout.setVerticalGroup(
@@ -149,51 +143,51 @@ public class EditFieldGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(fieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBoxFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpSowDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ddlCrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton2))
+                    .addComponent(btnSetBoundaries))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxStationName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4)))
+                    .addComponent(btnSave)
+                    .addComponent(btnCancel)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSetBoundariesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetBoundariesActionPerformed
         BoundaryGUI boundaryGUI = new BoundaryGUI();
         boundaryGUI.setGlobalVars(globalVar);
         boundaryGUI.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSetBoundariesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        globalVar.editField.setFieldName(fieldName.getText());
-        globalVar.editField.getCrop().setPlantDate(jXDatePicker1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        globalVar.editField.getCrop().setCropType(globalVar.cropTypes.get(jComboBox1.getSelectedIndex()));
-        globalVar.editField.getFieldStation().setName(fieldName1.getText());
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        globalVar.editField.setFieldName(txtBoxFieldName.getText());
+        globalVar.editField.getCrop().setPlantDate(dpSowDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        globalVar.editField.getCrop().setCropType(globalVar.cropTypes.get(ddlCrop.getSelectedIndex()));
+        globalVar.editField.getFieldStation().setName(txtBoxStationName.getText());
         if (globalVar.workingBoundary != null)
-            globalVar.editField.setBoundaries(globalVar.workingBoundary);
+            globalVar.editField.setBoundary(globalVar.workingBoundary);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,17 +225,17 @@ public class EditFieldGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField fieldName;
-    private javax.swing.JTextField fieldName1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSetBoundaries;
+    private javax.swing.JComboBox ddlCrop;
+    private org.jdesktop.swingx.JXDatePicker dpSowDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private javax.swing.JTextField txtBoxFieldName;
+    private javax.swing.JTextField txtBoxStationName;
     // End of variables declaration//GEN-END:variables
 }

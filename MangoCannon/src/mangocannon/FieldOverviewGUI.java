@@ -179,8 +179,10 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAddSensor = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
+        btnViewFields = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 23, 1000, 1000));
@@ -227,19 +229,28 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         jLabel2.setText("Add Sensor");
         jLabel2.setToolTipText("");
 
-        jButton2.setText("Add");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAddSensor.setText("Add");
+        btnAddSensor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAddSensorActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Close");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnCloseActionPerformed(evt);
             }
         });
+
+        btnViewFields.setText("View");
+        btnViewFields.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewFieldsActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("View Fields");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,9 +261,13 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 549, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnAddSensor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 211, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnViewFields)
+                .addGap(181, 181, 181)
+                .addComponent(btnClose)
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -262,8 +277,10 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAddSensor)
+                    .addComponent(btnClose)
+                    .addComponent(btnViewFields)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -308,7 +325,7 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_scrollChangedListener
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAddSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSensorActionPerformed
         globalVar.workingField = -1;
         GPS newGPS = new GPS(drawingShape.getBounds().x + 3, drawingShape.getBounds().y - 22);
         globalVar.workingGPS = newGPS;
@@ -328,15 +345,19 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         sensorGUI.setVisible(true);
         sensorGUI.setGlobalVars(globalVar);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAddSensorActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     private void MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_MouseClicked
+
+    private void btnViewFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewFieldsActionPerformed
+        this.repaint();
+    }//GEN-LAST:event_btnViewFieldsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,10 +395,12 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAddSensor;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnViewFields;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

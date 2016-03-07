@@ -41,7 +41,7 @@ public class Field {
         return gpsBoundary.getBoundary();
     }
     
-    public void setBoundaries(GPSBoundary theBoundaries) {
+    public void setBoundary(GPSBoundary theBoundaries) {
         this.gpsBoundary = theBoundaries;
     }
     

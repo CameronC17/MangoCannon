@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -30,17 +30,20 @@ public class MainGUI extends javax.swing.JFrame {
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
         createTableData();
-        lblUserStatus.setText("You are logged in as: " + globalVar.currentUser.getFirstName() + " " + globalVar.currentUser.getSecondName());
+        loadInformation();
+    }
+    
+    private void loadInformation() {
         switch (globalVar.currentUser.getAccessLevel())
         {
             case 1:
-                jButton7.setEnabled(false);
-                jButton12.setEnabled(false);
-                jButton1.setEnabled(false);
-                jButton4.setEnabled(false);
-                jButton5.setEnabled(false);
+                btnNewSensor.setEnabled(false);
+                btnNewField.setEnabled(false);
+                btnEdit.setEnabled(false);
+                btnRemove.setEnabled(false);
                 break;
         }
+        lblUserStatus.setText("You are logged in as: " + globalVar.currentUser.getFirstName() + " " + globalVar.currentUser.getSecondName());
     }
     
     public void addFieldTofarm (Field theField) {
@@ -48,33 +51,82 @@ public class MainGUI extends javax.swing.JFrame {
     }
     
     public void createTableData() {
-        //Creates stuff to display in GUI     
+        displayAllFields();
+        
+        displayHarvestInfo();
+        
+        displaySelectedFieldSensorInfo();       
+                
+        displayFieldStations();
+    
+        displaySensorTypes();
+    }
+    
+    public void displaySensorTypes() {
+        Vector<String> sensorNames = new Vector<String>();
+        Vector<String> sensorMeasurement = new Vector<String>();
+        Vector<Integer> sensorTimeInterval = new Vector<Integer>();
+        for (SensorTypes sensorT : globalVar.sensorTypes)
+        {
+            sensorNames.addElement(sensorT.getTypeName());
+            sensorMeasurement.addElement(sensorT.getReadingType());
+            sensorTimeInterval.addElement(sensorT.getTimeInterval());
+        }
+        
+        DefaultTableModel modelSensorTypes = (DefaultTableModel)tableSensorTypes.getModel();
+        modelSensorTypes.setColumnCount(0);
+        modelSensorTypes.setRowCount(0);
+        modelSensorTypes.addColumn("Sensor Type Name", sensorNames);
+        modelSensorTypes.addColumn("Measurement Unit", sensorMeasurement);
+        modelSensorTypes.addColumn("Sensor Time Interval (sec)", sensorTimeInterval);
+    }
+    
+    public void displayFieldStations () {
+        Vector<String> fieldStations = new Vector<String>();
+        Vector<String> fieldStationOwner = new Vector<String>();
+        Vector<Integer> sensorNumber = new Vector<Integer>();
+        Vector<String> gpsLocation = new Vector<String>();
+
+        for (Field field : globalVar.currentFarm)
+        {
+            fieldStations.add(field.getFieldStation().getName());
+            fieldStationOwner.add(field.getFieldName());
+            sensorNumber.add(field.getFieldStation().getSensors().size());
+            gpsLocation.add(field.getFieldStation().getGPS().getGlobalPosition()[0] + ", " + field.getFieldStation().getGPS().getGlobalPosition()[1]);
+        }
+        
+        DefaultTableModel modelFieldStations = (DefaultTableModel)tableFieldStations.getModel();
+        modelFieldStations.setColumnCount(0);
+        modelFieldStations.setRowCount(0);
+        modelFieldStations.addColumn("Field Station", fieldStations);
+        modelFieldStations.addColumn("Field Name", fieldStationOwner);
+        modelFieldStations.addColumn("No. of Sensors", sensorNumber);
+        modelFieldStations.addColumn("GPS Location", gpsLocation);
+    }
+    
+    public void displaySelectedFieldSensorInfo() {
+        Vector<String> sensors = new Vector<String>();
+        Vector<Float> avgReadings = new Vector<Float>();
+        Vector<String> unitType = new Vector<String>();
+        
+        
+        for (Sensor sensor : globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors())
+        {
+            sensors.addElement(sensor.getSensorTypeName());
+            avgReadings.addElement(sensor.getReadings().getAverageReading());
+            unitType.addElement(sensor.getSensorType().getReadingType());
+        }
+
+        DefaultTableModel modelSensor = (DefaultTableModel)tableSensorData.getModel();
+        modelSensor.setRowCount(0);
+        modelSensor.setColumnCount(0);
+        modelSensor.addColumn("Sensor", sensors);
+        modelSensor.addColumn("Reading", avgReadings);
+        modelSensor.addColumn("Unit Type", unitType);
+    }
+    
+    public void displayHarvestInfo() {
         Vector<String> fieldNames = new Vector<String>();
-        Vector<String> hasCropPlanted = new Vector<String>();
-        Vector<Integer> fieldSize = new Vector<Integer>();
-        
-        for (int i=0; i < globalVar.currentFarm.size(); i++){
-            fieldNames.addElement(globalVar.currentFarm.get(i).getFieldName());
-            if (globalVar.currentFarm.get(i).getCrop() != null)
-            {
-                hasCropPlanted.addElement("Yes");
-            }
-            else
-            {
-                hasCropPlanted.addElement("No");
-            }
-            fieldSize.addElement(globalVar.currentFarm.get(i).getGPSBoundary().getSize());            
-        }   
-        //TableModel for Fields table
-        DefaultTableModel modelFields = (DefaultTableModel)tableFields.getModel();        
-        modelFields.setRowCount(0);
-        modelFields.setColumnCount(0);
-        modelFields.addColumn("Fields", fieldNames);
-        modelFields.addColumn("Field Size (Square M)", fieldSize);
-        modelFields.addColumn("Crop Planted", hasCropPlanted);
-        
-  
-        fieldNames.clear();
         Vector<String> cropNames = new Vector<String>();
         Vector<LocalDate> datesPlanted = new Vector<LocalDate>();
         Vector<LocalDate> expectedDates = new Vector<LocalDate>();
@@ -99,69 +151,35 @@ public class MainGUI extends javax.swing.JFrame {
         modelHarvest.addColumn("Date Planted", datesPlanted);
         modelHarvest.addColumn("Expected Harvest", expectedDates);
         modelHarvest.addColumn("Expected Yield", expectedYield);
-        
-                
-        Vector<String> sensors = new Vector<String>();
-        Vector<Float> avgReadings = new Vector<Float>();
-        Vector<String> unitType = new Vector<String>();
-        
-        
-        for (Sensor sensor : globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors())
-        {
-            sensors.addElement(sensor.getSensorTypeName());
-            avgReadings.addElement(sensor.getReadings().getAverageReading());
-            unitType.addElement(sensor.getSensorType().getReadingType());
-        }
-
-        DefaultTableModel modelSensor = (DefaultTableModel)tableSensorData.getModel();
-        modelSensor.setRowCount(0);
-        modelSensor.setColumnCount(0);
-        modelSensor.addColumn("Sensor", sensors);
-        modelSensor.addColumn("Reading", avgReadings);
-        modelSensor.addColumn("Unit Type", unitType);
-        
-        Vector<String> fieldStations = new Vector<String>();
-        Vector<String> fieldStationOwner = new Vector<String>();
-        Vector<Integer> sensorNumber = new Vector<Integer>();
-        Vector<String> gpsLocation = new Vector<String>();
-
-        for (Field field : globalVar.currentFarm)
-        {
-            fieldStations.add(field.getFieldStation().getName());
-            fieldStationOwner.add(field.getFieldName());
-            sensorNumber.add(field.getFieldStation().getSensors().size());
-            gpsLocation.add(field.getFieldStation().getGPS().getGlobalPosition()[0] + ", " + field.getFieldStation().getGPS().getGlobalPosition()[1]);
-        }
-        
-        DefaultTableModel modelFieldStations = (DefaultTableModel)tableFieldStations.getModel();
-        modelFieldStations.setColumnCount(0);
-        modelFieldStations.setRowCount(0);
-        modelFieldStations.addColumn("Field Station", fieldStations);
-        modelFieldStations.addColumn("Field Name", fieldStationOwner);
-        modelFieldStations.addColumn("No. of Sensors", sensorNumber);
-        modelFieldStations.addColumn("GPS Location", gpsLocation);
-    
-        Vector<String> sensorNames = new Vector<String>();
-        Vector<String> sensorMeasurement = new Vector<String>();
-        Vector<Integer> sensorTimeInterval = new Vector<Integer>();
-        for (SensorTypes sensorT : globalVar.sensorTypes)
-        {
-            sensorNames.addElement(sensorT.getTypeName());
-            sensorMeasurement.addElement(sensorT.getReadingType());
-            sensorTimeInterval.addElement(sensorT.getTimeInterval());
-        }
-        
-        DefaultTableModel modelSensorTypes = (DefaultTableModel)tableSensorTypes.getModel();
-        modelSensorTypes.setColumnCount(0);
-        modelSensorTypes.setRowCount(0);
-        modelSensorTypes.addColumn("Sensor Type Name", sensorNames);
-        modelSensorTypes.addColumn("Measurement Unit", sensorMeasurement);
-        modelSensorTypes.addColumn("Sensor Time Interval (sec)", sensorTimeInterval);
-        
-        
     }
     
-
+    public void displayAllFields() {
+        //Creates stuff to display in GUI     
+        Vector<String> fieldNames = new Vector<String>();
+        Vector<String> hasCropPlanted = new Vector<String>();
+        Vector<Integer> fieldSize = new Vector<Integer>();
+        
+        for (int i=0; i < globalVar.currentFarm.size(); i++){
+            fieldNames.addElement(globalVar.currentFarm.get(i).getFieldName());
+            if (globalVar.currentFarm.get(i).getCrop() != null)
+            {
+                hasCropPlanted.addElement("Yes");
+            }
+            else
+            {
+                hasCropPlanted.addElement("No");
+            }
+            fieldSize.addElement(globalVar.currentFarm.get(i).getGPSBoundary().getSize());            
+        }   
+        //TableModel for Fields table
+        DefaultTableModel modelFields = (DefaultTableModel)tableFields.getModel();        
+        modelFields.setRowCount(0);
+        modelFields.setColumnCount(0);
+        modelFields.addColumn("Fields", fieldNames);
+        modelFields.addColumn("Field Size (Square M)", fieldSize);
+        modelFields.addColumn("Crop Planted", hasCropPlanted);
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,19 +208,18 @@ public class MainGUI extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabPaneMain = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSensorData = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableFields = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnRemove = new javax.swing.JButton();
         btnUpdateFields = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        btnNewField = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txtBoxSearch = new javax.swing.JTextField();
         btnSensorData = new javax.swing.JButton();
@@ -211,10 +228,8 @@ public class MainGUI extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tableHarvest = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        tabPaneFieldsSensors = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableFieldStations = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
@@ -222,8 +237,8 @@ public class MainGUI extends javax.swing.JFrame {
         tableSensorTypes = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton12 = new javax.swing.JButton();
+        tblUnallocatedSensors = new javax.swing.JTable();
+        btnNewSensor = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblUserStatus = new javax.swing.JLabel();
 
@@ -277,7 +292,7 @@ public class MainGUI extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 273, Short.MAX_VALUE))
+                .addGap(0, 38, Short.MAX_VALUE))
         );
 
         tableFields.setModel(new javax.swing.table.DefaultTableModel(
@@ -301,24 +316,17 @@ public class MainGUI extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tableFields);
 
-        jButton3.setText("Detail View");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnEdit.setText("Edit Field");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Edit Field");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnRemove.setText("Remove Field");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Remove Field");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnRemoveActionPerformed(evt);
             }
         });
 
@@ -330,17 +338,17 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
-        jButton1.setText("New Field");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNewField.setText("New Field");
+        btnNewField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNewFieldActionPerformed(evt);
             }
         });
 
@@ -362,14 +370,14 @@ public class MainGUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(btnNewField))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnUpdateFields)
                         .addGap(45, 45, 45)
                         .addComponent(txtBoxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -382,9 +390,8 @@ public class MainGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnSensorData))
                 .addGap(40, 40, 40))
         );
@@ -396,10 +403,10 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnNewField)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton2)
+                                    .addComponent(btnSearch)
                                     .addComponent(txtBoxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -409,22 +416,20 @@ public class MainGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5)))
+                        .addGap(117, 117, 117)
+                        .addComponent(btnEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRemove)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(btnSensorData)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Fields", jPanel1);
+        tabPaneMain.addTab("Fields", jPanel1);
 
         jLabel12.setText("Harvests");
 
@@ -459,11 +464,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Harvests", jPanel2);
-
-        jButton6.setText("Configure");
-
-        jButton7.setText("Delete Station");
+        tabPaneMain.addTab("Harvests", jPanel2);
 
         tableFieldStations.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -482,26 +483,17 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton7))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(223, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Field Stations", jPanel4);
+        tabPaneFieldsSensors.addTab("Field Stations", jPanel4);
 
         tableSensorTypes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -530,9 +522,9 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(223, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Sensor Categories/Types", jPanel5);
+        tabPaneFieldsSensors.addTab("Sensor Categories/Types", jPanel5);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblUnallocatedSensors.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -540,7 +532,7 @@ public class MainGUI extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane6.setViewportView(jTable1);
+        jScrollPane6.setViewportView(tblUnallocatedSensors);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -559,12 +551,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(113, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Unallocated Sensors", jPanel6);
+        tabPaneFieldsSensors.addTab("Unallocated Sensors", jPanel6);
 
-        jButton12.setText("New Sensor");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnNewSensor.setText("New Sensor");
+        btnNewSensor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                btnNewSensorActionPerformed(evt);
             }
         });
 
@@ -578,12 +570,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTabbedPane2)
+                        .addComponent(tabPaneFieldsSensors)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton12)
+                        .addComponent(btnNewSensor)
                         .addGap(33, 33, 33))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -592,13 +584,13 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12))
+                    .addComponent(btnNewSensor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabPaneFieldsSensors, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Field Stations / Sensors", jPanel3);
+        tabPaneMain.addTab("Field Stations / Sensors", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -610,7 +602,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(816, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -618,19 +610,19 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(lblUserStatus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tabPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnNewFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFieldActionPerformed
         FieldGUI fieldGUI = new FieldGUI();
         fieldGUI.setGlobalVars(globalVar);
         fieldGUI.setVisible(true);        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnNewFieldActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         EditFieldGUI editFieldGUI = new EditFieldGUI();
         //Gets the fields original data from selection
         selectedRow = tableFields.getSelectedRow();
@@ -638,14 +630,14 @@ public class MainGUI extends javax.swing.JFrame {
         editFieldGUI.setGlobalVars(globalVar);
         //editFieldGUI.populateGUIData(globalVar.currentFarm.get(selectedRow));
         editFieldGUI.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnEditActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         globalVar.currentFarm.remove(selectedRow);
         ((DefaultTableModel)tableFields.getModel()).removeRow(selectedRow);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnRemoveActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (txtBoxSearch.getText() != "")
         {
             String searchTerm = txtBoxSearch.getText();
@@ -679,7 +671,7 @@ public class MainGUI extends javax.swing.JFrame {
             model.addColumn("Field Size (Square M)", fieldSize);
             model.addColumn("Expected Yield", expectedYield);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tableFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFieldsMouseClicked
         // TODO add your handling code here:
@@ -700,15 +692,11 @@ public class MainGUI extends javax.swing.JFrame {
     private void tableFieldsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableFieldsMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tableFieldsMouseReleased
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void btnNewSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewSensorActionPerformed
         FieldOverviewGUI fieldOverviewGUI = new FieldOverviewGUI();
         fieldOverviewGUI.setGlobalVars(globalVar);
         fieldOverviewGUI.setVisible(true);
-    }//GEN-LAST:event_jButton12ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnNewSensorActionPerformed
 
     private void btnSensorDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSensorDataActionPerformed
         globalVar.workingSensor = globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors().get(tableSensorData.getSelectedRow());
@@ -753,21 +741,18 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnNewField;
+    private javax.swing.JButton btnNewSensor;
+    private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSensorData;
     private javax.swing.JButton btnUpdateFields;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
@@ -794,19 +779,19 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblUserStatus;
+    private javax.swing.JTabbedPane tabPaneFieldsSensors;
+    private javax.swing.JTabbedPane tabPaneMain;
     private javax.swing.JTable tableFieldStations;
     private javax.swing.JTable tableFields;
     private javax.swing.JTable tableHarvest;
     private javax.swing.JTable tableSensorData;
     private javax.swing.JTable tableSensorTypes;
+    private javax.swing.JTable tblUnallocatedSensors;
     private javax.swing.JTextField txtBoxSearch;
     // End of variables declaration//GEN-END:variables
 }
