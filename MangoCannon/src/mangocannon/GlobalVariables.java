@@ -14,9 +14,10 @@ import java.util.Vector;
  */
 public class GlobalVariables {
     public Farm currentFarm = new Farm();
+    public UserRegister userRegister = new UserRegister();
     public Vector<CropType> cropTypes = new Vector<CropType>();
     public Vector<SensorTypes> sensorTypes = new Vector<SensorTypes>();
-    public Vector<User> user = new Vector<User>();    
+    public Vector<User> user = new Vector<User>();
     public Vector<Sensor> unallocatedSensors = new Vector<Sensor>();
   
     public User currentUser;
@@ -24,6 +25,7 @@ public class GlobalVariables {
     public GPS workingGPS;
     public int workingField = -1;   
     public Field editField = null;
+    public Sensor workingSensor = null;
 
     public GlobalVariables()
     {
@@ -86,11 +88,10 @@ public class GlobalVariables {
         User user2 = new User("Sara", "James", "saraj", 5142, 1, "sara_james");
         User user3 = new User("John", "Smith", "johns", 5332, 2, "john_smith");
         User user4 = new User("Super", "Admin", "super", 1337, 2, "admin");
-        user.add(user1);
-        user.add(user2);
-        user.add(user3);
-        user.add(user4);
-
+        userRegister.addUser(user1);        
+        userRegister.addUser(user2);
+        userRegister.addUser(user3);
+        userRegister.addUser(user4);
         
         //Sensors
         Sensor rainFallSensor = new Sensor(rainFall, readings1, loc3);

@@ -8,8 +8,8 @@ import java.awt.Shape;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 public class BoundaryGUI extends javax.swing.JFrame {
+    
     GlobalVariables globalVar;
     int mouseStartX, mouseStartY, mouseEndX, mouseEndY;
     ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -19,11 +19,12 @@ public class BoundaryGUI extends javax.swing.JFrame {
 
     public BoundaryGUI() {
         initComponents();
-        //WORK FROM HERE!
+        //Mouse x and y set to -1 to prevent accidental drawing on form
         mouseStartX = -1;
         mouseStartY = -1;
     }
 
+    //Allows us to use 1 set of information, and pass information between GUI's.
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
         
@@ -46,6 +47,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
         this.repaint();
     }
     
+    //Paint method both repaints the GUI and draws on the new stuff that we are displaying on the fields
     public void paint(Graphics g) {
         paintComponents(g);
         Graphics2D g2 = (Graphics2D)g;
@@ -53,6 +55,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
         Color fieldColour = new Color(71, 152, 245, 128);
         Color sensorColour = new Color(255, 0, 0);
         int i = 0;
+        //Draws all the fields in the farm
         for (Shape shape : shapes) {
           int shapeX = shape.getBounds().x + 3,
               shapeY = shape.getBounds().y + 25,
@@ -81,6 +84,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
           i++;
         }
 
+        //Draws the sensors on the GUI, being highlighted in red.
         for (Shape shape : sensorShapes) {
           int shapeX = shape.getBounds().x + 3,
               shapeY = shape.getBounds().y + 25,
@@ -106,6 +110,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
           }
         }
         
+        //The code for drawing the shape that the user has created by clicking
         if (drawingShape != null)
         {
             int shapeX = drawingShape.getBounds().x + 1,
@@ -148,9 +153,9 @@ public class BoundaryGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSetBoundaries = new javax.swing.JButton();
+        btnViewAllFields = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 23, 1000, 1000));
@@ -193,24 +198,24 @@ public class BoundaryGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Add these boundaries to field");
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSetBoundaries.setText("Add");
+        btnSetBoundaries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSetBoundariesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("View");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnViewAllFields.setText("View");
+        btnViewAllFields.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnViewAllFieldsActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Close");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnCloseActionPerformed(evt);
             }
         });
 
@@ -223,13 +228,13 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnViewAllFields)
                 .addGap(153, 153, 153)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(btnSetBoundaries)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnClose)
                 .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
@@ -240,9 +245,9 @@ public class BoundaryGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnSetBoundaries)
+                    .addComponent(btnViewAllFields)
+                    .addComponent(btnClose))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -258,6 +263,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_recordDrag
 
     private void MouseUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseUp
+        //Creates the shape based on user input and redraws the GUI
         mouseEndX = evt.getX();
         mouseEndY = evt.getY();
 
@@ -279,6 +285,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_MouseUp
 
     private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
+        //Saves the initial click from the user
         mouseStartX = evt.getX();
         mouseStartY = evt.getY();
     }//GEN-LAST:event_mousePressed
@@ -292,16 +299,18 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mouseMoved
 
     private void scrollChangedListener(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_scrollChangedListener
-        // TODO add your handling code here:
+        // Repaints when the scroll pane has been scrolled
         this.repaint();
     }//GEN-LAST:event_scrollChangedListener
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnViewAllFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAllFieldsActionPerformed
+        //Draws all the GUI again, showing new fields
         this.repaint();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnViewAllFieldsActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       //if (drawingShape != null)
+    private void btnSetBoundariesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetBoundariesActionPerformed
+        //creates the boundary in global vars to be used in the previous GUI
+        if (drawingShape != null)
         {
             GPS loc1 = new GPS(drawingShape.getBounds().x, drawingShape.getBounds().y);
             GPS loc2 = new GPS(drawingShape.getBounds().x + drawingShape.getBounds().width, drawingShape.getBounds().y);
@@ -311,15 +320,15 @@ public class BoundaryGUI extends javax.swing.JFrame {
             newGPSBndry.createBoundary(loc1, loc2, loc3, loc4);
             globalVar.setWorkingBoundary(newGPSBndry);
         }
-        //else
+        else
         {
-         //   JOptionPane.showMessageDialog(null, "Please ensure you have drawn a field.");
+            JOptionPane.showMessageDialog(null, "Please ensure you have drawn a field.");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSetBoundariesActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,9 +366,9 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnSetBoundaries;
+    private javax.swing.JButton btnViewAllFields;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

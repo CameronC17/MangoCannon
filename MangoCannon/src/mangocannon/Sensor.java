@@ -8,7 +8,6 @@ import javax.swing.Timer;
  * @author tomhanson
  */
 public class Sensor {
-    private Timer timer;
     private SensorTypes sensorType;
     private long uniqueId;    
     private DataReading dataReadings;
@@ -31,13 +30,6 @@ public class Sensor {
         location = theGPS;
     }
 
-    Timer getTimer(){
-        return timer;
-    }
-    void setTimer(Timer theTimer){
-        this.timer = theTimer;
-    }
-
     SensorTypes getSensorType(){
         return sensorType;
     }
@@ -54,6 +46,10 @@ public class Sensor {
 
     DataReading getReadings(){
         return dataReadings;
+    }
+    
+    public void setDataReadings(DataReading theData) {
+        this.dataReadings = theData;
     }
     
     GPS getLocation() {
@@ -83,9 +79,5 @@ public class Sensor {
     DataReading saveReading(DataReading dataReading){
         // save reading - needs to be implemented
         return dataReading;
-    }
-
-    void resetTimer(){
-        timer.restart();
     }
 }

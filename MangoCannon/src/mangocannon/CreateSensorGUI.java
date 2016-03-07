@@ -20,24 +20,27 @@ public class CreateSensorGUI extends javax.swing.JFrame {
         initComponents();
     }
     
+    //Allows us to use 1 set of information, and pass information between GUI's.
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
+        //Populates the dropdown box to show all sensor types available
         DefaultComboBoxModel model1 = (DefaultComboBoxModel)cmbSensorTypes.getModel();
         for (int i = 0; i < globalVar.sensorTypes.size(); i++)
         {
             model1.addElement(globalVar.sensorTypes.get(i).getTypeName());
         }
         
-        jTextField1.setText(Integer.toString(globalVar.workingGPS.getGlobalPosition()[0]));
-        jTextField2.setText(Integer.toString(globalVar.workingGPS.getGlobalPosition()[1]));
+        txtBoxX.setText(Integer.toString(globalVar.workingGPS.getGlobalPosition()[0]));
+        txtBoxY.setText(Integer.toString(globalVar.workingGPS.getGlobalPosition()[1]));
         
+        //Determines if the sensor has been placed within a field
         if (globalVar.workingField > -1)
         {
-            jTextField3.setText(globalVar.currentFarm.get(globalVar.workingField).getFieldName());
+            txtBoxField.setText(globalVar.currentFarm.get(globalVar.workingField).getFieldName());
         }
         else
         {
-            jTextField3.setText("Unallocated");
+            txtBoxField.setText("Unallocated");
         }
     }
 
@@ -54,12 +57,12 @@ public class CreateSensorGUI extends javax.swing.JFrame {
         cmbSensorTypes = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBoxX = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtBoxY = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtBoxField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,17 +77,17 @@ public class CreateSensorGUI extends javax.swing.JFrame {
 
         jLabel2.setText("GPS:");
 
-        jTextField1.setEnabled(false);
+        txtBoxX.setEnabled(false);
 
         jLabel3.setText("X:");
 
-        jTextField2.setEnabled(false);
+        txtBoxY.setEnabled(false);
 
         jLabel4.setText("Y:");
 
         jLabel5.setText("Field:");
 
-        jTextField3.setEnabled(false);
+        txtBoxField.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,18 +103,18 @@ public class CreateSensorGUI extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBoxField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbSensorTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtBoxX, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(29, 29, 29)
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(txtBoxY, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(87, 146, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,14 +131,14 @@ public class CreateSensorGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBoxField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(btnAdd)
                 .addGap(36, 36, 36))
@@ -147,7 +150,7 @@ public class CreateSensorGUI extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         SensorTypes selectedSensorType = globalVar.sensorTypes.get(cmbSensorTypes.getSelectedIndex());
 
-        //public Sensor(SensorTypes theSensorTypes, GPS theGPS)
+        //if the sensor was placed within a field then we add it to that fieldstations sensors
         Sensor newSensor = new Sensor(selectedSensorType, globalVar.workingGPS);
         
         if (globalVar.workingField > -1)
@@ -205,8 +208,8 @@ public class CreateSensorGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtBoxField;
+    private javax.swing.JTextField txtBoxX;
+    private javax.swing.JTextField txtBoxY;
     // End of variables declaration//GEN-END:variables
 }
