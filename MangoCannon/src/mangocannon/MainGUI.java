@@ -158,26 +158,29 @@ public class MainGUI extends javax.swing.JFrame {
         Vector<String> fieldNames = new Vector<String>();
         Vector<String> hasCropPlanted = new Vector<String>();
         Vector<Integer> fieldSize = new Vector<Integer>();
+        Vector<String> gpsLocation = new Vector<String>();
         
         for (int i=0; i < globalVar.currentFarm.size(); i++){
             fieldNames.addElement(globalVar.currentFarm.get(i).getFieldName());
             if (globalVar.currentFarm.get(i).getCrop() != null)
             {
-                hasCropPlanted.addElement("Yes");
+                hasCropPlanted.addElement(globalVar.currentFarm.get(i).getCrop().getCropType().getCropName());
             }
             else
             {
-                hasCropPlanted.addElement("No");
+                hasCropPlanted.addElement("Not Applicable");
             }
-            fieldSize.addElement(globalVar.currentFarm.get(i).getGPSBoundary().getSize());            
+            gpsLocation.add(globalVar.currentFarm.get(i).getFieldStation().getGPS().getGlobalPosition()[0] + ", " + globalVar.currentFarm.get(i).getFieldStation().getGPS().getGlobalPosition()[1]);
+            fieldSize.addElement(globalVar.currentFarm.get(i).getGPSBoundary().getFieldArea());            
         }   
         //TableModel for Fields table
         DefaultTableModel modelFields = (DefaultTableModel)tableFields.getModel();        
         modelFields.setRowCount(0);
         modelFields.setColumnCount(0);
-        modelFields.addColumn("Fields", fieldNames);
-        modelFields.addColumn("Field Size (Square M)", fieldSize);
+        modelFields.addColumn("Fields", fieldNames);        
         modelFields.addColumn("Crop Planted", hasCropPlanted);
+        modelFields.addColumn("Locations", gpsLocation);
+        modelFields.addColumn("Field Size (Square M)", fieldSize);
     }
    
     /**

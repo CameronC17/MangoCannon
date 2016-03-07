@@ -159,7 +159,7 @@ public class FieldGUI extends JFrame {
         CropType selectedCropType = globalVar.cropTypes.get(jComboBox1.getSelectedIndex());
 
         //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
-        Crop newCrop = new Crop(selectedCropType, jXDatePicker1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), globalVar.workingBoundary.getSize());
+        Crop newCrop = new Crop(selectedCropType, jXDatePicker1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), globalVar.workingBoundary.getFieldArea());
         
         //public FieldStation(String theName, GPS theGPS) {
         FieldStation newFieldStation = new FieldStation(fieldStationNameText.getText(), globalVar.workingBoundary.getCentre());
