@@ -137,12 +137,23 @@ public class LoginGUI extends javax.swing.JFrame {
         User foundUser = globalVar.userRegister.login(username, password);
         
         if(foundUser != null){
-            globalVar.currentUser = foundUser;
-            loginMessage = "Login Success";
-            MainGUI main = new MainGUI();
-            main.setGlobalVars(globalVar);
-            main.setVisible(true);
-            this.dispose();
+            if (foundUser.getAccessLevel() <= 2)
+            {
+                globalVar.currentUser = foundUser;
+                loginMessage = "Login Success";
+                MainGUI main = new MainGUI();
+                main.setGlobalVars(globalVar);
+                main.setVisible(true);
+                this.dispose();
+            }
+            else if (foundUser.getAccessLevel() == 3)
+            {
+                loginMessage = "Login Success";
+                FarmView farmView = new FarmView();
+                farmView.setGlobalVars(globalVar);
+                farmView.setVisible(true);
+                this.dispose();
+            }
         } else {
             loginMessage = "Login Error";
         }

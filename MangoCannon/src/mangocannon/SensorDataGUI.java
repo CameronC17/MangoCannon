@@ -122,7 +122,9 @@ public class SensorDataGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel5)
                                     .addGap(56, 56, 56)
                                     .addComponent(jLabel4)
-                                    .addGap(128, 128, 128)
+                                    .addGap(64, 64, 64)
+                                    .addComponent(jLabel6)
+                                    .addGap(48, 48, 48)
                                     .addComponent(jLabel3))))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(37, 37, 37)
@@ -136,9 +138,7 @@ public class SensorDataGUI extends javax.swing.JFrame {
                         .addGap(154, 154, 154)
                         .addComponent(lblTimeLeft)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(btnTakeReading))))
+                        .addComponent(btnTakeReading)))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -190,7 +190,7 @@ public class FieldTest {
         sensorList1.add(temperatureSensor);
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", field1.getGPSBoundary().getCentre());
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 
@@ -246,7 +246,7 @@ public class FieldTest {
         sensorList1.add(temperatureSensor);
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", field1.getGPSBoundary().getCentre());
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 
@@ -303,7 +303,7 @@ public class FieldTest {
         sensorList1.add(temperatureSensor);
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", field1.getGPSBoundary().getCentre());
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 
@@ -369,7 +369,7 @@ public class FieldTest {
         sensorList1.add(temperatureSensor);
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", field1.getGPSBoundary().getCentre());
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 
@@ -426,7 +426,7 @@ public class FieldTest {
         sensorList1.add(temperatureSensor);
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", field1.getGPSBoundary().getCentre());
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 
@@ -482,7 +482,7 @@ public class FieldTest {
         sensorList1.add(nutrientSaturationSensor);
         sensorList1.add(temperatureSensor);
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 
@@ -539,7 +539,7 @@ public class FieldTest {
         sensorList1.add(nutrientSaturationSensor);
         sensorList1.add(temperatureSensor);
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 
@@ -598,7 +598,7 @@ public class FieldTest {
         sensorList1.add(temperatureSensor);
         FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", field1.getGPSBoundary().getCentre());
 
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.4);
         
         LocalDate date1 = LocalDate.parse("2016-02-10");
 

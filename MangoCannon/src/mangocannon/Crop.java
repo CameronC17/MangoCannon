@@ -34,7 +34,7 @@ public class Crop {
     }
     
     /**
-     * Sets the crop type to the new crop type specified in the parameter
+     * Sets the crop type to the new crop type specified in the parameter. works out the new harvest date and estimated yield
      * @param theCrop 
      */
     void setCropType(CropType theCrop) {
@@ -81,5 +81,10 @@ public class Crop {
     
     LocalDate getPlantDate() {
         return plantDate;
+    }
+    
+    double getValue() {
+        System.out.println(this.fieldArea + "   " + this.cropType.getCropValue());
+        return (this.fieldArea * this.cropType.getCropValue());
     }
 }
