@@ -12,17 +12,21 @@ import java.util.Vector;
  * @author jacobburns
  */
 public class FieldStation {
-    private long uniqueId;
-    //private Sensor[] sensorList;
     public Vector<Sensor> sensorList = new Vector<Sensor>();
     private String name;
     private boolean fixed;
     private GPS gps;
     
-    public FieldStation(Vector<Sensor> theSensorList, String theName, long theUniqueId, GPS theGPS){
+    /**
+     * FieldStation constructor. Takes a list of sensors, the name of the station and the
+     * @param theSensorList
+     * @param theName
+     * @param theUniqueId
+     * @param theGPS 
+     */
+    public FieldStation(Vector<Sensor> theSensorList, String theName, GPS theGPS){
         sensorList = theSensorList;
         name = theName;
-        uniqueId = theUniqueId;
         gps = theGPS;
     }
     
@@ -53,14 +57,6 @@ public class FieldStation {
     
     void setName(String theName){
         this.name = theName;
-    }
-    
-    long getUniqueId(){
-        return uniqueId;
-    }
-    
-    void setUniqueId(long theUniqueId){
-        this.uniqueId = theUniqueId;
     }
     
     boolean getFixed(){

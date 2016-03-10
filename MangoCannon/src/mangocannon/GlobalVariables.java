@@ -124,8 +124,8 @@ public class GlobalVariables {
         Field field2 = new Field("Field 2", gpsB2);
         Field field3 = new Field("Field 3", gpsB1);
         
-        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", 001, field1.getGPSBoundary().getCentre());
-        FieldStation fieldStation2 = new FieldStation(sensorList2, "FS2", 002, field2.getGPSBoundary().getCentre());
+        FieldStation fieldStation1 = new FieldStation(sensorList1, "Field Station 1", field1.getGPSBoundary().getCentre());
+        FieldStation fieldStation2 = new FieldStation(sensorList2, "FS2", field2.getGPSBoundary().getCentre());
 
         //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
         //Evetually change last number to be field1.size() or whatever
