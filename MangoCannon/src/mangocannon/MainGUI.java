@@ -71,6 +71,31 @@ public class MainGUI extends javax.swing.JFrame {
         displayFieldStations();
     
         displaySensorTypes();
+        
+        displayUnallocatedSensors();
+    }
+    
+    public void displayUnallocatedSensors() {
+        Vector<String> sensors = new Vector<String>();
+        Vector<Float> avgReadings = new Vector<Float>();
+        Vector<String> unitType = new Vector<String>();
+        Vector<String> gpsLocation = new Vector<String>();
+        
+        for (Sensor sensor : globalVar.unallocatedSensors)
+        {
+            sensors.addElement(sensor.getSensorTypeName());
+            avgReadings.addElement(sensor.getReadings().getAverageReading());
+            unitType.addElement(sensor.getSensorType().getReadingType());
+            gpsLocation.add(sensor.getLocation().getGlobalPosition()[0] + ", " + sensor.getLocation().getGlobalPosition()[1]);
+        }
+
+        DefaultTableModel modelSensor = (DefaultTableModel)tblUnallocatedSensors.getModel();
+        modelSensor.setRowCount(0);
+        modelSensor.setColumnCount(0);
+        modelSensor.addColumn("Sensor", sensors);
+        modelSensor.addColumn("Reading", avgReadings);
+        modelSensor.addColumn("Unit Type", unitType);
+        modelSensor.addColumn("Locaiton", gpsLocation);
     }
     
     public void displaySensorTypes() {
