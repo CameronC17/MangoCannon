@@ -8,6 +8,10 @@ import java.awt.Shape;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author cameron
+ */
 public class BoundaryGUI extends javax.swing.JFrame {
     
     GlobalVariables globalVar;
@@ -17,6 +21,9 @@ public class BoundaryGUI extends javax.swing.JFrame {
     Shape drawingShape;
     ArrayList<String> ShapeFieldNames = new ArrayList<String>();
 
+    /**
+     *
+     */
     public BoundaryGUI() {
         initComponents();
         //Mouse x and y set to -1 to prevent accidental drawing on form
@@ -25,7 +32,12 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }
 
     //Allows us to use 1 set of information, and pass information between GUI's.
-    public void setGlobalVars(GlobalVariables usingVar) {
+
+    /**
+     *
+     * @param usingVar
+     */
+        public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
         
         for (Field field : globalVar.currentFarm)
@@ -262,6 +274,11 @@ public class BoundaryGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_recordDrag
 
+    /**
+     * Listens for a mouse event in which the mouse is lifted up.
+     * We store the location the user lifts off the mouse in 2 variables.
+     * @param evt 
+     */
     private void MouseUp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MouseUp
         //Creates the shape based on user input and redraws the GUI
         mouseEndX = evt.getX();
@@ -284,6 +301,10 @@ public class BoundaryGUI extends javax.swing.JFrame {
         mouseEndY = -1;
     }//GEN-LAST:event_MouseUp
 
+    /**
+     * 
+     * @param evt 
+     */
     private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
         //Saves the initial click from the user
         mouseStartX = evt.getX();
