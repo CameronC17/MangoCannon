@@ -5,18 +5,24 @@ public class CropType {
     private float averageYieldPerM;
     private int averageTimeToGrow;
     
+    /**
+     * constructor for the crop type
+     * @param theCropType
+     * @param theAverageYield
+     * @param averageGrowTime 
+     */
     CropType (String theCropType, float theAverageYield, int averageGrowTime) {
         this.cropType = theCropType;
         this.averageYieldPerM = theAverageYield;
         this.averageTimeToGrow = averageGrowTime;
     }
     
+    /**
+     * returns the name of the crop type
+     * @return 
+     */
     String getCropName(){
         return cropType;
-    }
-    
-    void setCropType(String theCropType) {
-        this.cropType = theCropType;
     }
     
     float getAverageYield(){
@@ -31,12 +37,5 @@ public class CropType {
     }
     void setAverageGrowTime(int theExpectedHarvest){
         this.averageTimeToGrow = theExpectedHarvest;
-    }
-    
-//    String getCropTypeAtIndex(int i){
-//        return this.getCropTypeAtIndex(i);
-//    }
-    
-    
-    
+    } 
 }

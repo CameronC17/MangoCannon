@@ -30,6 +30,11 @@ public class FieldStation {
         gps = theGPS;
     }
     
+    /**
+     * A more basic field constructor to follow factory/builder method
+     * @param theName
+     * @param theGPS 
+     */    
     public FieldStation(String theName, GPS theGPS) {
         this.name = theName;
         this.gps = theGPS;        
@@ -44,10 +49,6 @@ public class FieldStation {
     }
     
     void setSensor(Vector<Sensor> theSensorList){
-        /*for (int i = 0; i < theSensorList.length; i++){
-            this.sensorList.add(theSensorList[i]);
-        }*/
-
         this.sensorList = theSensorList;
     }
     

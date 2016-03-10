@@ -21,9 +21,12 @@ public class Sensor {
         location = theGPS;
     }
 
-//    public Sensor(String theCategory, Timer theTimer, SensorTypes theSensorSettings, long theUniqueId, DataReading theDataReadings[]){
-//        Sensor rainFallSensor = new Sensor(null, sensorTypes.get(0), 001, readings1);
-
+    /**
+     * second constructor with more details to create a sensor
+     * @param theSensorTypes
+     * @param theDataReadings
+     * @param theGPS 
+     */    
     public Sensor(SensorTypes theSensorTypes, DataReading theDataReadings, GPS theGPS){
         sensorType = theSensorTypes;
         dataReadings = theDataReadings;
@@ -55,25 +58,9 @@ public class Sensor {
     GPS getLocation() {
         return location;
     }
-    
-//    void setDataReadings(DataReading theDataReading){
-//
-//    }
-//
-//    DataReading[] getLatestReading(){
-//        return dataReadings;
-//    }
 
     String getSensorTypeName(){
         return sensorType.getTypeName();
-    }
-
-    void startPolling(){
-        // SensorSettings.getTimeInterval();
-
-        //SensorTypes sensorSettings = new SensorTypes();
-        //boolean deltaBased = sensorSettings.getDeltaBased();
-        //float valDelta = sensorSettings.getValDelta();
     }
 
     DataReading saveReading(DataReading dataReading){

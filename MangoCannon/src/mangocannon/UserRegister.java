@@ -16,10 +16,24 @@ public class UserRegister extends Vector<User> {
         super.add(theUser);
     }
     
+    /**
+     * returns the int position of the user account in the list
+     * @param i
+     * @return 
+     */
     User findUserByIndex(int i) {
         return this.get(i);
     }
     
+    /**
+     * takes a name and password, and then:
+     * * First looks to find the exact user name.
+     * If found, checks the password against the one supplied
+     * If correct, returns the index of the user in the vector, else returns -1
+     * @param username
+     * @param password
+     * @return 
+     */
     User login(String username, String password){
         User returnUser = null;
         for (int i = 0; i < this.size(); i++)

@@ -23,8 +23,11 @@ public class DataReading {
         return readings;
     }
     
+    /**
+     * Converts the sent vector into an array of floats and replaces its current list of readings
+     * @param theReadings 
+     */
     public void setReadings(Vector<Float> theReadings) {
-        //int[] myIntArray = new int[3];
         float[] myFloatArr = new float[theReadings.size()];
         for (int i = 0; i < theReadings.size(); i++)
         {
@@ -34,10 +37,15 @@ public class DataReading {
         this.readings = myFloatArr;
     }
     
+    
     float getReadingValue(int i){
         return readings[i];
     }
     
+    /**
+     * Gets the average value of all the readings in this objects list
+     * @return 
+     */
     float getAverageReading() {
         float avgNum = 0;
         for(float theNum : readings)

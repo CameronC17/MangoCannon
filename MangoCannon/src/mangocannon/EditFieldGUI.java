@@ -25,6 +25,11 @@ public class EditFieldGUI extends javax.swing.JFrame {
 //        System.out.println("Field name was: " + oldFieldName);
     }
 
+    /**
+     * Here we set the global variables, by passing in the current object of vars we are using.
+     * We also initialise some of the objects on the GUI to data that has been set.
+     * @param usingVar 
+     */
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
         DefaultComboBoxModel model2 = (DefaultComboBoxModel)ddlCrop.getModel();
@@ -42,10 +47,11 @@ public class EditFieldGUI extends javax.swing.JFrame {
         
     }
     
-    public void populateGUIData(Field theField){
-        
-    }
-    
+    /**
+     * This function converts a local date into just a date to be used in Java
+     * @param date
+     * @return 
+     */
     //converts a localDate to a date
     public static Date fromLocalDate(LocalDate date) {
         Instant instant = date.atStartOfDay().atZone(ZoneId.systemDefault())
@@ -169,12 +175,20 @@ public class EditFieldGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * creates a new boundary gui to select the new field boundaries
+     * @param evt 
+     */
     private void btnSetBoundariesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetBoundariesActionPerformed
         BoundaryGUI boundaryGUI = new BoundaryGUI();
         boundaryGUI.setGlobalVars(globalVar);
         boundaryGUI.setVisible(true);
     }//GEN-LAST:event_btnSetBoundariesActionPerformed
 
+    /**
+     * Saves the new edited field data back into the field
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         globalVar.editField.setFieldName(txtBoxFieldName.getText());
         globalVar.editField.getCrop().setPlantDate(dpSowDate.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());

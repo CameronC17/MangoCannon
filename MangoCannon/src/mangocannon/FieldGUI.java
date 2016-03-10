@@ -23,12 +23,20 @@ public class FieldGUI extends JFrame {
         initComponents();
     }
     
+    /**
+     * Here we set the global variables, by passing in the current object of vars we are using.
+     * We also initialise some of the objects on the GUI to data that has been set.
+     * @param usingVar 
+     */
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
         getCropTypes();
         globalVar.workingBoundary = null;
     }
     
+    /**
+     * gets all available crop types and puts them in the jComboBox
+     */
     private void getCropTypes() {
         DefaultComboBoxModel model2 = (DefaultComboBoxModel)jComboBox1.getModel();
         for (int i = 0; i < globalVar.cropTypes.size(); i++)
@@ -155,6 +163,10 @@ public class FieldGUI extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * creates a new crop, fieldstation and field and then adds it to the farm, all based on users input
+     * @param evt 
+     */
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         CropType selectedCropType = globalVar.cropTypes.get(jComboBox1.getSelectedIndex());
 
@@ -177,6 +189,10 @@ public class FieldGUI extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldNameTextActionPerformed
 
+    /**
+     * creates new boundary gui
+     * @param evt 
+     */
     private void btnSetBoundariesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetBoundariesActionPerformed
         BoundaryGUI boundaryGUI = new BoundaryGUI();
         boundaryGUI.setGlobalVars(globalVar);

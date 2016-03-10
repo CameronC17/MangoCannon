@@ -20,6 +20,11 @@ public class CreateSensorGUI extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Here we set the global variables, by passing in the current object of vars we are using.
+     * We also initialise some of the objects on the GUI to data that has been set.
+     * @param usingVar 
+     */
     //Allows us to use 1 set of information, and pass information between GUI's.
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
@@ -147,6 +152,11 @@ public class CreateSensorGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Adds a new sensor based on the users input.
+     * Checks if the sensor has been placed in a field
+     * @param evt 
+     */
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         SensorTypes selectedSensorType = globalVar.sensorTypes.get(cmbSensorTypes.getSelectedIndex());
 

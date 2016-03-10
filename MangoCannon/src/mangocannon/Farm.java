@@ -13,6 +13,11 @@ public class Farm extends Vector<Field>{
         super.remove(theField);
     }
     
+    /**
+     * Finds what index the corresponding field is in
+     * @param theFieldName
+     * @return 
+     */
     int getFieldIndex(String theFieldName) {
         for (int i = 0; i < this.size(); i++) {
             if (this.get(i).getFieldName() == theFieldName)
