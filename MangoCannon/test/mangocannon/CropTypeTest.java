@@ -44,7 +44,7 @@ public class CropTypeTest {
     @Test
     public void testGetCropName() {
         System.out.println("getCropName");
-        CropType instance = new CropType("Moistness", 12.6f, 4);
+        CropType instance = new CropType("Banana", 12.6f, 4, 1.4);
         String expResult = "Moistness";
         String result = instance.getCropName();
         assertEquals(expResult, result);
@@ -57,7 +57,7 @@ public class CropTypeTest {
     @Test
     public void testGetAverageYield() {
         System.out.println("getAverageYield");
-        CropType instance = new CropType("Moistness", 12.6f, 4);
+        CropType instance = new CropType("Banana", 12.6f, 4, 1.4);
         float expResult = 12.6F;
         float result = instance.getAverageYield();
         assertEquals(expResult, result, 0.0);
@@ -70,7 +70,7 @@ public class CropTypeTest {
     public void testSetAverageYield() {
         System.out.println("setAverageYield");
         float theEstimatedYield = 12.6F;
-        CropType instance = new CropType("Moistness", 12.6f, 4);
+        CropType instance = new CropType("Banana", 12.6f, 4, 1.4);
         instance.setAverageYield(theEstimatedYield);
     }
 
@@ -80,7 +80,7 @@ public class CropTypeTest {
     @Test
     public void testGetAverageGrowTime() {
         System.out.println("getAverageGrowTime");
-        CropType instance = new CropType("Moistness", 12.6f, 4);
+        CropType instance = new CropType("Banana", 12.6f, 4, 1.4);
         int expResult = 4;
         int result = instance.getAverageGrowTime();
         assertEquals(expResult, result);
@@ -93,7 +93,7 @@ public class CropTypeTest {
     public void testSetAverageGrowTime() {
         System.out.println("setAverageGrowTime");
         int theExpectedHarvest = 4;
-        CropType instance = new CropType("Moistness", 12.6f, 4);
+        CropType instance = new CropType("Banana", 12.6f, 4, 1.4);
         instance.setAverageGrowTime(theExpectedHarvest);
     }
     

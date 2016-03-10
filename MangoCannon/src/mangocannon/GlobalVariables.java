@@ -46,10 +46,10 @@ public class GlobalVariables {
         gpsB2.createBoundary(loc5, loc6, loc7, loc8);
         
         //CropType (String theCropType, float theAverageYield, int averageGrowTime)
-        CropType carrots = new CropType("Carrots", 10.5f, 40);
-        CropType donuts = new CropType("Donuts", 1.3f, 1);        
-        CropType lemons = new CropType("Lemons", 50f, 60);
-        CropType apples = new CropType("Apples", 100f, 100); 
+        CropType carrots = new CropType("Carrots", 10.5f, 40, 1.20);
+        CropType donuts = new CropType("Donuts", 1.3f, 1, 14.9);        
+        CropType lemons = new CropType("Lemons", 50f, 60, 7.17);
+        CropType apples = new CropType("Apples", 100f, 100, 0.30); 
         cropTypes.addElement(carrots);
         cropTypes.addElement(donuts);        
         cropTypes.addElement(lemons);
@@ -88,10 +88,12 @@ public class GlobalVariables {
         User user2 = new User("Sara", "James", "saraj", 5142, 1, "sara_james");
         User user3 = new User("John", "Smith", "johns", 5332, 2, "john_smith");
         User user4 = new User("Super", "Admin", "super", 1337, 2, "admin");
+        User user5 = new User("Dennis", "Rhodes", "dennisr", 5425, 3, "dennis_rhodes");
         userRegister.addUser(user1);        
         userRegister.addUser(user2);
         userRegister.addUser(user3);
         userRegister.addUser(user4);
+        userRegister.addUser(user5);
         
         //Sensors
         Sensor rainFallSensor = new Sensor(rainFall, readings1, loc3);
@@ -129,8 +131,9 @@ public class GlobalVariables {
 
         //Crop(CropType theCropType, LocalDate thePlantDate, int fieldSizeInM)
         //Evetually change last number to be field1.size() or whatever
-        Crop crop1 = new Crop(donuts, date1, 54);
-        Crop crop2 = new Crop(lemons, date2, 120);        
+        Crop crop1 = new Crop(carrots, date1, field1.getGPSBoundary().getFieldArea());
+        Crop crop2 = new Crop(lemons, date2, field2.getGPSBoundary().getFieldArea());       
+
         field1.newCrop(crop1);
         field2.newCrop(crop2);
         
