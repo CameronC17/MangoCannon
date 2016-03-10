@@ -50,17 +50,7 @@ public class CropTypeTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setCropType method, of class CropType.
-     */
-    @Test
-    public void testSetCropType() {
-        System.out.println("setCropType");
-        String theCropType = "Moistness";
-        CropType instance = new CropType("Moistness", 12.6f, 4);
-        instance.setCropType(theCropType);
-    }
-
+    
     /**
      * Test of getAverageYield method, of class CropType.
      */
