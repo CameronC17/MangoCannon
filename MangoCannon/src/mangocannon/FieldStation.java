@@ -21,7 +21,6 @@ public class FieldStation {
      * FieldStation constructor. Takes a list of sensors, the name of the station and the
      * @param theSensorList
      * @param theName
-     * @param theUniqueId
      * @param theGPS 
      */
     public FieldStation(Vector<Sensor> theSensorList, String theName, GPS theGPS){
