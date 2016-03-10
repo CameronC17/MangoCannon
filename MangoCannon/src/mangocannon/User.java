@@ -17,6 +17,15 @@ public class User {
     private int AccessLevel;
     private String username;
     
+    /**
+     * user constructor takes all relevant info and creates a new user
+     * @param theFirstName
+     * @param theSecondName
+     * @param thePassword
+     * @param theUniqueId
+     * @param theAccessLevel
+     * @param theUsername 
+     */
     public User(String theFirstName, String theSecondName, String thePassword, long theUniqueId, int theAccessLevel, String theUsername){
         this.firstName = theFirstName;
         this.secondName = theSecondName;

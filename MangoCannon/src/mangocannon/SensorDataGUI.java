@@ -23,6 +23,11 @@ public class SensorDataGUI extends javax.swing.JFrame {
         btnTakeReading.setVisible(false);
     }
     
+    /**
+     * Here we set the global variables, by passing in the current object of vars we are using.
+     * We also initialise some of the objects on the GUI to data that has been set.
+     * @param theVars 
+     */
     public void setGlobalVars(GlobalVariables theVars) {
         globalVar = theVars;
         lblSensorInfo.setText("You are workong on the sensor: " + globalVar.workingSensor.getSensorTypeName() + ".");
@@ -170,6 +175,11 @@ public class SensorDataGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Takes the time set by the user and starts the countdown.
+     * old code is left in - hwoever the odl code requires multithreading
+     * @param evt 
+     */
     private void btnStartPollingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartPollingActionPerformed
         dataReadings.clear();
         remainingTime = Integer.parseInt(txtBoxTimer.getText());
@@ -197,6 +207,11 @@ public class SensorDataGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    /**
+     * clicking this button gets the current position of the slider and adds it to the dataReading of 
+     * the current sensor
+     * @param evt 
+     */
     private void btnTakeReadingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTakeReadingActionPerformed
         if (remainingTime >= 0)
         {

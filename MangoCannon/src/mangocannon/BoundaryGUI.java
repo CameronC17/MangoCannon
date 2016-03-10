@@ -22,7 +22,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
     ArrayList<String> ShapeFieldNames = new ArrayList<String>();
 
     /**
-     *
+     *GUI constructor
      */
     public BoundaryGUI() {
         initComponents();
@@ -34,7 +34,8 @@ public class BoundaryGUI extends javax.swing.JFrame {
     //Allows us to use 1 set of information, and pass information between GUI's.
 
     /**
-     *
+     * Here we set the global variables, by passing in the current object of vars we are using.
+     * We also initialise some of the objects on the GUI to data that has been set.
      * @param usingVar
      */
         public void setGlobalVars(GlobalVariables usingVar) {
@@ -59,6 +60,12 @@ public class BoundaryGUI extends javax.swing.JFrame {
         this.repaint();
     }
     
+        /**
+         * Used to repaint the graphics of the GUI.
+         * This includes the current objects on the screen such as labels and buttons, 
+         * with the new addition of the drawn graphics
+         * @param g 
+         */
     //Paint method both repaints the GUI and draws on the new stuff that we are displaying on the fields
     public void paint(Graphics g) {
         paintComponents(g);
@@ -302,7 +309,7 @@ public class BoundaryGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_MouseUp
 
     /**
-     * 
+     * Records the x and y of the mouse press down
      * @param evt 
      */
     private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
@@ -324,11 +331,19 @@ public class BoundaryGUI extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_scrollChangedListener
 
+    /**
+     * Redraws everything, including the new object created
+     * @param evt 
+     */
     private void btnViewAllFieldsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAllFieldsActionPerformed
         //Draws all the GUI again, showing new fields
         this.repaint();
     }//GEN-LAST:event_btnViewAllFieldsActionPerformed
 
+    /**
+     * Creates a new GPSBoundary and sets it to the working boundary in global vars to be parsed back to the previous GUI
+     * @param evt 
+     */
     private void btnSetBoundariesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetBoundariesActionPerformed
         //creates the boundary in global vars to be used in the previous GUI
         if (drawingShape != null)

@@ -27,12 +27,20 @@ public class MainGUI extends javax.swing.JFrame {
         jLabel12.setFont(new Font("SansSerif", Font.PLAIN, 30));
     }
     
+    /**
+     * Here we set the global variables, by passing in the current object of vars we are using.
+     * We also initialise some of the objects on the GUI to data that has been set.
+     * @param usingVar 
+     */
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
         createTableData();
         loadInformation();
     }
     
+    /**
+     * Changes what buttons and objects are available depending on the users access level
+     */
     private void loadInformation() {
         switch (globalVar.currentUser.getAccessLevel())
         {
@@ -50,6 +58,9 @@ public class MainGUI extends javax.swing.JFrame {
         globalVar.currentFarm.addField(theField);
     }
     
+    /**
+     * updates each of the main tables and lists on the gui
+     */
     public void createTableData() {
         displayAllFields();
         
@@ -619,12 +630,20 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Creates a new field gui on button press
+     * @param evt 
+     */
     private void btnNewFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewFieldActionPerformed
         FieldGUI fieldGUI = new FieldGUI();
         fieldGUI.setGlobalVars(globalVar);
         fieldGUI.setVisible(true);        
     }//GEN-LAST:event_btnNewFieldActionPerformed
 
+    /**
+     * presents a new edit field gui related to the index of the table and what field is currently selected
+     * @param evt 
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         EditFieldGUI editFieldGUI = new EditFieldGUI();
         //Gets the fields original data from selection
@@ -635,11 +654,19 @@ public class MainGUI extends javax.swing.JFrame {
         editFieldGUI.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
+    /**
+     * deletes a field from the farm
+     * @param evt 
+     */
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         globalVar.currentFarm.remove(selectedRow);
         ((DefaultTableModel)tableFields.getModel()).removeRow(selectedRow);
     }//GEN-LAST:event_btnRemoveActionPerformed
 
+    /**
+     * searches the farm for specific field names
+     * @param evt 
+     */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         if (txtBoxSearch.getText() != "")
         {
@@ -686,6 +713,10 @@ public class MainGUI extends javax.swing.JFrame {
         createTableData();
     }//GEN-LAST:event_btnUpdateFieldsActionPerformed
 
+    /**
+     * sets the global variable of what row is selected on the main table to what has been clicked
+     * @param evt 
+     */
     private void mousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousePressed
         selectedRow = tableFields.getSelectedRow();
         createTableData();
@@ -701,6 +732,10 @@ public class MainGUI extends javax.swing.JFrame {
         fieldOverviewGUI.setVisible(true);
     }//GEN-LAST:event_btnNewSensorActionPerformed
 
+    /**
+     * creates new working sensor in global variables  and opens the Sensor data gui
+     * @param evt 
+     */
     private void btnSensorDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSensorDataActionPerformed
         globalVar.workingSensor = globalVar.currentFarm.get(selectedRow).getFieldStation().getSensors().get(tableSensorData.getSelectedRow());
         SensorDataGUI sensorGUI = new SensorDataGUI();

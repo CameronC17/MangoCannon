@@ -12,10 +12,13 @@ package mangocannon;
 public class GPS {
     //Private variable initialisers
     //I have added this gpsCoordinates class to hold the locational data of the FieldStation
-
-//    private float[] gpsCoordinates; //Can only be two columns
     private int[] gpsCoordinates = new int[2];
     
+    /**
+     * Takes 2 ints to hold the x and y of the position
+     * @param theX
+     * @param theY 
+     */
     GPS(int theX, int theY) {
         gpsCoordinates[0] = theX;
         gpsCoordinates[1] = theY;
@@ -25,6 +28,11 @@ public class GPS {
         return gpsCoordinates;
     }
     
+    /**
+     * sets the x and y, and overrides what is already set
+     * @param theX
+     * @param theY 
+     */
     void setGlobalPosition(int theX, int theY) {
         gpsCoordinates[0] = theX;
         gpsCoordinates[1] = theY;

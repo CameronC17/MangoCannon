@@ -24,6 +24,11 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         mouseY = -1;
     }
 
+    /**
+     * Here we set the global variables, by passing in the current object of vars we are using.
+     * We also initialise some of the objects on the GUI to data that has been set.
+     * @param usingVar 
+     */
     public void setGlobalVars(GlobalVariables usingVar) {
         globalVar = usingVar;
         
@@ -78,6 +83,12 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         this.repaint();
     }
     
+    /**
+     * Used to repaint the graphics of the GUI.
+     * This includes the current objects on the screen such as labels and buttons, 
+     * with the new addition of the drawn graphics
+     * @param g 
+     */
     public void paint(Graphics g) {
         paintComponents(g);
         Graphics2D g2 = (Graphics2D)g;
@@ -303,6 +314,10 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mousePressed
 
+    /**
+     * saves the location of the mouse click
+     * @param evt 
+     */
     private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClicked
         mouseX = evt.getX();
         mouseY = evt.getY();
@@ -325,6 +340,10 @@ public class FieldOverviewGUI extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_scrollChangedListener
 
+    /**
+     * finds if the sensor is incise boundaries of a field and creates the new sensor gui
+     * @param evt 
+     */
     private void btnAddSensorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSensorActionPerformed
         globalVar.workingField = -1;
         GPS newGPS = new GPS(drawingShape.getBounds().x + 3, drawingShape.getBounds().y - 22);

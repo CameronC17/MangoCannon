@@ -11,18 +11,6 @@ public class LoginGUI extends javax.swing.JFrame {
         initComponents();
     }
     
-    int UserAuth(String theUsername, String thePassword){
-        int foundUser = -1;
-        
-        for (int i = 0; i < globalVar.user.size(); i++)
-        {
-            if (globalVar.user.get(i).getUsername().contentEquals(theUsername))
-                if (globalVar.user.get(i).getPassword().contentEquals(thePassword))
-                    foundUser = i;
-        }
-        return foundUser;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,6 +126,10 @@ public class LoginGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBoxUsernameActionPerformed
 
+    /**
+     * When button login is clicked, uses user register class to find if the user exists
+     * @param evt 
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String username = txtBoxUsername.getText();
         String password = new String(txtBoxPassword.getPassword());
@@ -162,6 +154,10 @@ public class LoginGUI extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Forgotten your password? Naughty");
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    /**
+     * Skips the login process, for testing purposes
+     * @param evt 
+     */
     private void btnSkipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkipActionPerformed
         globalVar.currentUser = globalVar.userRegister.findUserByIndex(3);
         MainGUI main = new MainGUI();
